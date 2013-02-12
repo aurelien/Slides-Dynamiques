@@ -1,4 +1,4 @@
-R-D_WebSocket
+Slides-Dynamiques 
 =============
 
 Projet R&amp;D de Aurelien GEANT et Julian DEMAREST
