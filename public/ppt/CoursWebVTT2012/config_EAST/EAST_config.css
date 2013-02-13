@@ -1,0 +1,27 @@
+/*  Tous les slides et les boutons sont révélés par défaut
+    Le slide d'erreur est caché  */
+    
+#slideshow {
+
+	display: block;
+	
+}
+
+p.menu {
+
+	display: block;
+
+}
+
+p.menuts {
+
+	display: block;
+
+}
+
+div#erreur {
+
+	display: none;
+	
+}
+

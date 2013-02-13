@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><EAST transition="carousel">
+                            <PREFERENCES>
+                                                        <PUCE colorpuce="orange" level="1" type="square"/><PUCE colorpuce="green" level="2" type="disc"/><PUCE colorpuce="orange" level="3" type="circle"/><PAGE/>
+                            </PREFERENCES>
+                            <LOGO_GAUCHE fichier="Logo_evry.svg" hauteur_SVG="30" largeur_SVG="30"/>
+              <PIEDPAGE_GAUCHE>
+                                          Module Multimédia
+                            </PIEDPAGE_GAUCHE>
+              <PIEDPAGE_DROIT>
+                                          M2 MIAGE APP
+                            </PIEDPAGE_DROIT>
+              <PAGE_TITRE>
+                    <TITRE>WebVTT</TITRE>
+                    <SOUS_TITRE>Un langage de sous titrage universel pour le Web</SOUS_TITRE><AUTEUR>Didier COURTAUD</AUTEUR>
+              </PAGE_TITRE>
+    <PARTIE>
+        <TITRE>Introduction</TITRE>
+        <SECTION>
+            <TITRE>Introduction</TITRE>
+            <PARAGRAPHE>
+                Le sous-titrage est une technique assez ancienne pour permettre d'ajouter de l'information à une séquence vidéo
+            </PARAGRAPHE>
+            <LISTE mode="incremental_allume">
+                <EL>Il est particulièrement important
+                    	<LISTE>
+                        		<EL>Pour internationaliser un contenu : sous-titre dans une langue différente de celle qui est parlée</EL>
+                        		<EL>Pour aider à la compréhension des personnes malentendantes ou sourdes
+                            			<LISTE>
+                                				<EL>Fourniture du contenu du dialogue parlé</EL>
+                                				<EL>Fourniture d'indications sur qui parle ou sur l'environnement sonore de la scène ( audiodescription)</EL>
+                            			</LISTE>
+                        		</EL>
+                        		<EL>Pour le divertissement : karaoké</EL>
+                        		<EL>Pour donner des accès vers des ressources supplémentaires</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+            
+        </SECTION>
+        <SECTION>
+            <TITRE>Techniques</TITRE>
+            <LISTE mode="pliage">
+                <EL>Les premiers sous-titres sont apparus avec le cinéma
+                    	<LISTE>
+                        		<EL>Incrustation du texte dans la scène audiovisuelle</EL>
+                        		<EL>Ajout du sous-titre <EMPHASE>à la main</EMPHASE> sur support analogique</EL>
+                        		<EL>Ajout du sous-titre par un logiciel de montage sur support numérique</EL>
+                    	</LISTE>
+                </EL>
+                <EL>Avec le développement d'Internet, le besoin de sous-titrage s'est démultipliée
+                    	<LISTE>
+                        		<EL>Téléchargement de films/séries en anglais  =&gt; besoin de la version française</EL>
+                        		<EL>Augmentation des besoins en accessibilité =&gt; plus de sous-titres pour plus de supports multimédia</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Trop de sous-titres !</TITRE>
+            <PARAGRAPHE>
+                Ce besoin grandissant a donné lieu à une explosion de formats de sous-titrages<BR/><BR/>
+                <IMAGE fichier="subtitles_vlc.jpg" hauteur="90" largeur="90"/>
+            </PARAGRAPHE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Mais pas assez de fonctionnalités</TITRE>
+            <LISTE>
+                <EL>Tous ces formats de sous titrage sont uniquement textuels</EL>
+                <EL>Ils sont très orientés audiovisuel : séries TV, films</EL>
+                <EL>Mais
+                    	<LISTE>
+                        		<EL>Ils manquent de mise en page</EL>
+                        		<EL>Ils manquent de fonctionnalités hypertexte ( TV connectées )</EL>
+                        		<EL>Ils sont mal adaptés aux contenus purement Web</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+        </SECTION>
+    </PARTIE>
+    <PARTIE>
+        <TITRE>WebVTT</TITRE>
+        <SECTION>
+            <TITRE>Vers la définition d'un nouveau format</TITRE>
+            <LISTE>
+                <EL>L'arrivée de HTML5 a précipité les choses et permis à un Groupe de Travail de réfléchir à la création d'un nouveau langage pour le sous-titrage</EL>
+                <EL>Ce langage doit permettre
+                    	<LISTE>
+                        		<EL>d'ajouter des sous-titres à un flux vidéo</EL>
+                        		<EL>de chapitrer les sous titres</EL>
+                        		<EL>de formatter les sous-titres</EL>
+                        		<EL>de sémantiser les sous-titres</EL>
+                        		<EL>de permettre d'y accéder par Javascript</EL>
+                    	</LISTE>
+                </EL>
+                <EL>Ce <LIEN_EXTERNE href="http://www.w3.org/community/texttracks/">groupe de travail</LIEN_EXTERNE> s'est rassemblé sous l'égide du W3 Consortium pour mettre au point la spécification du langage WebVTT ( Web Video Text Tracks )
+                    	<LISTE>
+                        	<EL>L'objectif est de standardiser ce langage en tant que W3C Recommandation</EL>
+                        	<EL>47 personnes représentant Apple, l'INA, VLC , Mozilla, Adobe, Opera, beaucoup d'Universités dont .... Evry</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Requirements</TITRE>
+            <LISTE>
+                <EL>Sous titres / Commentaires</EL>
+                <EL>Audiodescriptions</EL>
+                <EL>Chapitrage / Navigation</EL>
+                <EL>Métadonnées</EL>
+                <EL>Formattage</EL>
+                <EL>Facilement lisible par les humains ... et les machines</EL>
+            </LISTE>
+            
+        </SECTION>
+        <SECTION>
+            <TITRE>Structure générale du fichier WebVTT</TITRE>
+            <LISTE>
+                <EL>Le langage WebVTT s'est inspiré du format SRT</EL>
+                <EL>On retrouve donc la forme <EMPHASE>générale</EMPHASE> du fichier SRT
+                    	<LISTE>
+                        	<EL>Une ligne donnant un titre de chapitre par exemple ( indexation)</EL>
+                        	<EL>Une ligne donnant les Time Code de début et de fin de la séquence de sous-titrage</EL>
+                        	<EL>Une ligne donnant le texte à afficher</EL>
+                    	</LISTE>
+                </EL>
+                <EL>Exemple
+                    <EXEMPLE>
+                        <CODE>WEBVTT
+                            
+                            Introduction
+                            00:00.000 --&gt; 00:01.000
+                            Sous-titre de la première minute
+                            
+                            Sujet principal
+                            00:00.000 --&gt; 00:01.000
+                        Sous-titre de la deuxième minute</CODE>
+                    </EXEMPLE>
+                </EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Structure générale du fichier WebVTT ( suite )</TITRE>
+            <LISTE>
+                <EL>Le fichier commence obligatoirement par le chaine de caractères <CODE>WEBVTT</CODE> en début de ligne</EL>
+                <EL>Les différents sous-titres sont séparés par une ligne blanche</EL>
+                <EL>Un <EMPHASE>paquet </EMPHASE>"Titre+ time-codes + sous-titres" 
+                    	<LISTE>
+                        		<EL>est donc matérialisé par une séparation d'une ligne blanche au-dessus et d'une ligne blanche au dessous</EL>
+                        		<EL>prend le nom générique de <EMPHASE>cue</EMPHASE></EL>
+                    	</LISTE>
+                </EL>
+                <EL>Les Time Codes sont exprimés obligatoirement sous la forme <CODE>[Heures:]Minutes:Secondes.Millisecondes</CODE> avec les valeurs <CODE>00</CODE> ou <CODE>000</CODE> obligatoires</EL>
+                <EL>Le texte du sous-titre peut s'étaler sur plusieurs lignes tant qu'il n'y a pas de ligne vide</EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Contenu des cues</TITRE>
+            <PARAGRAPHE>
+                Le contenu présent dans les cues peut être
+            </PARAGRAPHE>
+            <LISTE mode="incremental">
+                <EL>du texte ordinaire</EL>
+                <EL>du texte HTML ( ie contenant des balises HTML comme <CODE>&lt;p&gt;</CODE> <CODE>&lt;b&gt;</CODE> ou <CODE>&lt;i&gt;</CODE></EL>
+                <EL>un fichier JSON</EL>
+                <EL>Exemple 1
+                    <EXEMPLE>
+                        <CODE>L'université d'Evry
+                            00:00.000 --&gt; 00:01.00
+                            &lt;p&gt; Cette université fait partie des &lt;b&gt;nouvelles&lt;/b&gt; universités d'Ile de France &lt;/p&gt;
+                        </CODE>
+                    </EXEMPLE>
+                </EL>
+                <EL>Exemple 2
+                    <EXEMPLE>
+                        <CODE>miage
+                            00:03:45.000 --&gt; 00:04:14.000
+                            {
+                            "title": La MIAGE d'Evry
+                            "description": "Elle est spécailisée dans les technologies du Web"
+                            "src": "miage_evry.jpg"
+                            "href: "http://www.univ-evry.fr"
+                            }
+                        </CODE>
+                    </EXEMPLE>
+                </EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Mise en page des cues</TITRE>
+            <PARAGRAPHE>
+                Le texte des cues peut être mis en page par 5 opérateurs
+            </PARAGRAPHE>
+            <LISTE>
+                <EL><CODE>line</CODE> : positionnement en lignes </EL>
+                <EL><CODE>align </CODE>: alignement</EL>
+                <EL><CODE>position</CODE> : position des textes</EL>
+                <EL><CODE>size</CODE> : taille des textes</EL>
+                <EL><CODE>vertical</CODE> : direction d'écriture verticale</EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Mise en page des cues (suite)</TITRE>
+            <LISTE>
+                <EL>line 
+                    	<LISTE>
+                        		<EL>peut être un entier ( numéro d'ordre de la ligne )</EL>
+                        		<EL>peut être un pourcentage ( par rapport à la hauteur totale de la vidéo)</EL>
+                    	</LISTE>
+                </EL>
+                <EL>align
+                    	<LISTE>
+                        		<EL><CODE>start, middle, end, left, right</CODE></EL>
+                    	</LISTE>
+                </EL>
+                <EL>position
+                    	<LISTE>
+                        		<EL>Position du texte en pourcentage par rapport à la largeur de la vidéo</EL>
+                    	</LISTE>
+                </EL>
+                <EL>size
+                    	<LISTE>
+                        		<EL>Taille du texte en pourcentage</EL>
+                    	</LISTE>
+                </EL>
+                <EL>vertical
+                    	<LISTE>
+                        		<EL>Définit la direction d'écriture du texte vertical : <CODE>lr</CODE> ( vertical ascendant ) ou <CODE>rl</CODE> ( vertical descendant )</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Mise en page des cues ( exemple )</TITRE>
+            <TABLEAU>
+                <LT><CT><EXEMPLE>
+                            <CODE>WEBVTT
+                                
+                                00:00:05.000 --&gt; 00:00:08.040 align:middle line:10%
+                                I dabble? Listen to me. What a jerk.
+                                
+                                00:00:05.000 --&gt; 00:00:08.040 align:middle line:60%
+                                Yeah, I sort of dabble around,
+                                you know.
+                            </CODE>
+                        </EXEMPLE></CT><CT><IMAGE fichier="style.jpg" hauteur="90" largeur="90"/></CT></LT>
+            </TABLEAU>
+            <TABLEAU>
+                <LT><CT><EXEMPLE>
+                            <CODE>WEBVTT
+                                
+                                00:00:05.000 --&gt; 00:00:08.040 align:middle position:10%
+                                Ahem...
+                                
+                                00:00:05.000 --&gt; 00:00:08.040 align:middle position:80%
+                                What's the matter?
+                                			
+                            </CODE>
+                        </EXEMPLE></CT><CT><IMAGE fichier="style2.jpg" hauteur="105" largeur="105"/></CT></LT>
+            </TABLEAU>
+        </SECTION>
+        <SECTION>
+            <TITRE>Encore plus de style</TITRE>
+            <LISTE>
+                <EL>WebVTT peut aussi être <EMPHASE>stylé </EMPHASE>par l'intermédiaire de CSS</EL>
+                <EL>Un nouveau pseudo élément CSS est introduit : <CODE>::cue</CODE></EL>
+                <EL>Il permet de séléctionner
+                    	<LISTE>
+                        		<EL>des éléments par la sélaction normale de CSS</EL>
+                        		<EL>des objets VTT tels que définis :<IMAGE fichier="classnames.jpg" hauteur="80" largeur="80"/>
+                        		</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Encore plus de style ( suite )</TITRE>
+            <LISTE>
+                <EL>Le pseudo élément ::cue peur recevoir les propriétés CSS suivantes
+                    	<LISTE>
+                        		<EL>color</EL>
+                        		<EL>opacity</EL>
+                        		<EL>visibility</EL>
+                        		<EL>text-decoration</EL>
+                        		<EL>text-outline</EL>
+                        		<EL>text-shadow</EL>
+                        		<EL>propriétés relatives à background</EL>
+                        		<EL>propriétés relatives à outline</EL>
+                        		<EL>propriétés relatives aux transitions et aux animations</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Encore plus de style : exemple</TITRE>
+            <TABLEAU>
+                <LT><CT><EXEMPLE>
+                            <CODE>WEBVTT
+                                
+                                1
+                                00:00:13.000 --&gt; 00:00:16.100
+                                I heard about this &lt;c.arduino&gt;arduino&lt;/c&gt; project, and I saw it online - 
+                                
+                                2
+                                00:00:16.100 --&gt; 00:00:20.100
+                                - and I said 'Wow! a lot of people are starting to talk about this.
+                                I should check it out!
+                            </CODE>
+                        </EXEMPLE></CT><CT><EXEMPLE>
+                            <CODE>::cue .arduino {
+                                        color: red;
+                                        text-transform: uppercase;
+                                        font-family: "Helvetica Neue";
+                                        font-weight: lighter;
+                                }
+                            </CODE>
+                        </EXEMPLE></CT></LT>
+                <LT><CT colspan="2"><IMAGE fichier="cue.jpg"/></CT></LT>
+            </TABLEAU>
+        </SECTION>
+        <SECTION>
+            <TITRE>Toujours plus de style</TITRE>
+            <LISTE>
+                <EL>Deux pseudo classes sont introduites
+                    	<LISTE>
+                        		<EL><CODE>:past</CODE> permet de sélectionner des objets WebVTT qui sont dans le passé</EL>
+                        		<EL><CODE>:future</CODE>permet de sélectionner des objets WebVTT qui sont dans le futur</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+            <TABLEAU>
+                <LT><CT><EXEMPLE>
+                            <CODE>WEBVTT
+                                
+                                1
+                                00:00:10.000 --&gt; 00:00:12.210
+                                &lt;00:00:10.035&gt;Chocolate &lt;00:00:11.000&gt;Rain
+                                 
+                                2
+                                00:00:12.210 --&gt; 00:00:15.910
+                                &lt;00:00:13.250&gt;Some &lt;00:00:13.500&gt;stay &lt;00:00:13.750&gt;dry &lt;00:00:14.25&gt;and 
+                                &lt;00:00:14.50&gt;others &lt;00:00:15.00&gt;feel &lt;00:00:15.25&gt;the &lt;00:00:15.50&gt;pain
+                                 
+                                3
+                                00:00:15.910 --&gt; 00:00:15.920
+                                &lt;00:00:16.000&gt;Chocolate &lt;00:00:16.500&gt;Rain
+                            </CODE>
+                        </EXEMPLE></CT><CT><EXEMPLE>
+                            <CODE>::cue:past {
+                                	color: yellow;
+                                } 
+                                ::cue:future {
+                                 	text-shadow: black 0 0 1px;
+                                }
+                            </CODE>
+                        </EXEMPLE></CT></LT>
+            </TABLEAU>
+        </SECTION>
+        <SECTION>
+            <TITRE>Utilisation avec HTML5</TITRE>
+            <LISTE>
+                <EL>Pour pouvoir utiliser ces sous-titres, il faut les associer à une source vidéo</EL>
+                <EL>C'est le rôle de la balise <CODE>&lt;track&gt;</CODE> de HTML5</EL>
+                <EL><CODE>track</CODE> a les attributs suivants
+                    	<LISTE>
+                        		<EL><CODE>kind</CODE> indique un type parmii la liste
+                            			<LISTE>
+                                				<EL><CODE>subtitles</CODE> : pour des sous-titres</EL>
+                                				<EL><CODE>captions</CODE> : pour des sous-titres enrichis d'indications sur l'environnement sonore</EL>
+                                				<EL><CODE>descriptions</CODE> : pour des textes destinés à être lus par une machine</EL>
+                                				<EL><CODE>chapters</CODE> : pour ajouter une structure de navigation</EL>
+                                				<EL><CODE>metadata</CODE> : pour ajouter des métadonnées ( qui ne seront pas affichées )</EL>
+                            			</LISTE>
+                        		</EL> 
+                        		<EL><CODE>scrlang</CODE> indique la langue des sous-titres</EL>
+                        		<EL><CODE>src</CODE> localise le fichier</EL>
+                        		<EL><CODE>label</CODE> donne une étiquette pour une possible indexaton</EL>
+                    	</LISTE>
+                </EL>
+            </LISTE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Exemple d'utilisation de la balise track</TITRE>
+            <EXEMPLE>
+                <CODE>&lt;video controls&gt;
+                      &lt;source src="video.mp4"  type="video/mp4"&gt;
+                      &lt;source src="video.webm" type="video/webm"&gt;
+                    
+                      &lt;track label="English Captions"     kind="captions"     srclang="en"
+                                                                              src="video_cc_en.vtt"&gt;
+                      &lt;track label="German Subtitles"     kind="subtitles"    srclang="de"
+                                                                              src="video_sub_de.vtt"&gt;
+                      &lt;track label="French Subtitles"     kind="subtitles"    srclang="fr"
+                                                                              src="video_sub_fr.vtt"
+                      &lt;track label="English Descriptions" kind="descriptions" srclang="en"
+                                                                              src="video_audesc_en.vtt"
+                      &lt;track label="Chapters"             kind="chapters"     srclang="en"
+                                                                              src="video_chapters_en.vtt"&gt;
+                    &lt;/video&gt;
+                </CODE>
+            </EXEMPLE>
+        </SECTION>
+        <SECTION>
+            <TITRE>Utiliser Track et WebVTT en Javascript</TITRE>
+            <PARAGRAPHE>
+                Les élements <CODE>audio</CODE> et <CODE>vidéo</CODE> de HTML5 ont une propriété <CODE>textTracks </CODE>qui renvoie une liste <CODE>TextTrackList </CODE>dont tous les membres sont des <CODE>TextTrack</CODE> correspondant à un élément <CODE>&lt;track&gt;</CODE><BR/>
+                <EXEMPLE>
+                    <CODE>var videoElement = document.querySelector("video");
+                        var textTracks = videoElement.textTracks; // un pour chaque élément track
+                        var textTrack = textTracks[0]; // le premier élément track
+                        var kind = textTrack.kind // par exemple "subtitles"
+                        var mode = textTrack.mode // 0 (TextTrack.OFF dans la spec, TextTrack.DISABLED dans Chrome),
+                                                     1 (TextTrack.HIDDEN) ou 2 (TextTrack.SHOWING)
+                    </CODE>
+                </EXEMPLE>
+            </PARAGRAPHE>
+            <PARAGRAPHE>
+                Chaque <CODE>TextTrack</CODE>, à son tour, a une propriété <CODE>cue</CODE> qui renvoie une <CODE>TextTrackCueList</CODE> dont les membres sont des cues. <BR/>Les données des cues peuvent  être accédées par des propriétés telles que <CODE>startTime, endTime </CODE>et <CODE>Text</CODE><BR/>
+                <EXEMPLE>
+                    <CODE>var cues = textTrack.cues;
+                        var cue = cues[0]; // le premier cue du fichier WebVTT
+                        var cueId = cue.id // l'identificateur donné ua cue dans le fichier WebVTT
+                        var cueText = cue.text; // Le texte du cue ( ou le JSON )
+                    </CODE>
+                </EXEMPLE>
+            </PARAGRAPHE>
+            <LISTE>
+                <EL/>
+            </LISTE>
+        </SECTION>
+      <SECTION>
+        <TITRE>Utiliser Track et WebVTT en Javascript ( suite )</TITRE>
+        <PARAGRAPHE>
+          Une autre façon de faire est d'utiliser directement l'élément HTML Track
+        </PARAGRAPHE>
+        <EXEMPLE>
+          <CODE>var trackElements = document.querySelectorAll("track");
+          // pour chaque élément track
+          
+          for (var i = 0; i &lt; trackElements.length; i++) {
+          
+              trackElements[i].addEventListener("load", function() {
+              var textTrack = this.track; // Attentio : "this" est un HTMLTrackElement, pas un objet TextTrack
+              var isSubtitles = textTrack.kind === "subtitles";
+              
+              // par exemple pour chaque cue
+              
+              for (var j = 0; j &lt; textTrack.cues.length; ++j) {
+                var cue = textTrack.cues[j];
+                // .....
+              }
+          }
+          </CODE>
+        </EXEMPLE>
+      </SECTION>
+    <SECTION>
+      <TITRE>Utiliser Track et WebVTT en Javascript ( suite )</TITRE>
+      <LISTE>
+        <TITRE>Eévénements sur les tracks et les cues</TITRE>
+        <EL>Les deux types d'événements détectés sont :
+          	<LISTE>
+            		<EL>l'entrée et la sortie des cues</EL>
+            		<EL>le changement d'état des cues</EL>
+          	</LISTE>
+        </EL>
+        <EL>Exemple 1 : Event listeners des exemples précédents
+          <EXEMPLE>
+            <CODE>cue.onenter = function(){
+                // gestion de l'entrée
+              };
+              
+              cue.onexit = function(){
+                // gestion de la sortie
+              };
+            </CODE>
+          </EXEMPLE>
+        </EL>
+        <EL>Exemple 2 : récupération du texte d'un cue lorqu'il change
+          <EXEMPLE>
+            <CODE>textTrack.oncuechange = function (){
+                // "this" est un textTrack
+                var cue = this.activeCues[0]; // on suppose qu'il n'y a qu'un cue actif
+                var obj = JSON.parse(cue.text);
+                // faire qqchose
+              
+            </CODE>
+          </EXEMPLE>
+        </EL>
+      </LISTE>
+    </SECTION>
+    <SECTION>
+      <TITRE>Utiliser Track et WebVTT en Javascript ( suite )</TITRE>
+      <LISTE><TITRE>Ajouter un cue</TITRE>
+        <EL>
+          <EXEMPLE>
+            <CODE>var sfx = new Audio('sfx.wav');
+              var track = sfx.addTextTrack('metadata'); 
+              
+              // Ajoute des cues pour les sons intéressants
+              track.addCue(new TextTrackCue('dog bark', 12.783, 13.612, '', '', '', true));
+              track.addCue(new TextTrackCue('kitten mew', 13.612, 15.091, '', '', '', true));
+              
+              function playSound(id) {
+                sfx.currentTime = track.getCueById(id).startTime;
+                sfx.play();
+              }
+              
+              playSound('dog bark');
+              playSound('kitten mew');
+            </CODE>
+          </EXEMPLE>
+        </EL>
+        <EL>Les arguments sont : id, startTime, endTime, texte du cue, position, taille , alignement et un booléen pour <CODE>pauseOnExit</CODE></EL>
+      </LISTE>
+    </SECTION>
+    <SECTION>
+      <TITRE>Utiliser Track et WebVTT en Javascript ( suite )</TITRE>
+      <LISTE>
+        <TITRE>Enlever un cue</TITRE>
+        <EL><EXEMPLE><CODE>var videoElement = document.querySelector("video");
+              var track = videoElement.textTracks[0];
+              var activeCue = track.activeCues[0];
+              track.removeCue(activeCue);
+            </CODE>
+          </EXEMPLE>
+        </EL>
+      </LISTE>
+    </SECTION>
+    <SECTION>
+      <TITRE>Utiliser Track et WebVTT en Javascript ( fin )</TITRE>
+      <PARAGRAPHE>
+        Liste des fonctions possibles sur les cues<BR/><IMAGE fichier="Listefnscue.jpg"/>
+      </PARAGRAPHE>
+    </SECTION>
+  </PARTIE>
+  <PARTIE>
+    <TITRE>Support</TITRE>
+    <SECTION>
+      <TITRE>Où en est le support dans les navigateurs Web ?</TITRE>
+      <LISTE>
+        <EL>IE 10
+          	<LISTE>
+            		<EL>Support dansPlatform Preview 4 le 30 Novembre 2011 </EL>	
+            		<EL>Support d'une version <EMPHASE>basique </EMPHASE>de WebVTT</EL>
+          	</LISTE>
+        </EL>
+        <EL>Google Chrome
+          	<LISTE>
+            		<EL>Support de WebVTT depuis la version 18 en Novembre 2011</EL>
+            		<EL>Doit être demandé en modifiant <CODE>chrome://flags</CODE></EL>
+          	</LISTE>
+        </EL>
+        <EL>Safari
+          	<LISTE>
+            		<EL>Apple a publié le support de WebVTT avec la version 6 en Juillet 2012</EL>
+          	</LISTE>
+        </EL>
+        <EL>Opera
+          	<LISTE>
+            		<EL>Support dans Opera Next en Août 2012</EL>
+          	</LISTE>
+        </EL>
+        <EL>Firefox
+          	<LISTE>
+            		<EL>Pas encore de support dans une version officielle</EL>
+            		<EL>Premier développement partiel</EL>
+            		<EL>Reprise de ce développement par les étudiants de David Humphrey à Seneca</EL>
+          	</LISTE>
+        </EL>
+      </LISTE>
+    </SECTION>
+    <SECTION>
+      <TITRE>Et en attendant ?</TITRE>
+      <PARAGRAPHE>
+        On peut utiliser des <EMPHASE>polyfills</EMPHASE> écrits en Javascript
+      </PARAGRAPHE>
+      <LISTE>
+        <EL>video.js :<LIEN_EXTERNE href=" http://videojs.com/docs/tracks/"> http://videojs.com/docs/tracks/</LIEN_EXTERNE></EL>
+        <EL>MediaElement.js : <LIEN_EXTERNE href="http://mediaelementjs.com/ ">http://mediaelementjs.com/ </LIEN_EXTERNE></EL>
+        <EL>LeanBack Player : <LIEN_EXTERNE href="http://leanbackplayer.com/">http://leanbackplayer.com/</LIEN_EXTERNE></EL>
+        <EL>Playr : <LIEN_EXTERNE href="http://www.delphiki.com/html5/playr/">http://www.delphiki.com/html5/playr/</LIEN_EXTERNE></EL>
+        <EL>Captionator : <LIEN_EXTERNE href="https://github.com/cgiffard/Captionator">https://github.com/cgiffard/Captionator</LIEN_EXTERNE></EL>
+      </LISTE>
+    </SECTION>
+  </PARTIE>
+  <PARTIE>
+    <TITRE>Conclusion</TITRE>
+    <SECTION>
+      <TITRE>Démonstrations</TITRE>
+      <PARAGRAPHE>
+        Démonstrations en utilisant Google Chrome
+      </PARAGRAPHE>
+    </SECTION>
+    <SECTION>
+      <TITRE>Conclusion</TITRE>
+      <LISTE>
+        <EL>WebVTT est un standard en devenir
+          	<LISTE>
+            		<EL>Presque tous les navigateurs Web ont publié ou vont publier une version qui interprétera WebVTT</EL>
+            		<EL>D'ores et déjà utilisable via des librairies Javascript</EL>	
+          	</LISTE>
+        </EL>
+        <EL>C'est l'outil idéal
+          	<LISTE>
+            		<EL>pour l'internationalisation</EL>
+            		<EL>pour l'accessibilité</EL>
+          	</LISTE>
+        </EL>
+      </LISTE>
+    </SECTION>
+  </PARTIE>
+</EAST>

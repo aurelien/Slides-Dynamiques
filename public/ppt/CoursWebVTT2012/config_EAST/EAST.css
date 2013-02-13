@@ -1,0 +1,222 @@
+/* collapsable lists */
+.outline   li,
+.accordion li {
+  cursor: pointer;
+}
+
+/* Standard Outline/accordion lists */
+
+.outline   li ol,
+.outline   li ul,
+.accordion li ol,
+.accordion li ul {
+  display: none;
+}
+.outline li.expanded.active ol,
+.outline li.expanded.active ul {
+  display: none;
+}
+.outline   li.active ol,
+.outline   li.active ul,
+.accordion li.active ol,
+.accordion li.active ul {
+  display: block;
+}
+.outline   li.idle ol,
+.outline   li.idle ul,
+.accordion li.idle ol,
+.accordion li.idle ul {
+  display: none !important;
+}
+.outline   li.done ol,
+.outline   li.done ul,
+.accordion li.done ol,
+.accordion li.done ul {
+  display: none;
+}
+.outline li.expanded ol,
+.outline li.expanded ul {
+  display: block;
+}
+
+/* Last level Outline/accordion lists */
+
+.outline:last-child li ol,
+.outline :last-child  li ul,
+.accordion:last-child li ol,
+.accordion:last-child li ul {
+ display: none; 
+
+}
+.outline:last-child li.expanded.active ol,
+.outline:last-child li.expanded.active ul {
+  display: none;
+}
+.outline:last-child   li.active ol,
+.outline:last-child   li.active ul,
+.accordion:last-child li.active ol,
+.accordion:last-child li.active ul {
+  display: block;
+}
+.outline:last-child li.expanded ol,
+.outline:last-child li.expanded ul {
+  display: block;
+}
+
+/* Shadowed incremental lists */
+
+/* List items */
+
+.shadowinc li[smil="idle"] {
+  visibility: hidden;
+}
+.shadowinc li[smil="idle"] span {
+  opacity: 0;
+}
+
+.shadowinc li[smil="done"] {
+  visibility: visible;
+ }
+.shadowinc li[smil="done"] span {
+  opacity: 0.4;
+}
+
+.shadowinc li[smil="active"] {
+  visibility: visible;
+}
+.shadowinc li[smil="active"] span {
+  opacity:1;
+}
+
+/* List titles */
+
+h3.shadowinc[smil="idle"] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+h3.shadowinc[smil="done"] {
+  visibility: visible;
+  opacity: 0.4;
+ }
+
+h3.shadowinc[smil="active"] {
+  visibility: visible;
+  opacity:1;
+}
+
+/* Higlithed incremental lists /*
+  
+/* Lists items */
+
+.highinc  li[smil="active"] {
+  visibility: visible;
+  color:red !important;
+}
+.highinc  li[smil="active"] > span:first-child {
+  opacity:1;
+  color: red !important;
+}
+
+.highinc  li[smil="idle"] {
+  visibility: hidden;
+}
+.highinc  li[smil="idle"] span {
+  opacity: 0;
+}
+
+.highinc  li[smil="active"] ~ li[smil="idle"] {
+  visibility: visible;
+}
+.highinc  li[smil="active"] ~ li[smil="idle"] span {
+  opacity: 0.2;
+/*  color: black ; */
+}
+
+ .highinc  li[smil="active"]  li span {
+  opacity: 0.2;
+/*  color: black ;*/
+}
+
+.highinc  li[smil="active"]  li {
+  visibility: visible;
+}
+
+.highinc  li[smil="active"] ~ li[smil="idle"] li {
+  visibility: visible;
+}
+
+.highinc  li[smil="active"] ~ li[smil="idle"] li span{
+  opacity: 0.2;
+/*  color: black ; */
+}
+
+.highinc  li[smil="done"] ~ li[smil="idle"] li {
+  visibility: visible;
+}
+.highinc  li[smil="done"] ~ li[smil="idle"] li span {
+  opacity: 0.2;
+/*  color: black; */
+}
+
+.highinc  li[smil="done"] ~ li[smil="idle"] {
+  visibility: visible;
+}
+.highinc  li[smil="done"] ~ li[smil="idle"] span {
+  opacity: 0.2;
+/*  color: black; */
+}
+
+.highinc  li[smil="done"] {
+  visibility: visible;
+ }
+.highinc  li[smil="done"] span {
+  opacity: 1 ;
+/*  color: black; */
+}
+
+
+/* Lists titles */
+
+h3.highinc[smil="idle"] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+h3.highinc[smil="done"] {
+  visibility: visible;
+  opacity: 1;
+/*  color: black; */
+ }
+
+h3.highinc[smil="active"] {
+  visibility: visible;
+  opacity:1;
+  color: red;
+}
+
+/* Plus sign manadgment */
+
+li.signeplus[smil="idle"]{
+  display: block;
+  visibility: visible !important;
+}
+li.signeplus[smil="active"]{
+  display:none ;
+}
+li.signeplus[smil="done"]{
+  display:none ;
+}
+
+li[smil="idle"] img.plus{
+  visibility: visible !important;
+}
+
+li[smil="done"] img.plus{
+  visibility: visible !important;
+}
+li[smil="active"] img.plus{
+ display:none ;
+}
+
+

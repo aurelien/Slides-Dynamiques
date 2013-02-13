@@ -1,0 +1,4218 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>WebVTT</title>
+<style type="text/css">
+
+/* Page */
+
+	
+
+body { background: #FFFFFF } 
+h1 { text-align: center; font-size: 150%; font-family: sans-serif; color: #963232 }
+h2 { text-align: center; font-size: 110%; font-weight: bold; font-family: sans-serif; color: #963232 }
+h3 { font-size: 100%; font-weight: bold; font-family: serif; margin-bottom: 0.5em }
+h5 { text-align: center; font-size: 90%; font-weight: bold; font-family: serif; margin-bottom: 0.5em; color: #963232 }
+h6 { text-align: center; font-size: 70%; font-weight: bold; font-family: serif; margin-bottom: 0.5em; color: #963232 }
+.auteur { text-align: center }
+.date { text-align: left }
+.sommaire { page-break-after: always; background: #F5F5FF; margin: 0.5em; padding: 0.5em; border: gray outset }
+.cover { page-break-after: always; background: #F5F5FF; margin: 0.5em; padding: 0.5em; border: gray outset }
+.section { page-break-after: always; background: #FFFFEB; margin: 2em 0.5em; padding: 0.5em; border: gray outset }
+
+
+
+
+	
+		
+		
+			.slide { page-break-after: always; background: #FFFFEB; margin: 2em 0.5em; padding: 0.5em; border: gray outset }
+		
+	
+		
+	
+/* Fin page */
+
+/* Page de titre */
+
+.pagetitre {
+
+	
+	
+	
+color:  ;
+ 
+}
+
+
+/* Fin Page de titre */
+
+
+/* Environnements d'image et de video */
+
+	
+
+.titreimage { text-align: center; font-weight: bold; background-color: #E0E0FF ;  ; color: black}
+.envimage { text-align: center; border: gray outset; padding: 0; margin: 1em; background: #EBFFEB }
+.legende { font-family: sans-serif; margin-top: 1em ; color: black}
+
+
+/* Fin environnements */
+
+	
+
+pre.code_xml { color: #963232 } ;
+pre { background: #EBFFEB; padding-left: 2em; padding-bottom: 0.5em }
+tt { color: #963232 ; font-family:  sans-serif}
+li { margin-bottom: 0.5em; }
+dt { font-weight: bold; }
+dd { margin-bottom: 0.5em; }
+.elsommaire { font-size: 110%; color: #963232 ; text-decoration: none; font-weight: bold }
+.elsommaire:hover { font-size: 110%; color: #663399; text-decoration: none; font-weight: bold }
+.elsommaire2 { font-size: 110%; color: #963232 ; text-decoration: none}
+.elsommaire2:hover { font-size: 110%; color: #663399; text-decoration: none }
+
+
+/* Tableaux */
+
+table#table_titre {
+height: 80%;
+margin-top: 10 %;
+margin-bottom: 10 %;
+width: 80%;
+margin-left: 10%;
+margin-right: 10%;
+}
+
+/* Entetes */
+
+	
+
+th {
+background: #FFF0E0 ;
+color: black ;
+
+}
+
+/* Corps des tableaux */
+
+	
+	
+.tableau1 {
+background: #FFFAE0 ;
+color: black ;
+ 
+}
+.tableau2 {
+background: #FFFAE0 ;
+color: black ;
+ 
+}
+
+td.tiers { width: 33% }
+td.vingt { width: 20% }
+table.bas { position: absolute; bottom: 2% ; left:0 }
+
+/* Fin tableaux */
+
+	
+
+.commentaire {
+margin: 1em;
+color: #196419 ;
+}
+
+
+.equation { vertical-align : middle }
+
+
+	
+	
+	
+	ul { margin-top: 0.5em }
+	p { text-indent: 1em; text-align: justify; margin-top: 0.5em }
+	.spanli { }
+	
+	p#navigation_par {text-indent: 1em; text-align: justify; margin-top: 0.5em ; background : none }
+	p#text_size_par {text-indent: 1em; text-align: justify; margin-top: 0.5em ; background : none }
+	
+	
+		
+		td.logogauche{  }	
+		
+	
+	
+	
+	tt.slidenumber { color : #963232 }
+	
+	
+		
+		tt.piedgauche { color : #963232}
+		
+	
+		
+		tt.pieddroit { color : #963232}
+		
+	
+	
+		
+		
+		
+
+
+/* Titres */
+
+td.soixante { width: 60% ; background :  }
+
+.slide_title  , .titrepartie , .titresommaire {
+
+	
+
+
+color : #963232 ;
+
+
+}
+
+/* Fin Titres */
+
+
+
+
+
+
+
+#slideshow div.slide {
+  position: absolute;
+  left: 10%;
+  top: 3%;
+  width:80%;
+  height:80%;  
+}
+#slideshow div.print {
+  position: relative !important;
+}
+
+#slideshow div.image {
+align:center;
+}
+
+#slideshow div.moitie {
+  float:left;
+  width:50%;
+}
+
+#slideshow div.tiers {
+  float:left;
+  width:33%;
+}
+#slideshow div.quart {
+  float:left;
+  width:25%;
+}
+
+
+
+#navigation_par.print {
+  display: none;
+  opacity: 0;
+}
+
+#text_size_par.print {
+  display: none;
+  opacity: 0;
+}
+
+/* navigation menu */
+#slideshow .menu {
+  position: absolute;
+  /*bottom: 0;*/
+  /*right: 2em;*/
+  /*font-size: 0.75em;*/
+  bottom: 0%;
+  right: 9%;
+	margin: 0;
+  border-radius         : 0px;
+  -o-border-radius      : 0px;
+  -moz-border-radius    : 0px;
+  -webkit-border-radius : 0px;
+  box-shadow         : none;
+  -o-box-shadow      : none;
+  -moz-box-shadow    : none;
+  -webkit-box-shadow : none;
+  z-index: 2;
+}
+/* no transition for the menu! */
+#slideshow .menu {
+  opacity: 1 ;
+  visibility: visible ;
+}
+#slideshow .menu button {
+  opacity: 1;
+  transition         : none;
+  -o-transition      : none;
+  -moz-transition    : none;
+  -webkit-transition : none;
+}
+#slideshow .menu button[smil=idle] {
+  opacity: 0.5;
+  transform         : none;
+  -o-transform      : none;
+  -moz-transform    : none;
+  -webkit-transform : none;
+}
+
+
+/* text sizing menu */
+#slideshow .menuts {
+  position: absolute;
+  /*bottom: 0;*/
+  /*right: 2em;*/
+  /*font-size: 0.75em;*/
+  bottom: 0%;
+  left: 9%;
+	margin: 0;
+  border-radius         : 0px;
+  -o-border-radius      : 0px;
+  -moz-border-radius    : 0px;
+  -webkit-border-radius : 0px;
+  box-shadow         : none;
+  -o-box-shadow      : none;
+  -moz-box-shadow    : none;
+  -webkit-box-shadow : none;
+  z-index: 2;
+}
+/* no transition for the menu! */
+#slideshow .menuts {
+  opacity: 1 ;
+  visibility: visible ;
+}
+#slideshow .menuts button {
+  opacity: 1;
+  transition         : none;
+  -o-transition      : none;
+  -moz-transition    : none;
+  -webkit-transition : none;
+}
+#slideshow .menuts button[smil=idle] {
+  opacity: 0.5;
+  transform         : none;
+  -o-transform      : none;
+  -moz-transform    : none;
+  -webkit-transform : none;
+}
+
+/* Code en colonnes */
+
+div.code_cols {
+
+   column-gap: 1em;
+   -o-column-gap: 1em;
+   -moz-column-gap: 1em;
+   -webkit-column-gap: 1em;
+   column-rule:1px solid;
+   -o-column-rule:1px solid;
+   -moz-column-rule:1px solid;
+   -webkit-column-rule:1px solid;
+   color: #963232;
+   white-space:pre-wrap ;
+   word-wrap:break-word;
+}
+
+#slideshow div[smil="active"] {
+
+   display: block;
+}
+
+/*  Tous les slides et les boutons sont caches par defaut
+    pour verifier la presence du repertoire de configuration qui contient
+    le fichier CSS qui va les rendre visibles
+    
+    Un slide d'erreur est affiche */
+    
+#slideshow {
+
+	display: none;
+	
+}
+
+p.menu {
+
+	display: none;
+
+}
+
+p.menuts {
+
+	display: none;
+
+}
+
+div#erreur {
+
+	display: block;
+	
+	position: absolute;
+	left: 10%;
+	top: 3%;
+	width:80%;
+	height:80%;
+	background: #FFFFEB;
+	margin: 2em 0.5em;
+	padding: 0.5em;
+	border: gray outset
+}
+
+    </style>
+<meta charset="UTF-8"/>
+<link href="config_EAST/EAST_transitions.css" type="text/css" rel="stylesheet"> </link>
+<link href="config_EAST/EAST.css" type="text/css" rel="stylesheet"> </link>
+<link href="config_EAST/EAST_config.css" type="text/css" rel="stylesheet"> </link>
+<link href="config_EAST/EAST.smil" type="application/smil+xml" rel="timesheet"> </link> <!--[if lt IE 9]> 
+<script src="config_EAST/sizzle.js" type="text/javascript"/>
+<script src="config_EAST/html5.js" type="text/javascript"/>
+<script src="config_EAST/mediaelement.js" type="text/javascript"/> <![endif]--> 
+<script src="config_EAST/EAST.js" type="text/javascript"> </script>
+<script src="config_EAST/timesheets.js" type="text/javascript"> </script>
+<script src="config_EAST/timesheets-navigation.js" type="text/javascript"> </script>
+</head>
+<body style="font-size: 100%" class="carousel">
+<div id="slideshow">
+<div id="cover" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td/>
+<td class="vingt logodroit" align="right">
+<tt/>
+</td>
+</tr>
+</table>
+<table id="table_titre">
+<tbody>
+<tr>
+<td>
+<h1 class="pagetitre">WebVTT</h1>
+</td>
+</tr>
+<tr>
+<td>
+<h2 class="pagetitre">Un langage de sous titrage universel pour le Web</h2>
+</td>
+</tr>
+<tr>
+<td>
+<h5 class="pagetitre">Didier COURTAUD</h5>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td>
+<h6 class="pagetitre">
+<tt/>
+</h6>
+</td>
+</tr>
+</tfoot>
+</table>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber"/>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="sommaire" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h1 class="titresommaire"> Plan </h1>
+</td>
+<td class="vingt" align="right">
+<tt/>
+</td>
+</tr>
+</table>
+<ul class="accordion">
+<li class="elsommaire">
+<span>Introduction<ul id="liste_sections">
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide1">Introduction</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide2">Techniques</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide3">Trop de sous-titres !</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide4">Mais pas assez de fonctionnalités</a>
+</span>
+</li>
+</ul>
+</span>
+</li>
+<li class="elsommaire">
+<span>WebVTT<ul id="liste_sections">
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide5">Vers la définition d'un nouveau format</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide6">Requirements</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide7">Structure générale du fichier WebVTT</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide8">Structure générale du fichier WebVTT ( suite )</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide9">Contenu des cues</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide10">Mise en page des cues</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide11">Mise en page des cues (suite)</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide12">Mise en page des cues ( exemple )</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide13">Encore plus de style</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide14">Encore plus de style ( suite )</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide15">Encore plus de style : exemple</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide16">Toujours plus de style</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide17">Utilisation avec HTML5</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide18">Exemple d'utilisation de la balise track</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide19">Utiliser Track et WebVTT en Javascript</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide20">Utiliser Track et WebVTT en Javascript ( suite )</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide21">Utiliser Track et WebVTT en Javascript ( suite )</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide22">Utiliser Track et WebVTT en Javascript ( suite )</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide23">Utiliser Track et WebVTT en Javascript ( suite )</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide24">Utiliser Track et WebVTT en Javascript ( fin )</a>
+</span>
+</li>
+</ul>
+</span>
+</li>
+<li class="elsommaire">
+<span>Support<ul id="liste_sections">
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide25">Où en est le support dans les navigateurs Web ?</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide26">Et en attendant ?</a>
+</span>
+</li>
+</ul>
+</span>
+</li>
+<li class="elsommaire">
+<span>Conclusion<ul id="liste_sections">
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide27">Démonstrations</a>
+</span>
+</li>
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide28">Conclusion</a>
+</span>
+</li>
+</ul>
+</span>
+</li>
+</ul>
+</div>
+<div id="partie1" class="slide">
+<table height="60%" width="100%">
+<tbody>
+<tr>
+<td>
+<h1 class="titrepartie">Introduction</h1>
+</td>
+</tr>
+</tbody>
+</table>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber"/>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide1" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Introduction</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <p>
+        Le sous-titrage est une technique assez ancienne pour permettre d'ajouter de l'information à une séquence vidéo
+      </p>
+      <ul type="square" class="highinc">
+<li class="highlight" id="l1110">
+<span class="spanli" id="s1110">Il est particulièrement important
+          	
+        </span>
+<ul type="disc">
+<li class="highlight" id="l1120">
+<span class="spanli" id="s1120">Pour internationaliser un contenu : sous-titre dans une langue différente de celle qui est parlée</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1120 = document.getElementById("l1120");
+						var spans1120 = document.getElementById("s1120");
+						
+						lil1120.style.color = "green";
+						
+						
+							
+							lil1120.style.listStyleImage = "url()";
+						
+						spans1120.style.color = "black";</script>
+<li class="highlight" id="l1121">
+<span class="spanli" id="s1121">Pour aider à la compréhension des personnes malentendantes ou sourdes
+              			
+            		</span>
+<ul type="circle">
+<li class="highlight" id="l1131">
+<span class="spanli" id="s1131">Fourniture du contenu du dialogue parlé</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1131 = document.getElementById("l1131");
+						var spans1131 = document.getElementById("s1131");
+						
+						lil1131.style.color = "orange";
+						
+						
+							
+							lil1131.style.listStyleImage = "url()";
+						
+						spans1131.style.color = "black";</script>
+<li class="highlight" id="l1132">
+<span class="spanli" id="s1132">Fourniture d'indications sur qui parle ou sur l'environnement sonore de la scène ( audiodescription)</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1132 = document.getElementById("l1132");
+						var spans1132 = document.getElementById("s1132");
+						
+						lil1132.style.color = "orange";
+						
+						
+							
+							lil1132.style.listStyleImage = "url()";
+						
+						spans1132.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1121 = document.getElementById("l1121");
+						var spans1121 = document.getElementById("s1121");
+						
+						lil1121.style.color = "green";
+						
+						
+							
+							lil1121.style.listStyleImage = "url()";
+						
+						spans1121.style.color = "black";</script>
+<li class="highlight" id="l1124">
+<span class="spanli" id="s1124">Pour le divertissement : karaoké</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1124 = document.getElementById("l1124");
+						var spans1124 = document.getElementById("s1124");
+						
+						lil1124.style.color = "green";
+						
+						
+							
+							lil1124.style.listStyleImage = "url()";
+						
+						spans1124.style.color = "black";</script>
+<li class="highlight" id="l1125">
+<span class="spanli" id="s1125">Pour donner des accès vers des ressources supplémentaires</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1125 = document.getElementById("l1125");
+						var spans1125 = document.getElementById("s1125");
+						
+						lil1125.style.color = "green";
+						
+						
+							
+							lil1125.style.listStyleImage = "url()";
+						
+						spans1125.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1110 = document.getElementById("l1110");
+						var spans1110 = document.getElementById("s1110");
+						
+						lil1110.style.color = "orange";
+						
+						
+							
+							lil1110.style.listStyleImage = "url()";
+						
+						spans1110.style.color = "black";</script>
+<li class="signeplus">
+<img src="config_EAST/signe_plus.png"/>
+</li>
+</ul>
+      
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">1/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide2" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Techniques</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square" class="outline">
+<li class="li_class" id="l1117">
+<span class="spanli" id="s1117">Les premiers sous-titres sont apparus avec le cinéma
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l1127">
+<span class="spanli" id="s1127">Incrustation du texte dans la scène audiovisuelle</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1127 = document.getElementById("l1127");
+						var spans1127 = document.getElementById("s1127");
+						
+						lil1127.style.color = "green";
+						
+						
+							
+							lil1127.style.listStyleImage = "url()";
+						
+						spans1127.style.color = "black";</script>
+<li class="li_class" id="l1128">
+<span class="spanli" id="s1128">Ajout du sous-titre <em>à la main</em> sur support analogique</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1128 = document.getElementById("l1128");
+						var spans1128 = document.getElementById("s1128");
+						
+						lil1128.style.color = "green";
+						
+						
+							
+							lil1128.style.listStyleImage = "url()";
+						
+						spans1128.style.color = "black";</script>
+<li class="li_class" id="l1129">
+<span class="spanli" id="s1129">Ajout du sous-titre par un logiciel de montage sur support numérique</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1129 = document.getElementById("l1129");
+						var spans1129 = document.getElementById("s1129");
+						
+						lil1129.style.color = "green";
+						
+						
+							
+							lil1129.style.listStyleImage = "url()";
+						
+						spans1129.style.color = "black";</script>
+</ul>
+<img src="config_EAST/signe_plus.png" class="plus"/>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil1117 = document.getElementById("l1117");
+						var spans1117 = document.getElementById("s1117");
+						
+						lil1117.style.color = "orange";
+						
+						
+							
+							lil1117.style.listStyleImage = "url()";
+						
+						spans1117.style.color = "black";</script>
+<li class="li_class" id="l11111">
+<span class="spanli" id="s11111">Avec le développement d'Internet, le besoin de sous-titrage s'est démultipliée
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11211">
+<span class="spanli" id="s11211">Téléchargement de films/séries en anglais  =&gt; besoin de la version française</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11211 = document.getElementById("l11211");
+						var spans11211 = document.getElementById("s11211");
+						
+						lil11211.style.color = "green";
+						
+						
+							
+							lil11211.style.listStyleImage = "url()";
+						
+						spans11211.style.color = "black";</script>
+<li class="li_class" id="l11212">
+<span class="spanli" id="s11212">Augmentation des besoins en accessibilité =&gt; plus de sous-titres pour plus de supports multimédia</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11212 = document.getElementById("l11212");
+						var spans11212 = document.getElementById("s11212");
+						
+						lil11212.style.color = "green";
+						
+						
+							
+							lil11212.style.listStyleImage = "url()";
+						
+						spans11212.style.color = "black";</script>
+</ul>
+<img src="config_EAST/signe_plus.png" class="plus"/>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11111 = document.getElementById("l11111");
+						var spans11111 = document.getElementById("s11111");
+						
+						lil11111.style.color = "orange";
+						
+						
+							
+							lil11111.style.listStyleImage = "url()";
+						
+						spans11111.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">2/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide3" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Trop de sous-titres !</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <p>
+        Ce besoin grandissant a donné lieu à une explosion de formats de sous-titrages<br/>
+<br/>
+        <img height="90%" width="90%" src="subtitles_vlc.jpg"/>
+      </p>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">3/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide4" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Mais pas assez de fonctionnalités</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11114">
+<span class="spanli" id="s11114">Tous ces formats de sous titrage sont uniquement textuels</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11114 = document.getElementById("l11114");
+						var spans11114 = document.getElementById("s11114");
+						
+						lil11114.style.color = "orange";
+						
+						
+							
+							lil11114.style.listStyleImage = "url()";
+						
+						spans11114.style.color = "black";</script>
+<li class="li_class" id="l11115">
+<span class="spanli" id="s11115">Ils sont très orientés audiovisuel : séries TV, films</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11115 = document.getElementById("l11115");
+						var spans11115 = document.getElementById("s11115");
+						
+						lil11115.style.color = "orange";
+						
+						
+							
+							lil11115.style.listStyleImage = "url()";
+						
+						spans11115.style.color = "black";</script>
+<li class="li_class" id="l11116">
+<span class="spanli" id="s11116">Mais
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11216">
+<span class="spanli" id="s11216">Ils manquent de mise en page</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11216 = document.getElementById("l11216");
+						var spans11216 = document.getElementById("s11216");
+						
+						lil11216.style.color = "green";
+						
+						
+							
+							lil11216.style.listStyleImage = "url()";
+						
+						spans11216.style.color = "black";</script>
+<li class="li_class" id="l11217">
+<span class="spanli" id="s11217">Ils manquent de fonctionnalités hypertexte ( TV connectées )</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11217 = document.getElementById("l11217");
+						var spans11217 = document.getElementById("s11217");
+						
+						lil11217.style.color = "green";
+						
+						
+							
+							lil11217.style.listStyleImage = "url()";
+						
+						spans11217.style.color = "black";</script>
+<li class="li_class" id="l11218">
+<span class="spanli" id="s11218">Ils sont mal adaptés aux contenus purement Web</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11218 = document.getElementById("l11218");
+						var spans11218 = document.getElementById("s11218");
+						
+						lil11218.style.color = "green";
+						
+						
+							
+							lil11218.style.listStyleImage = "url()";
+						
+						spans11218.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11116 = document.getElementById("l11116");
+						var spans11116 = document.getElementById("s11116");
+						
+						lil11116.style.color = "orange";
+						
+						
+							
+							lil11116.style.listStyleImage = "url()";
+						
+						spans11116.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">4/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="partie2" class="slide">
+<table height="60%" width="100%">
+<tbody>
+<tr>
+<td>
+<h1 class="titrepartie">WebVTT</h1>
+</td>
+</tr>
+</tbody>
+</table>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber"/>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide5" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Vers la définition d'un nouveau format</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11120">
+<span class="spanli" id="s11120">L'arrivée de HTML5 a précipité les choses et permis à un Groupe de Travail de réfléchir à la création d'un nouveau langage pour le sous-titrage</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11120 = document.getElementById("l11120");
+						var spans11120 = document.getElementById("s11120");
+						
+						lil11120.style.color = "orange";
+						
+						
+							
+							lil11120.style.listStyleImage = "url()";
+						
+						spans11120.style.color = "black";</script>
+<li class="li_class" id="l11121">
+<span class="spanli" id="s11121">Ce langage doit permettre
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11221">
+<span class="spanli" id="s11221">d'ajouter des sous-titres à un flux vidéo</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11221 = document.getElementById("l11221");
+						var spans11221 = document.getElementById("s11221");
+						
+						lil11221.style.color = "green";
+						
+						
+							
+							lil11221.style.listStyleImage = "url()";
+						
+						spans11221.style.color = "black";</script>
+<li class="li_class" id="l11222">
+<span class="spanli" id="s11222">de chapitrer les sous titres</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11222 = document.getElementById("l11222");
+						var spans11222 = document.getElementById("s11222");
+						
+						lil11222.style.color = "green";
+						
+						
+							
+							lil11222.style.listStyleImage = "url()";
+						
+						spans11222.style.color = "black";</script>
+<li class="li_class" id="l11223">
+<span class="spanli" id="s11223">de formatter les sous-titres</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11223 = document.getElementById("l11223");
+						var spans11223 = document.getElementById("s11223");
+						
+						lil11223.style.color = "green";
+						
+						
+							
+							lil11223.style.listStyleImage = "url()";
+						
+						spans11223.style.color = "black";</script>
+<li class="li_class" id="l11224">
+<span class="spanli" id="s11224">de sémantiser les sous-titres</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11224 = document.getElementById("l11224");
+						var spans11224 = document.getElementById("s11224");
+						
+						lil11224.style.color = "green";
+						
+						
+							
+							lil11224.style.listStyleImage = "url()";
+						
+						spans11224.style.color = "black";</script>
+<li class="li_class" id="l11225">
+<span class="spanli" id="s11225">de permettre d'y accéder par Javascript</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11225 = document.getElementById("l11225");
+						var spans11225 = document.getElementById("s11225");
+						
+						lil11225.style.color = "green";
+						
+						
+							
+							lil11225.style.listStyleImage = "url()";
+						
+						spans11225.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11121 = document.getElementById("l11121");
+						var spans11121 = document.getElementById("s11121");
+						
+						lil11121.style.color = "orange";
+						
+						
+							
+							lil11121.style.listStyleImage = "url()";
+						
+						spans11121.style.color = "black";</script>
+<li class="li_class" id="l11127">
+<span class="spanli" id="s11127">Ce <a href="http://www.w3.org/community/texttracks/">groupe de travail</a> s'est rassemblé sous l'égide du W3 Consortium pour mettre au point la spécification du langage WebVTT ( Web Video Text Tracks )
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11227">
+<span class="spanli" id="s11227">L'objectif est de standardiser ce langage en tant que W3C Recommandation</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11227 = document.getElementById("l11227");
+						var spans11227 = document.getElementById("s11227");
+						
+						lil11227.style.color = "green";
+						
+						
+							
+							lil11227.style.listStyleImage = "url()";
+						
+						spans11227.style.color = "black";</script>
+<li class="li_class" id="l11228">
+<span class="spanli" id="s11228">47 personnes représentant Apple, l'INA, VLC , Mozilla, Adobe, Opera, beaucoup d'Universités dont .... Evry</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11228 = document.getElementById("l11228");
+						var spans11228 = document.getElementById("s11228");
+						
+						lil11228.style.color = "green";
+						
+						
+							
+							lil11228.style.listStyleImage = "url()";
+						
+						spans11228.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11127 = document.getElementById("l11127");
+						var spans11127 = document.getElementById("s11127");
+						
+						lil11127.style.color = "orange";
+						
+						
+							
+							lil11127.style.listStyleImage = "url()";
+						
+						spans11127.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">5/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide6" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Requirements</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11130">
+<span class="spanli" id="s11130">Sous titres / Commentaires</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11130 = document.getElementById("l11130");
+						var spans11130 = document.getElementById("s11130");
+						
+						lil11130.style.color = "orange";
+						
+						
+							
+							lil11130.style.listStyleImage = "url()";
+						
+						spans11130.style.color = "black";</script>
+<li class="li_class" id="l11131">
+<span class="spanli" id="s11131">Audiodescriptions</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11131 = document.getElementById("l11131");
+						var spans11131 = document.getElementById("s11131");
+						
+						lil11131.style.color = "orange";
+						
+						
+							
+							lil11131.style.listStyleImage = "url()";
+						
+						spans11131.style.color = "black";</script>
+<li class="li_class" id="l11132">
+<span class="spanli" id="s11132">Chapitrage / Navigation</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11132 = document.getElementById("l11132");
+						var spans11132 = document.getElementById("s11132");
+						
+						lil11132.style.color = "orange";
+						
+						
+							
+							lil11132.style.listStyleImage = "url()";
+						
+						spans11132.style.color = "black";</script>
+<li class="li_class" id="l11133">
+<span class="spanli" id="s11133">Métadonnées</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11133 = document.getElementById("l11133");
+						var spans11133 = document.getElementById("s11133");
+						
+						lil11133.style.color = "orange";
+						
+						
+							
+							lil11133.style.listStyleImage = "url()";
+						
+						spans11133.style.color = "black";</script>
+<li class="li_class" id="l11134">
+<span class="spanli" id="s11134">Formattage</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11134 = document.getElementById("l11134");
+						var spans11134 = document.getElementById("s11134");
+						
+						lil11134.style.color = "orange";
+						
+						
+							
+							lil11134.style.listStyleImage = "url()";
+						
+						spans11134.style.color = "black";</script>
+<li class="li_class" id="l11135">
+<span class="spanli" id="s11135">Facilement lisible par les humains ... et les machines</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11135 = document.getElementById("l11135");
+						var spans11135 = document.getElementById("s11135");
+						
+						lil11135.style.color = "orange";
+						
+						
+							
+							lil11135.style.listStyleImage = "url()";
+						
+						spans11135.style.color = "black";</script>
+</ul>
+      
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">6/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide7" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Structure générale du fichier WebVTT</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11136">
+<span class="spanli" id="s11136">Le langage WebVTT s'est inspiré du format SRT</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11136 = document.getElementById("l11136");
+						var spans11136 = document.getElementById("s11136");
+						
+						lil11136.style.color = "orange";
+						
+						
+							
+							lil11136.style.listStyleImage = "url()";
+						
+						spans11136.style.color = "black";</script>
+<li class="li_class" id="l11137">
+<span class="spanli" id="s11137">On retrouve donc la forme <em>générale</em> du fichier SRT
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11237">
+<span class="spanli" id="s11237">Une ligne donnant un titre de chapitre par exemple ( indexation)</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11237 = document.getElementById("l11237");
+						var spans11237 = document.getElementById("s11237");
+						
+						lil11237.style.color = "green";
+						
+						
+							
+							lil11237.style.listStyleImage = "url()";
+						
+						spans11237.style.color = "black";</script>
+<li class="li_class" id="l11238">
+<span class="spanli" id="s11238">Une ligne donnant les Time Code de début et de fin de la séquence de sous-titrage</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11238 = document.getElementById("l11238");
+						var spans11238 = document.getElementById("s11238");
+						
+						lil11238.style.color = "green";
+						
+						
+							
+							lil11238.style.listStyleImage = "url()";
+						
+						spans11238.style.color = "black";</script>
+<li class="li_class" id="l11239">
+<span class="spanli" id="s11239">Une ligne donnant le texte à afficher</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11239 = document.getElementById("l11239");
+						var spans11239 = document.getElementById("s11239");
+						
+						lil11239.style.color = "green";
+						
+						
+							
+							lil11239.style.listStyleImage = "url()";
+						
+						spans11239.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11137 = document.getElementById("l11137");
+						var spans11137 = document.getElementById("s11137");
+						
+						lil11137.style.color = "orange";
+						
+						
+							
+							lil11137.style.listStyleImage = "url()";
+						
+						spans11137.style.color = "black";</script>
+<li class="li_class" id="l11141">
+<span class="spanli" id="s11141">Exemple
+          <pre>
+            <tt style="">WEBVTT
+              
+              Introduction
+              00:00.000 --&gt; 00:01.000
+              Sous-titre de la première minute
+              
+              Sujet principal
+              00:00.000 --&gt; 00:01.000
+            Sous-titre de la deuxième minute</tt>
+          </pre>
+        </span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11141 = document.getElementById("l11141");
+						var spans11141 = document.getElementById("s11141");
+						
+						lil11141.style.color = "orange";
+						
+						
+							
+							lil11141.style.listStyleImage = "url()";
+						
+						spans11141.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">7/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide8" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Structure générale du fichier WebVTT ( suite )</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11142">
+<span class="spanli" id="s11142">Le fichier commence obligatoirement par le chaine de caractères <tt style="">WEBVTT</tt> en début de ligne</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11142 = document.getElementById("l11142");
+						var spans11142 = document.getElementById("s11142");
+						
+						lil11142.style.color = "orange";
+						
+						
+							
+							lil11142.style.listStyleImage = "url()";
+						
+						spans11142.style.color = "black";</script>
+<li class="li_class" id="l11143">
+<span class="spanli" id="s11143">Les différents sous-titres sont séparés par une ligne blanche</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11143 = document.getElementById("l11143");
+						var spans11143 = document.getElementById("s11143");
+						
+						lil11143.style.color = "orange";
+						
+						
+							
+							lil11143.style.listStyleImage = "url()";
+						
+						spans11143.style.color = "black";</script>
+<li class="li_class" id="l11144">
+<span class="spanli" id="s11144">Un <em>paquet </em>"Titre+ time-codes + sous-titres" 
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11244">
+<span class="spanli" id="s11244">est donc matérialisé par une séparation d'une ligne blanche au-dessus et d'une ligne blanche au dessous</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11244 = document.getElementById("l11244");
+						var spans11244 = document.getElementById("s11244");
+						
+						lil11244.style.color = "green";
+						
+						
+							
+							lil11244.style.listStyleImage = "url()";
+						
+						spans11244.style.color = "black";</script>
+<li class="li_class" id="l11245">
+<span class="spanli" id="s11245">prend le nom générique de <em>cue</em>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11245 = document.getElementById("l11245");
+						var spans11245 = document.getElementById("s11245");
+						
+						lil11245.style.color = "green";
+						
+						
+							
+							lil11245.style.listStyleImage = "url()";
+						
+						spans11245.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11144 = document.getElementById("l11144");
+						var spans11144 = document.getElementById("s11144");
+						
+						lil11144.style.color = "orange";
+						
+						
+							
+							lil11144.style.listStyleImage = "url()";
+						
+						spans11144.style.color = "black";</script>
+<li class="li_class" id="l11147">
+<span class="spanli" id="s11147">Les Time Codes sont exprimés obligatoirement sous la forme <tt style="">[Heures:]Minutes:Secondes.Millisecondes</tt> avec les valeurs <tt style="">00</tt> ou <tt style="">000</tt> obligatoires</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11147 = document.getElementById("l11147");
+						var spans11147 = document.getElementById("s11147");
+						
+						lil11147.style.color = "orange";
+						
+						
+							
+							lil11147.style.listStyleImage = "url()";
+						
+						spans11147.style.color = "black";</script>
+<li class="li_class" id="l11148">
+<span class="spanli" id="s11148">Le texte du sous-titre peut s'étaler sur plusieurs lignes tant qu'il n'y a pas de ligne vide</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11148 = document.getElementById("l11148");
+						var spans11148 = document.getElementById("s11148");
+						
+						lil11148.style.color = "orange";
+						
+						
+							
+							lil11148.style.listStyleImage = "url()";
+						
+						spans11148.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">8/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide9" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Contenu des cues</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <p>
+        Le contenu présent dans les cues peut être
+      </p>
+      <ul type="square" class="incremental">
+<li class="li_class" id="l11149">
+<span class="spanli" id="s11149">du texte ordinaire</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11149 = document.getElementById("l11149");
+						var spans11149 = document.getElementById("s11149");
+						
+						lil11149.style.color = "orange";
+						
+						
+							
+							lil11149.style.listStyleImage = "url()";
+						
+						spans11149.style.color = "black";</script>
+<li class="li_class" id="l11150">
+<span class="spanli" id="s11150">du texte HTML ( ie contenant des balises HTML comme <tt style="">&lt;p&gt;</tt> <tt style="">&lt;b&gt;</tt> ou <tt style="">&lt;i&gt;</tt>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11150 = document.getElementById("l11150");
+						var spans11150 = document.getElementById("s11150");
+						
+						lil11150.style.color = "orange";
+						
+						
+							
+							lil11150.style.listStyleImage = "url()";
+						
+						spans11150.style.color = "black";</script>
+<li class="li_class" id="l11151">
+<span class="spanli" id="s11151">un fichier JSON</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11151 = document.getElementById("l11151");
+						var spans11151 = document.getElementById("s11151");
+						
+						lil11151.style.color = "orange";
+						
+						
+							
+							lil11151.style.listStyleImage = "url()";
+						
+						spans11151.style.color = "black";</script>
+<li class="li_class" id="l11152">
+<span class="spanli" id="s11152">Exemple 1
+          <pre>
+            <tt style="">L'université d'Evry
+              00:00.000 --&gt; 00:01.00
+              &lt;p&gt; Cette université fait partie des &lt;b&gt;nouvelles&lt;/b&gt; universités d'Ile de France &lt;/p&gt;
+            </tt>
+          </pre>
+        </span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11152 = document.getElementById("l11152");
+						var spans11152 = document.getElementById("s11152");
+						
+						lil11152.style.color = "orange";
+						
+						
+							
+							lil11152.style.listStyleImage = "url()";
+						
+						spans11152.style.color = "black";</script>
+<li class="li_class" id="l11153">
+<span class="spanli" id="s11153">Exemple 2
+          <pre>
+            <tt style="">miage
+              00:03:45.000 --&gt; 00:04:14.000
+              {
+              "title": La MIAGE d'Evry
+              "description": "Elle est spécailisée dans les technologies du Web"
+              "src": "miage_evry.jpg"
+              "href: "http://www.univ-evry.fr"
+              }
+            </tt>
+          </pre>
+        </span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11153 = document.getElementById("l11153");
+						var spans11153 = document.getElementById("s11153");
+						
+						lil11153.style.color = "orange";
+						
+						
+							
+							lil11153.style.listStyleImage = "url()";
+						
+						spans11153.style.color = "black";</script>
+<li class="signeplus">
+<img src="config_EAST/signe_plus.png"/>
+</li>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">9/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide10" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Mise en page des cues</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <p>
+        Le texte des cues peut être mis en page par 5 opérateurs
+      </p>
+      <ul type="square">
+<li class="li_class" id="l11154">
+<span class="spanli" id="s11154">
+<tt style="">line</tt> : positionnement en lignes </span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11154 = document.getElementById("l11154");
+						var spans11154 = document.getElementById("s11154");
+						
+						lil11154.style.color = "orange";
+						
+						
+							
+							lil11154.style.listStyleImage = "url()";
+						
+						spans11154.style.color = "black";</script>
+<li class="li_class" id="l11155">
+<span class="spanli" id="s11155">
+<tt style="">align </tt>: alignement</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11155 = document.getElementById("l11155");
+						var spans11155 = document.getElementById("s11155");
+						
+						lil11155.style.color = "orange";
+						
+						
+							
+							lil11155.style.listStyleImage = "url()";
+						
+						spans11155.style.color = "black";</script>
+<li class="li_class" id="l11156">
+<span class="spanli" id="s11156">
+<tt style="">position</tt> : position des textes</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11156 = document.getElementById("l11156");
+						var spans11156 = document.getElementById("s11156");
+						
+						lil11156.style.color = "orange";
+						
+						
+							
+							lil11156.style.listStyleImage = "url()";
+						
+						spans11156.style.color = "black";</script>
+<li class="li_class" id="l11157">
+<span class="spanli" id="s11157">
+<tt style="">size</tt> : taille des textes</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11157 = document.getElementById("l11157");
+						var spans11157 = document.getElementById("s11157");
+						
+						lil11157.style.color = "orange";
+						
+						
+							
+							lil11157.style.listStyleImage = "url()";
+						
+						spans11157.style.color = "black";</script>
+<li class="li_class" id="l11158">
+<span class="spanli" id="s11158">
+<tt style="">vertical</tt> : direction d'écriture verticale</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11158 = document.getElementById("l11158");
+						var spans11158 = document.getElementById("s11158");
+						
+						lil11158.style.color = "orange";
+						
+						
+							
+							lil11158.style.listStyleImage = "url()";
+						
+						spans11158.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">10/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide11" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Mise en page des cues (suite)</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11159">
+<span class="spanli" id="s11159">line 
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11259">
+<span class="spanli" id="s11259">peut être un entier ( numéro d'ordre de la ligne )</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11259 = document.getElementById("l11259");
+						var spans11259 = document.getElementById("s11259");
+						
+						lil11259.style.color = "green";
+						
+						
+							
+							lil11259.style.listStyleImage = "url()";
+						
+						spans11259.style.color = "black";</script>
+<li class="li_class" id="l11260">
+<span class="spanli" id="s11260">peut être un pourcentage ( par rapport à la hauteur totale de la vidéo)</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11260 = document.getElementById("l11260");
+						var spans11260 = document.getElementById("s11260");
+						
+						lil11260.style.color = "green";
+						
+						
+							
+							lil11260.style.listStyleImage = "url()";
+						
+						spans11260.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11159 = document.getElementById("l11159");
+						var spans11159 = document.getElementById("s11159");
+						
+						lil11159.style.color = "orange";
+						
+						
+							
+							lil11159.style.listStyleImage = "url()";
+						
+						spans11159.style.color = "black";</script>
+<li class="li_class" id="l11162">
+<span class="spanli" id="s11162">align
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11262">
+<span class="spanli" id="s11262">
+<tt style="">start, middle, end, left, right</tt>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11262 = document.getElementById("l11262");
+						var spans11262 = document.getElementById("s11262");
+						
+						lil11262.style.color = "green";
+						
+						
+							
+							lil11262.style.listStyleImage = "url()";
+						
+						spans11262.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11162 = document.getElementById("l11162");
+						var spans11162 = document.getElementById("s11162");
+						
+						lil11162.style.color = "orange";
+						
+						
+							
+							lil11162.style.listStyleImage = "url()";
+						
+						spans11162.style.color = "black";</script>
+<li class="li_class" id="l11164">
+<span class="spanli" id="s11164">position
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11264">
+<span class="spanli" id="s11264">Position du texte en pourcentage par rapport à la largeur de la vidéo</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11264 = document.getElementById("l11264");
+						var spans11264 = document.getElementById("s11264");
+						
+						lil11264.style.color = "green";
+						
+						
+							
+							lil11264.style.listStyleImage = "url()";
+						
+						spans11264.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11164 = document.getElementById("l11164");
+						var spans11164 = document.getElementById("s11164");
+						
+						lil11164.style.color = "orange";
+						
+						
+							
+							lil11164.style.listStyleImage = "url()";
+						
+						spans11164.style.color = "black";</script>
+<li class="li_class" id="l11166">
+<span class="spanli" id="s11166">size
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11266">
+<span class="spanli" id="s11266">Taille du texte en pourcentage</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11266 = document.getElementById("l11266");
+						var spans11266 = document.getElementById("s11266");
+						
+						lil11266.style.color = "green";
+						
+						
+							
+							lil11266.style.listStyleImage = "url()";
+						
+						spans11266.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11166 = document.getElementById("l11166");
+						var spans11166 = document.getElementById("s11166");
+						
+						lil11166.style.color = "orange";
+						
+						
+							
+							lil11166.style.listStyleImage = "url()";
+						
+						spans11166.style.color = "black";</script>
+<li class="li_class" id="l11168">
+<span class="spanli" id="s11168">vertical
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11268">
+<span class="spanli" id="s11268">Définit la direction d'écriture du texte vertical : <tt style="">lr</tt> ( vertical ascendant ) ou <tt style="">rl</tt> ( vertical descendant )</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11268 = document.getElementById("l11268");
+						var spans11268 = document.getElementById("s11268");
+						
+						lil11268.style.color = "green";
+						
+						
+							
+							lil11268.style.listStyleImage = "url()";
+						
+						spans11268.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11168 = document.getElementById("l11168");
+						var spans11168 = document.getElementById("s11168");
+						
+						lil11168.style.color = "orange";
+						
+						
+							
+							lil11168.style.listStyleImage = "url()";
+						
+						spans11168.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">11/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide12" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Mise en page des cues ( exemple )</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <table width="100%" border="1">
+        <tr>
+<td style="" class="tableau2">
+<pre>
+              <tt style="">WEBVTT
+                
+                00:00:05.000 --&gt; 00:00:08.040 align:middle line:10%
+                I dabble? Listen to me. What a jerk.
+                
+                00:00:05.000 --&gt; 00:00:08.040 align:middle line:60%
+                Yeah, I sort of dabble around,
+                you know.
+              </tt>
+            </pre>
+</td>
+<td style="" class="tableau2">
+<img height="90%" width="90%" src="style.jpg"/>
+</td>
+</tr>
+      </table>
+      <table width="100%" border="1">
+        <tr>
+<td style="" class="tableau2">
+<pre>
+              <tt style="">WEBVTT
+                
+                00:00:05.000 --&gt; 00:00:08.040 align:middle position:10%
+                Ahem...
+                
+                00:00:05.000 --&gt; 00:00:08.040 align:middle position:80%
+                What's the matter?
+                			
+              </tt>
+            </pre>
+</td>
+<td style="" class="tableau2">
+<img height="105%" width="105%" src="style2.jpg"/>
+</td>
+</tr>
+      </table>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">12/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide13" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Encore plus de style</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11170">
+<span class="spanli" id="s11170">WebVTT peut aussi être <em>stylé </em>par l'intermédiaire de CSS</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11170 = document.getElementById("l11170");
+						var spans11170 = document.getElementById("s11170");
+						
+						lil11170.style.color = "orange";
+						
+						
+							
+							lil11170.style.listStyleImage = "url()";
+						
+						spans11170.style.color = "black";</script>
+<li class="li_class" id="l11171">
+<span class="spanli" id="s11171">Un nouveau pseudo élément CSS est introduit : <tt style="">::cue</tt>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11171 = document.getElementById("l11171");
+						var spans11171 = document.getElementById("s11171");
+						
+						lil11171.style.color = "orange";
+						
+						
+							
+							lil11171.style.listStyleImage = "url()";
+						
+						spans11171.style.color = "black";</script>
+<li class="li_class" id="l11172">
+<span class="spanli" id="s11172">Il permet de séléctionner
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11272">
+<span class="spanli" id="s11272">des éléments par la sélaction normale de CSS</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11272 = document.getElementById("l11272");
+						var spans11272 = document.getElementById("s11272");
+						
+						lil11272.style.color = "green";
+						
+						
+							
+							lil11272.style.listStyleImage = "url()";
+						
+						spans11272.style.color = "black";</script>
+<li class="li_class" id="l11273">
+<span class="spanli" id="s11273">des objets VTT tels que définis :<img height="80%" width="80%" src="classnames.jpg"/>
+            		</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11273 = document.getElementById("l11273");
+						var spans11273 = document.getElementById("s11273");
+						
+						lil11273.style.color = "green";
+						
+						
+							
+							lil11273.style.listStyleImage = "url()";
+						
+						spans11273.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11172 = document.getElementById("l11172");
+						var spans11172 = document.getElementById("s11172");
+						
+						lil11172.style.color = "orange";
+						
+						
+							
+							lil11172.style.listStyleImage = "url()";
+						
+						spans11172.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">13/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide14" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Encore plus de style ( suite )</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11175">
+<span class="spanli" id="s11175">Le pseudo élément ::cue peur recevoir les propriétés CSS suivantes
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11275">
+<span class="spanli" id="s11275">color</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11275 = document.getElementById("l11275");
+						var spans11275 = document.getElementById("s11275");
+						
+						lil11275.style.color = "green";
+						
+						
+							
+							lil11275.style.listStyleImage = "url()";
+						
+						spans11275.style.color = "black";</script>
+<li class="li_class" id="l11276">
+<span class="spanli" id="s11276">opacity</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11276 = document.getElementById("l11276");
+						var spans11276 = document.getElementById("s11276");
+						
+						lil11276.style.color = "green";
+						
+						
+							
+							lil11276.style.listStyleImage = "url()";
+						
+						spans11276.style.color = "black";</script>
+<li class="li_class" id="l11277">
+<span class="spanli" id="s11277">visibility</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11277 = document.getElementById("l11277");
+						var spans11277 = document.getElementById("s11277");
+						
+						lil11277.style.color = "green";
+						
+						
+							
+							lil11277.style.listStyleImage = "url()";
+						
+						spans11277.style.color = "black";</script>
+<li class="li_class" id="l11278">
+<span class="spanli" id="s11278">text-decoration</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11278 = document.getElementById("l11278");
+						var spans11278 = document.getElementById("s11278");
+						
+						lil11278.style.color = "green";
+						
+						
+							
+							lil11278.style.listStyleImage = "url()";
+						
+						spans11278.style.color = "black";</script>
+<li class="li_class" id="l11279">
+<span class="spanli" id="s11279">text-outline</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11279 = document.getElementById("l11279");
+						var spans11279 = document.getElementById("s11279");
+						
+						lil11279.style.color = "green";
+						
+						
+							
+							lil11279.style.listStyleImage = "url()";
+						
+						spans11279.style.color = "black";</script>
+<li class="li_class" id="l11280">
+<span class="spanli" id="s11280">text-shadow</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11280 = document.getElementById("l11280");
+						var spans11280 = document.getElementById("s11280");
+						
+						lil11280.style.color = "green";
+						
+						
+							
+							lil11280.style.listStyleImage = "url()";
+						
+						spans11280.style.color = "black";</script>
+<li class="li_class" id="l11281">
+<span class="spanli" id="s11281">propriétés relatives à background</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11281 = document.getElementById("l11281");
+						var spans11281 = document.getElementById("s11281");
+						
+						lil11281.style.color = "green";
+						
+						
+							
+							lil11281.style.listStyleImage = "url()";
+						
+						spans11281.style.color = "black";</script>
+<li class="li_class" id="l11282">
+<span class="spanli" id="s11282">propriétés relatives à outline</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11282 = document.getElementById("l11282");
+						var spans11282 = document.getElementById("s11282");
+						
+						lil11282.style.color = "green";
+						
+						
+							
+							lil11282.style.listStyleImage = "url()";
+						
+						spans11282.style.color = "black";</script>
+<li class="li_class" id="l11283">
+<span class="spanli" id="s11283">propriétés relatives aux transitions et aux animations</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11283 = document.getElementById("l11283");
+						var spans11283 = document.getElementById("s11283");
+						
+						lil11283.style.color = "green";
+						
+						
+							
+							lil11283.style.listStyleImage = "url()";
+						
+						spans11283.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11175 = document.getElementById("l11175");
+						var spans11175 = document.getElementById("s11175");
+						
+						lil11175.style.color = "orange";
+						
+						
+							
+							lil11175.style.listStyleImage = "url()";
+						
+						spans11175.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">14/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide15" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Encore plus de style : exemple</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <table width="100%" border="1">
+        <tr>
+<td style="" class="tableau2">
+<pre>
+              <tt style="">WEBVTT
+                
+                1
+                00:00:13.000 --&gt; 00:00:16.100
+                I heard about this &lt;c.arduino&gt;arduino&lt;/c&gt; project, and I saw it online - 
+                
+                2
+                00:00:16.100 --&gt; 00:00:20.100
+                - and I said 'Wow! a lot of people are starting to talk about this.
+                I should check it out!
+              </tt>
+            </pre>
+</td>
+<td style="" class="tableau2">
+<pre>
+              <tt style="">::cue .arduino {
+                        color: red;
+                        text-transform: uppercase;
+                        font-family: "Helvetica Neue";
+                        font-weight: lighter;
+                }
+              </tt>
+            </pre>
+</td>
+</tr>
+        <tr>
+<td style="" class="tableau1" colspan="2">
+<img src="cue.jpg"/>
+</td>
+</tr>
+      </table>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">15/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide16" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Toujours plus de style</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11185">
+<span class="spanli" id="s11185">Deux pseudo classes sont introduites
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11285">
+<span class="spanli" id="s11285">
+<tt style="">:past</tt> permet de sélectionner des objets WebVTT qui sont dans le passé</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11285 = document.getElementById("l11285");
+						var spans11285 = document.getElementById("s11285");
+						
+						lil11285.style.color = "green";
+						
+						
+							
+							lil11285.style.listStyleImage = "url()";
+						
+						spans11285.style.color = "black";</script>
+<li class="li_class" id="l11286">
+<span class="spanli" id="s11286">
+<tt style="">:future</tt>permet de sélectionner des objets WebVTT qui sont dans le futur</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11286 = document.getElementById("l11286");
+						var spans11286 = document.getElementById("s11286");
+						
+						lil11286.style.color = "green";
+						
+						
+							
+							lil11286.style.listStyleImage = "url()";
+						
+						spans11286.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11185 = document.getElementById("l11185");
+						var spans11185 = document.getElementById("s11185");
+						
+						lil11185.style.color = "orange";
+						
+						
+							
+							lil11185.style.listStyleImage = "url()";
+						
+						spans11185.style.color = "black";</script>
+</ul>
+      <table width="100%" border="1">
+        <tr>
+<td style="" class="tableau2">
+<pre>
+              <tt style="">WEBVTT
+                
+                1
+                00:00:10.000 --&gt; 00:00:12.210
+                &lt;00:00:10.035&gt;Chocolate &lt;00:00:11.000&gt;Rain
+                 
+                2
+                00:00:12.210 --&gt; 00:00:15.910
+                &lt;00:00:13.250&gt;Some &lt;00:00:13.500&gt;stay &lt;00:00:13.750&gt;dry &lt;00:00:14.25&gt;and 
+                &lt;00:00:14.50&gt;others &lt;00:00:15.00&gt;feel &lt;00:00:15.25&gt;the &lt;00:00:15.50&gt;pain
+                 
+                3
+                00:00:15.910 --&gt; 00:00:15.920
+                &lt;00:00:16.000&gt;Chocolate &lt;00:00:16.500&gt;Rain
+              </tt>
+            </pre>
+</td>
+<td style="" class="tableau2">
+<pre>
+              <tt style="">::cue:past {
+                	color: yellow;
+                } 
+                ::cue:future {
+                 	text-shadow: black 0 0 1px;
+                }
+              </tt>
+            </pre>
+</td>
+</tr>
+      </table>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">16/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide17" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Utilisation avec HTML5</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <ul type="square">
+<li class="li_class" id="l11188">
+<span class="spanli" id="s11188">Pour pouvoir utiliser ces sous-titres, il faut les associer à une source vidéo</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11188 = document.getElementById("l11188");
+						var spans11188 = document.getElementById("s11188");
+						
+						lil11188.style.color = "orange";
+						
+						
+							
+							lil11188.style.listStyleImage = "url()";
+						
+						spans11188.style.color = "black";</script>
+<li class="li_class" id="l11189">
+<span class="spanli" id="s11189">C'est le rôle de la balise <tt style="">&lt;track&gt;</tt> de HTML5</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11189 = document.getElementById("l11189");
+						var spans11189 = document.getElementById("s11189");
+						
+						lil11189.style.color = "orange";
+						
+						
+							
+							lil11189.style.listStyleImage = "url()";
+						
+						spans11189.style.color = "black";</script>
+<li class="li_class" id="l11190">
+<span class="spanli" id="s11190">
+<tt style="">track</tt> a les attributs suivants
+          	
+        </span>
+<ul type="disc">
+<li class="li_class" id="l11290">
+<span class="spanli" id="s11290">
+<tt style="">kind</tt> indique un type parmii la liste
+              			
+            		</span>
+<ul type="circle">
+<li class="li_class" id="l11390">
+<span class="spanli" id="s11390">
+<tt style="">subtitles</tt> : pour des sous-titres</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11390 = document.getElementById("l11390");
+						var spans11390 = document.getElementById("s11390");
+						
+						lil11390.style.color = "orange";
+						
+						
+							
+							lil11390.style.listStyleImage = "url()";
+						
+						spans11390.style.color = "black";</script>
+<li class="li_class" id="l11391">
+<span class="spanli" id="s11391">
+<tt style="">captions</tt> : pour des sous-titres enrichis d'indications sur l'environnement sonore</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11391 = document.getElementById("l11391");
+						var spans11391 = document.getElementById("s11391");
+						
+						lil11391.style.color = "orange";
+						
+						
+							
+							lil11391.style.listStyleImage = "url()";
+						
+						spans11391.style.color = "black";</script>
+<li class="li_class" id="l11392">
+<span class="spanli" id="s11392">
+<tt style="">descriptions</tt> : pour des textes destinés à être lus par une machine</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11392 = document.getElementById("l11392");
+						var spans11392 = document.getElementById("s11392");
+						
+						lil11392.style.color = "orange";
+						
+						
+							
+							lil11392.style.listStyleImage = "url()";
+						
+						spans11392.style.color = "black";</script>
+<li class="li_class" id="l11393">
+<span class="spanli" id="s11393">
+<tt style="">chapters</tt> : pour ajouter une structure de navigation</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11393 = document.getElementById("l11393");
+						var spans11393 = document.getElementById("s11393");
+						
+						lil11393.style.color = "orange";
+						
+						
+							
+							lil11393.style.listStyleImage = "url()";
+						
+						spans11393.style.color = "black";</script>
+<li class="li_class" id="l11394">
+<span class="spanli" id="s11394">
+<tt style="">metadata</tt> : pour ajouter des métadonnées ( qui ne seront pas affichées )</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11394 = document.getElementById("l11394");
+						var spans11394 = document.getElementById("s11394");
+						
+						lil11394.style.color = "orange";
+						
+						
+							
+							lil11394.style.listStyleImage = "url()";
+						
+						spans11394.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11290 = document.getElementById("l11290");
+						var spans11290 = document.getElementById("s11290");
+						
+						lil11290.style.color = "green";
+						
+						
+							
+							lil11290.style.listStyleImage = "url()";
+						
+						spans11290.style.color = "black";</script>
+<li class="li_class" id="l11296">
+<span class="spanli" id="s11296">
+<tt style="">scrlang</tt> indique la langue des sous-titres</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11296 = document.getElementById("l11296");
+						var spans11296 = document.getElementById("s11296");
+						
+						lil11296.style.color = "green";
+						
+						
+							
+							lil11296.style.listStyleImage = "url()";
+						
+						spans11296.style.color = "black";</script>
+<li class="li_class" id="l11297">
+<span class="spanli" id="s11297">
+<tt style="">src</tt> localise le fichier</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11297 = document.getElementById("l11297");
+						var spans11297 = document.getElementById("s11297");
+						
+						lil11297.style.color = "green";
+						
+						
+							
+							lil11297.style.listStyleImage = "url()";
+						
+						spans11297.style.color = "black";</script>
+<li class="li_class" id="l11298">
+<span class="spanli" id="s11298">
+<tt style="">label</tt> donne une étiquette pour une possible indexaton</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11298 = document.getElementById("l11298");
+						var spans11298 = document.getElementById("s11298");
+						
+						lil11298.style.color = "green";
+						
+						
+							
+							lil11298.style.listStyleImage = "url()";
+						
+						spans11298.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil11190 = document.getElementById("l11190");
+						var spans11190 = document.getElementById("s11190");
+						
+						lil11190.style.color = "orange";
+						
+						
+							
+							lil11190.style.listStyleImage = "url()";
+						
+						spans11190.style.color = "black";</script>
+</ul>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">17/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide18" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Exemple d'utilisation de la balise track</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <pre>
+        <tt style="">&lt;video controls&gt;
+            &lt;source src="video.mp4"  type="video/mp4"&gt;
+            &lt;source src="video.webm" type="video/webm"&gt;
+          
+            &lt;track label="English Captions"     kind="captions"     srclang="en"
+                                                                    src="video_cc_en.vtt"&gt;
+            &lt;track label="German Subtitles"     kind="subtitles"    srclang="de"
+                                                                    src="video_sub_de.vtt"&gt;
+            &lt;track label="French Subtitles"     kind="subtitles"    srclang="fr"
+                                                                    src="video_sub_fr.vtt"
+            &lt;track label="English Descriptions" kind="descriptions" srclang="en"
+                                                                    src="video_audesc_en.vtt"
+            &lt;track label="Chapters"             kind="chapters"     srclang="en"
+                                                                    src="video_chapters_en.vtt"&gt;
+          &lt;/video&gt;
+        </tt>
+      </pre>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">18/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide19" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Utiliser Track et WebVTT en Javascript</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+      
+      <p>
+        Les élements <tt style="">audio</tt> et <tt style="">vidéo</tt> de HTML5 ont une propriété <tt style="">textTracks </tt>qui renvoie une liste <tt style="">TextTrackList </tt>dont tous les membres sont des <tt style="">TextTrack</tt> correspondant à un élément <tt style="">&lt;track&gt;</tt>
+<br/>
+        <pre>
+          <tt style="">var videoElement = document.querySelector("video");
+            var textTracks = videoElement.textTracks; // un pour chaque élément track
+            var textTrack = textTracks[0]; // le premier élément track
+            var kind = textTrack.kind // par exemple "subtitles"
+            var mode = textTrack.mode // 0 (TextTrack.OFF dans la spec, TextTrack.DISABLED dans Chrome),
+                                         1 (TextTrack.HIDDEN) ou 2 (TextTrack.SHOWING)
+          </tt>
+        </pre>
+      </p>
+      <p>
+        Chaque <tt style="">TextTrack</tt>, à son tour, a une propriété <tt style="">cue</tt> qui renvoie une <tt style="">TextTrackCueList</tt> dont les membres sont des cues. <br/>Les données des cues peuvent  être accédées par des propriétés telles que <tt style="">startTime, endTime </tt>et <tt style="">Text</tt>
+<br/>
+        <pre>
+          <tt style="">var cues = textTrack.cues;
+            var cue = cues[0]; // le premier cue du fichier WebVTT
+            var cueId = cue.id // l'identificateur donné ua cue dans le fichier WebVTT
+            var cueText = cue.text; // Le texte du cue ( ou le JSON )
+          </tt>
+        </pre>
+      </p>
+      <ul type="square"/>
+    <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">19/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide20" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Utiliser Track et WebVTT en Javascript ( suite )</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+  
+  <p>
+  Une autre façon de faire est d'utiliser directement l'élément HTML Track
+  </p>
+  <pre>
+  <tt style="">var trackElements = document.querySelectorAll("track");
+// pour chaque élément track
+
+for (var i = 0; i &lt; trackElements.length; i++) {
+
+    trackElements[i].addEventListener("load", function() {
+    var textTrack = this.track; // Attentio : "this" est un HTMLTrackElement, pas un objet TextTrack
+    var isSubtitles = textTrack.kind === "subtitles";
+    
+    // par exemple pour chaque cue
+    
+    for (var j = 0; j &lt; textTrack.cues.length; ++j) {
+      var cue = textTrack.cues[j];
+      // .....
+    }
+}
+  </tt>
+  </pre>
+  <table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">20/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide21" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Utiliser Track et WebVTT en Javascript ( suite )</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+
+<h3>Eévénements sur les tracks et les cues</h3>
+<ul type="square">
+<li class="li_class" id="l111101">
+<span class="spanli" id="s111101">Les deux types d'événements détectés sont :
+	
+</span>
+<ul type="disc">
+<li class="li_class" id="l112101">
+<span class="spanli" id="s112101">l'entrée et la sortie des cues</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112101 = document.getElementById("l112101");
+						var spans112101 = document.getElementById("s112101");
+						
+						lil112101.style.color = "green";
+						
+						
+							
+							lil112101.style.listStyleImage = "url()";
+						
+						spans112101.style.color = "black";</script>
+<li class="li_class" id="l112102">
+<span class="spanli" id="s112102">le changement d'état des cues</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112102 = document.getElementById("l112102");
+						var spans112102 = document.getElementById("s112102");
+						
+						lil112102.style.color = "green";
+						
+						
+							
+							lil112102.style.listStyleImage = "url()";
+						
+						spans112102.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111101 = document.getElementById("l111101");
+						var spans111101 = document.getElementById("s111101");
+						
+						lil111101.style.color = "orange";
+						
+						
+							
+							lil111101.style.listStyleImage = "url()";
+						
+						spans111101.style.color = "black";</script>
+<li class="li_class" id="l111104">
+<span class="spanli" id="s111104">Exemple 1 : Event listeners des exemples précédents
+<pre>
+<tt style="">cue.onenter = function(){
+  // gestion de l'entrée
+};
+
+cue.onexit = function(){
+  // gestion de la sortie
+};
+</tt>
+</pre>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111104 = document.getElementById("l111104");
+						var spans111104 = document.getElementById("s111104");
+						
+						lil111104.style.color = "orange";
+						
+						
+							
+							lil111104.style.listStyleImage = "url()";
+						
+						spans111104.style.color = "black";</script>
+<li class="li_class" id="l111105">
+<span class="spanli" id="s111105">Exemple 2 : récupération du texte d'un cue lorqu'il change
+<pre>
+<tt style="">textTrack.oncuechange = function (){
+  // "this" est un textTrack
+  var cue = this.activeCues[0]; // on suppose qu'il n'y a qu'un cue actif
+  var obj = JSON.parse(cue.text);
+  // faire qqchose
+
+</tt>
+</pre>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111105 = document.getElementById("l111105");
+						var spans111105 = document.getElementById("s111105");
+						
+						lil111105.style.color = "orange";
+						
+						
+							
+							lil111105.style.listStyleImage = "url()";
+						
+						spans111105.style.color = "black";</script>
+</ul>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">21/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide22" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Utiliser Track et WebVTT en Javascript ( suite )</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+
+<h3>Ajouter un cue</h3>
+<ul type="square">
+<li class="li_class" id="l111106">
+<span class="spanli" id="s111106">
+<pre>
+<tt style="">var sfx = new Audio('sfx.wav');
+var track = sfx.addTextTrack('metadata'); 
+
+// Ajoute des cues pour les sons intéressants
+track.addCue(new TextTrackCue('dog bark', 12.783, 13.612, '', '', '', true));
+track.addCue(new TextTrackCue('kitten mew', 13.612, 15.091, '', '', '', true));
+
+function playSound(id) {
+  sfx.currentTime = track.getCueById(id).startTime;
+  sfx.play();
+}
+
+playSound('dog bark');
+playSound('kitten mew');
+</tt>
+</pre>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111106 = document.getElementById("l111106");
+						var spans111106 = document.getElementById("s111106");
+						
+						lil111106.style.color = "orange";
+						
+						
+							
+							lil111106.style.listStyleImage = "url()";
+						
+						spans111106.style.color = "black";</script>
+<li class="li_class" id="l111107">
+<span class="spanli" id="s111107">Les arguments sont : id, startTime, endTime, texte du cue, position, taille , alignement et un booléen pour <tt style="">pauseOnExit</tt>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111107 = document.getElementById("l111107");
+						var spans111107 = document.getElementById("s111107");
+						
+						lil111107.style.color = "orange";
+						
+						
+							
+							lil111107.style.listStyleImage = "url()";
+						
+						spans111107.style.color = "black";</script>
+</ul>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">22/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide23" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Utiliser Track et WebVTT en Javascript ( suite )</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+
+<h3>Enlever un cue</h3>
+<ul type="square">
+<li class="li_class" id="l111108">
+<span class="spanli" id="s111108">
+<pre>
+<tt style="">var videoElement = document.querySelector("video");
+var track = videoElement.textTracks[0];
+var activeCue = track.activeCues[0];
+track.removeCue(activeCue);
+</tt>
+</pre>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111108 = document.getElementById("l111108");
+						var spans111108 = document.getElementById("s111108");
+						
+						lil111108.style.color = "orange";
+						
+						
+							
+							lil111108.style.listStyleImage = "url()";
+						
+						spans111108.style.color = "black";</script>
+</ul>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">23/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide24" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Utiliser Track et WebVTT en Javascript ( fin )</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+
+<p>
+Liste des fonctions possibles sur les cues<br/>
+<img src="Listefnscue.jpg"/>
+</p>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">24/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="partie3" class="slide">
+<table height="60%" width="100%">
+<tbody>
+<tr>
+<td>
+<h1 class="titrepartie">Support</h1>
+</td>
+</tr>
+</tbody>
+</table>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber"/>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide25" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Où en est le support dans les navigateurs Web ?</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+
+<ul type="square">
+<li class="li_class" id="l111109">
+<span class="spanli" id="s111109">IE 10
+	
+</span>
+<ul type="disc">
+<li class="li_class" id="l112109">
+<span class="spanli" id="s112109">Support dansPlatform Preview 4 le 30 Novembre 2011 </span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112109 = document.getElementById("l112109");
+						var spans112109 = document.getElementById("s112109");
+						
+						lil112109.style.color = "green";
+						
+						
+							
+							lil112109.style.listStyleImage = "url()";
+						
+						spans112109.style.color = "black";</script>
+<li class="li_class" id="l112110">
+<span class="spanli" id="s112110">Support d'une version <em>basique </em>de WebVTT</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112110 = document.getElementById("l112110");
+						var spans112110 = document.getElementById("s112110");
+						
+						lil112110.style.color = "green";
+						
+						
+							
+							lil112110.style.listStyleImage = "url()";
+						
+						spans112110.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111109 = document.getElementById("l111109");
+						var spans111109 = document.getElementById("s111109");
+						
+						lil111109.style.color = "orange";
+						
+						
+							
+							lil111109.style.listStyleImage = "url()";
+						
+						spans111109.style.color = "black";</script>
+<li class="li_class" id="l111112">
+<span class="spanli" id="s111112">Google Chrome
+	
+</span>
+<ul type="disc">
+<li class="li_class" id="l112112">
+<span class="spanli" id="s112112">Support de WebVTT depuis la version 18 en Novembre 2011</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112112 = document.getElementById("l112112");
+						var spans112112 = document.getElementById("s112112");
+						
+						lil112112.style.color = "green";
+						
+						
+							
+							lil112112.style.listStyleImage = "url()";
+						
+						spans112112.style.color = "black";</script>
+<li class="li_class" id="l112113">
+<span class="spanli" id="s112113">Doit être demandé en modifiant <tt style="">chrome://flags</tt>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112113 = document.getElementById("l112113");
+						var spans112113 = document.getElementById("s112113");
+						
+						lil112113.style.color = "green";
+						
+						
+							
+							lil112113.style.listStyleImage = "url()";
+						
+						spans112113.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111112 = document.getElementById("l111112");
+						var spans111112 = document.getElementById("s111112");
+						
+						lil111112.style.color = "orange";
+						
+						
+							
+							lil111112.style.listStyleImage = "url()";
+						
+						spans111112.style.color = "black";</script>
+<li class="li_class" id="l111115">
+<span class="spanli" id="s111115">Safari
+	
+</span>
+<ul type="disc">
+<li class="li_class" id="l112115">
+<span class="spanli" id="s112115">Apple a publié le support de WebVTT avec la version 6 en Juillet 2012</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112115 = document.getElementById("l112115");
+						var spans112115 = document.getElementById("s112115");
+						
+						lil112115.style.color = "green";
+						
+						
+							
+							lil112115.style.listStyleImage = "url()";
+						
+						spans112115.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111115 = document.getElementById("l111115");
+						var spans111115 = document.getElementById("s111115");
+						
+						lil111115.style.color = "orange";
+						
+						
+							
+							lil111115.style.listStyleImage = "url()";
+						
+						spans111115.style.color = "black";</script>
+<li class="li_class" id="l111117">
+<span class="spanli" id="s111117">Opera
+	
+</span>
+<ul type="disc">
+<li class="li_class" id="l112117">
+<span class="spanli" id="s112117">Support dans Opera Next en Août 2012</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112117 = document.getElementById("l112117");
+						var spans112117 = document.getElementById("s112117");
+						
+						lil112117.style.color = "green";
+						
+						
+							
+							lil112117.style.listStyleImage = "url()";
+						
+						spans112117.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111117 = document.getElementById("l111117");
+						var spans111117 = document.getElementById("s111117");
+						
+						lil111117.style.color = "orange";
+						
+						
+							
+							lil111117.style.listStyleImage = "url()";
+						
+						spans111117.style.color = "black";</script>
+<li class="li_class" id="l111119">
+<span class="spanli" id="s111119">Firefox
+	
+</span>
+<ul type="disc">
+<li class="li_class" id="l112119">
+<span class="spanli" id="s112119">Pas encore de support dans une version officielle</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112119 = document.getElementById("l112119");
+						var spans112119 = document.getElementById("s112119");
+						
+						lil112119.style.color = "green";
+						
+						
+							
+							lil112119.style.listStyleImage = "url()";
+						
+						spans112119.style.color = "black";</script>
+<li class="li_class" id="l112120">
+<span class="spanli" id="s112120">Premier développement partiel</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112120 = document.getElementById("l112120");
+						var spans112120 = document.getElementById("s112120");
+						
+						lil112120.style.color = "green";
+						
+						
+							
+							lil112120.style.listStyleImage = "url()";
+						
+						spans112120.style.color = "black";</script>
+<li class="li_class" id="l112121">
+<span class="spanli" id="s112121">Reprise de ce développement par les étudiants de David Humphrey à Seneca</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112121 = document.getElementById("l112121");
+						var spans112121 = document.getElementById("s112121");
+						
+						lil112121.style.color = "green";
+						
+						
+							
+							lil112121.style.listStyleImage = "url()";
+						
+						spans112121.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111119 = document.getElementById("l111119");
+						var spans111119 = document.getElementById("s111119");
+						
+						lil111119.style.color = "orange";
+						
+						
+							
+							lil111119.style.listStyleImage = "url()";
+						
+						spans111119.style.color = "black";</script>
+</ul>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">25/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide26" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Et en attendant ?</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+
+<p>
+On peut utiliser des <em>polyfills</em> écrits en Javascript
+</p>
+<ul type="square">
+<li class="li_class" id="l111123">
+<span class="spanli" id="s111123">video.js :<a href=" http://videojs.com/docs/tracks/"> http://videojs.com/docs/tracks/</a>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111123 = document.getElementById("l111123");
+						var spans111123 = document.getElementById("s111123");
+						
+						lil111123.style.color = "orange";
+						
+						
+							
+							lil111123.style.listStyleImage = "url()";
+						
+						spans111123.style.color = "black";</script>
+<li class="li_class" id="l111124">
+<span class="spanli" id="s111124">MediaElement.js : <a href="http://mediaelementjs.com/ ">http://mediaelementjs.com/ </a>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111124 = document.getElementById("l111124");
+						var spans111124 = document.getElementById("s111124");
+						
+						lil111124.style.color = "orange";
+						
+						
+							
+							lil111124.style.listStyleImage = "url()";
+						
+						spans111124.style.color = "black";</script>
+<li class="li_class" id="l111125">
+<span class="spanli" id="s111125">LeanBack Player : <a href="http://leanbackplayer.com/">http://leanbackplayer.com/</a>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111125 = document.getElementById("l111125");
+						var spans111125 = document.getElementById("s111125");
+						
+						lil111125.style.color = "orange";
+						
+						
+							
+							lil111125.style.listStyleImage = "url()";
+						
+						spans111125.style.color = "black";</script>
+<li class="li_class" id="l111126">
+<span class="spanli" id="s111126">Playr : <a href="http://www.delphiki.com/html5/playr/">http://www.delphiki.com/html5/playr/</a>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111126 = document.getElementById("l111126");
+						var spans111126 = document.getElementById("s111126");
+						
+						lil111126.style.color = "orange";
+						
+						
+							
+							lil111126.style.listStyleImage = "url()";
+						
+						spans111126.style.color = "black";</script>
+<li class="li_class" id="l111127">
+<span class="spanli" id="s111127">Captionator : <a href="https://github.com/cgiffard/Captionator">https://github.com/cgiffard/Captionator</a>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111127 = document.getElementById("l111127");
+						var spans111127 = document.getElementById("s111127");
+						
+						lil111127.style.color = "orange";
+						
+						
+							
+							lil111127.style.listStyleImage = "url()";
+						
+						spans111127.style.color = "black";</script>
+</ul>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">26/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="partie4" class="slide">
+<table height="60%" width="100%">
+<tbody>
+<tr>
+<td>
+<h1 class="titrepartie">Conclusion</h1>
+</td>
+</tr>
+</tbody>
+</table>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber"/>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide27" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Démonstrations</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+
+<p>
+Démonstrations en utilisant Google Chrome
+</p>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">27/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide28" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left">
+<img width="30%" title="" height="30%" src="Logo_evry.svg" alt="" align="left"/>
+</td>
+<td class="soixante" align="center">
+<h2 class="slide_title">Conclusion</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+
+<ul type="square">
+<li class="li_class" id="l111128">
+<span class="spanli" id="s111128">WebVTT est un standard en devenir
+	
+</span>
+<ul type="disc">
+<li class="li_class" id="l112128">
+<span class="spanli" id="s112128">Presque tous les navigateurs Web ont publié ou vont publier une version qui interprétera WebVTT</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112128 = document.getElementById("l112128");
+						var spans112128 = document.getElementById("s112128");
+						
+						lil112128.style.color = "green";
+						
+						
+							
+							lil112128.style.listStyleImage = "url()";
+						
+						spans112128.style.color = "black";</script>
+<li class="li_class" id="l112129">
+<span class="spanli" id="s112129">D'ores et déjà utilisable via des librairies Javascript</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112129 = document.getElementById("l112129");
+						var spans112129 = document.getElementById("s112129");
+						
+						lil112129.style.color = "green";
+						
+						
+							
+							lil112129.style.listStyleImage = "url()";
+						
+						spans112129.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111128 = document.getElementById("l111128");
+						var spans111128 = document.getElementById("s111128");
+						
+						lil111128.style.color = "orange";
+						
+						
+							
+							lil111128.style.listStyleImage = "url()";
+						
+						spans111128.style.color = "black";</script>
+<li class="li_class" id="l111131">
+<span class="spanli" id="s111131">C'est l'outil idéal
+	
+</span>
+<ul type="disc">
+<li class="li_class" id="l112131">
+<span class="spanli" id="s112131">pour l'internationalisation</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112131 = document.getElementById("l112131");
+						var spans112131 = document.getElementById("s112131");
+						
+						lil112131.style.color = "green";
+						
+						
+							
+							lil112131.style.listStyleImage = "url()";
+						
+						spans112131.style.color = "black";</script>
+<li class="li_class" id="l112132">
+<span class="spanli" id="s112132">pour l'accessibilité</span>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil112132 = document.getElementById("l112132");
+						var spans112132 = document.getElementById("s112132");
+						
+						lil112132.style.color = "green";
+						
+						
+							
+							lil112132.style.listStyleImage = "url()";
+						
+						spans112132.style.color = "black";</script>
+</ul>
+</li>
+<script type="text/javascript">
+						
+						
+						var lil111131 = document.getElementById("l111131");
+						var spans111131 = document.getElementById("s111131");
+						
+						lil111131.style.color = "orange";
+						
+						
+							
+							lil111131.style.listStyleImage = "url()";
+						
+						spans111131.style.color = "black";</script>
+</ul>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche">
+                                      Module Multimédia
+                          </tt>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">28/28</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit">
+                                      M2 MIAGE APP
+                          </tt>
+</td>
+</tr>
+</table>
+</div>
+<p class="menu" id="navigation_par">
+<button title="first slide" id="first">  &lt;&lt; begin   </button>
+<button title="previous slide" id="prev"> &lt; prev </button>
+<button title="next slide" id="next">     next &gt; </button>
+<button title="last slide" id="last">         end &gt;&gt;  </button>
+<button onclick="location.href='#sommaire'" title="Plan" id="plan"> Plan </button>
+<button onclick="make_print();" title="Print" id="print"> Print </button>
+</p>
+<p class="menuts" id="text_size_par">
+<button onclick="increase_body_size();" title="A++" id="A++">  A++ </button>
+<button onclick="decrease_body_size();" title="A--" id="A--">  A-- </button>
+</p>
+</div>
+<div id="erreur">
+<h1> Problème </h1>
+<ul>
+<h3> Francais </h3>
+<li> La configuration de EAST n'a pas été trouvée et cela empêche le fonctionnement normal de EAST. </li>
+<li> Pour corriger ce probleme, placez le répertoire <em> config_EAST </em>  à côté de votre fichier HTML dans le même répertoire et rechargez votre fichier HTML</li>
+</ul>
+<ul>
+<h3> English </h3>
+<li> EAST configuration has not been found and EAST cannot work normally. </li>
+<li> To fix this problem, just put the directory <em> config_EAST </em>  beside your HTML file in the same directory and reload your HTML file</li>
+</ul>
+</div>
+</body>
+</html>
