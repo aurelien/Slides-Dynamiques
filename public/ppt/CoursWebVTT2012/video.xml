@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><EAST>
+  <PAGE_TITRE>
+    <TITRE>Essai de vidéos</TITRE>
+  </PAGE_TITRE>
+  <PARTIE>
+    <TITRE>Vidéos</TITRE>
+    <SECTION>
+      <TITRE>Liste incluant une vidéo</TITRE><LISTE mode="incremental">
+        <EL>Premier item de liste</EL>
+        <EL><VIDEO fichier="Matin.webm" hauteur="50" largeur="50"/></EL>
+        <EL>Troisième item de liste</EL>
+      </LISTE>
+    </SECTION>
+  </PARTIE>
+</EAST>
