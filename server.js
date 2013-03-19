@@ -90,10 +90,12 @@ client.on('envoiRefObjetHtml', function (idtempo) {
     //tab_client.splice(tab_client.indexOf(my_client.id),1);
     //console.log(tab_client);
     //clearTimeout(my_timer);
+	tab_client.shift();
     allClients -= 1;
     my_client.obj.broadcast.send(JSON.stringify(
     {
-      "clients": allClients
+      "clients": allClients,
+	  "tab_client": tab_client
     }));
     //console.log('disconnect'+my_client.id);
   });

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?><EAST transition="carousel">
+<?xml version="1.0" encoding="ISO-8859-1"?><EAST transition="burst">
                             <PREFERENCES>
                                                         <PUCE colorpuce="orange" level="1" type="square"/><PUCE colorpuce="green" level="2" type="disc"/><PUCE colorpuce="orange" level="3" type="circle"/><PAGE/>
                             </PREFERENCES>
