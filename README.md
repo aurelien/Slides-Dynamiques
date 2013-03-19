@@ -30,6 +30,7 @@ VERSION 2.0
 Ajout des fonctionalités suivantes :
 
     - Débogage de la liste itératives ;
+    - Débogage du nombre d'utilisateurs connectés ;
     - Ajout d'un channel rétractable à gauche du slide ;
     - Début intégration vidéo (en cours de dév)
     
