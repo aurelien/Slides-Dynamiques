@@ -77,7 +77,8 @@
         var socket = io.connect();
         socket.on('message', function (data)
         {
-          var obj = JSON.parse(data);
+          //var obj = jQuery.JSON.parse(data);
+		  var obj = jQuery.parseJSON(data);
           if (obj.le_next)
           {
             $('#pos_y').text(obj.le_next);
@@ -116,39 +117,72 @@
         });
         
 ///////////////////////////////////////////////////////////        
-        
-        $('#notre_frame').load(function(){
-		$($(this).contents()).find("li").click(function(e){
-					//$(this).html("coucou");
-					e.stopPropagation();
-
-					idtempo = this.id;
-                    // alert("id="+this.id);
-
-                socket.emit('envoiRefObjetHtml', idtempo);   
+       
+			$('#notre_frame').load(function(){
+			
+			
+				$($(this).contents()).find(".slide").click(function(e){
+						//$(this).html("coucou");
+						e.stopPropagation();
+						
+					 if (master==true)
+					{	
 				
-			}); 
-		});  
+						idtempo = this.id;
+					 
+
+					socket.emit('envoiRefObjetHtml', idtempo);  
+					}
+					
+				}); 
+			
+				
+				$($(this).contents()).find("li").not("[class='highlight']").click(function(e){
+						//$(this).html("coucou");
+						e.stopPropagation();
+						
+					 if (master==true)
+					{	
+				
+						idtempo = this.id;
+					 
+
+					socket.emit('envoiRefObjetHtml', idtempo);  
+					}
+					
+				}); 
+				
+		
+				
+				
+				
+			});  
         
     socket.on('recupObjetHtml', function (idtempo) {
-    
-  if( $($('#notre_frame').contents()).find("#"+idtempo).attr("class")!="active")
-  {
+	
+	/*
     
         $($('#notre_frame').contents()).find("#"+idtempo).attr("class","active");
 			
         $($('#notre_frame').contents()).find("#"+idtempo).attr("smil","active");
-    }else{
- 
-  
-    
-    $($('#notre_frame').contents()).find("#"+idtempo).attr("class","li_class");
-			
-    $($('#notre_frame').contents()).find("#"+idtempo).attr("smil","idle");
- 
- 
-    }
-    
+
+	*/
+
+	if(idtempo)
+	{
+		$($('#notre_frame').contents()).find("#"+idtempo).click();
+	}
+
+	
+		//var ifram = document.getElementById("notre_frame");            
+		//var doc = ifram.contentDocument || ifram.contentWindow.document; // standard 
+		//doc.getElementById(doc.location.hash.slice(1)).click();
+	
+	
+	 //document.getElementById(window.location.hash.slice(1)).click();
+	 //$($('#notre_frame').contents()).find("#"+window.location.hash.slice(1)).click();
+		 
+
   });
         
         
@@ -157,6 +191,8 @@
 
         $("#next1").click(function ()
         {
+			if (master==true)
+		{
                     
           $($('#notre_frame').contents()).find("#next").click();
           
@@ -165,14 +201,15 @@
           {
             suivant: "next"
           }));
-          
+          }
           
         });
 
         $("#prev1").click(function ()
         {
         
-        
+        if (master==true)
+		{
         
         $($('#notre_frame').contents()).find("#prev").click();
         
@@ -181,26 +218,37 @@
           {
             precedant: "prev"
           }));
+		  }
 
         });
 
         $("#first1").click(function ()
         {
+		
+		if (master==true)
+		{
             $($('#notre_frame').contents()).find("#first").click();
             
           socket.send(JSON.stringify(
           {
             premier: "first"
           }));
+		  
+		  }
         });
 
         $("#last1").click(function ()
         {
+		
+		if (master==true)
+		{
           $($('#notre_frame').contents()).find("#last").click();
           socket.send(JSON.stringify(
           {
             dernier: "last"
           }));
+		  
+		  }
         });
         $('#btn_ok').click(function ()
         {
@@ -230,11 +278,31 @@
         });
 
       });
+	  
+	  /////////////////////////////////////// traitement video////////////////////////
+	  
+	  
+	  function playPause()
+	{ 
+	
+		//On récupere l'element video; 
+		var myVideo=$($('#notre_frame').contents()).find("video")[0]; 
+		
+		if (myVideo.paused) 
+			myVideo.play(); 
+		else if (myVideo.played)
+		myVideo.pause(); 
+	
+		//myVideo.width=560;
+	} 
+	  
+	  
+	  
     </script>
   </head>
   
   <body topmargin="0" leftmargin="0" style="width:100%;">
-    <!-- <div id="overlay" style="background:black; opacity:0.7; width:100%;
+    <div id="overlay" style="background:black; opacity:0.7; width:100%;
     height:115%; display:block; z-index:1"></div>
 <div id="div_connection" style="z-index:2; display:none; position:absolute; top:250px; background:white; padding:15px; font-family:arial; font-size:12px;box-shadow: 1px 1px 4px black;">
 <img src="images/fermer.png" style="float:right; cursor:pointer;" id="fermeture_overlay1"/>
@@ -243,7 +311,7 @@
 <INPUT type=text name="identifiant" id="identifiant">
 <INPUT type="submit" value="Se connecter" id="identification">
 </div>
--->
+
     <style>
       #liste_player {
         margin :0px;
@@ -310,7 +378,9 @@
 
 
 <div id="exemple">coucou</div><br>
-<div id="timestamp"</div>
+<div id="timestamp"></div>
+<button onclick="playPause()">Play/Pause</button> 
+
   </body>
 
 </html>
