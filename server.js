@@ -2,8 +2,9 @@
   
 var io = require('socket.io');
 var express = require('express');
- 
-var app = express.createServer();
+var app = express();
+var server = require('http').createServer(app);
+var socket = io.listen(server);
 
 
 app.configure(function(){
@@ -12,91 +13,103 @@ app.configure(function(){
 app.get('/', function(req, res, next){
   res.render('./public/index.html');
 });
-app.listen(8333);
+server.listen(8333);
  
-
-var socket = io.listen(app);
-
-  
-  
-
-
+ 
+//----------Attribut-------------
+var my_timer;
 var allClients = 0;
-var clientId = 0;
-var tab_client = [];
+var tab_client = new Array();
+
+//---------on dÈfinie le fichier client-----
 app.get('/', function (req, res)
 {
   res.sendfile(__dirname + '/public/index.html');
 });
 
+
+//--------Connection d'un client-------------
 socket.on('connection', function (client)
 {
+	allClients ++;
+	var TempoPseudo;
+	
+	//--------AprËs avoir saisie son speudo on ouvre la session-------------
+	client.on('ouvertureSession', function (pseudo) {
+	
+		console.log("Ouverture Session");
+		tab_client.push(pseudo);
+		TempoPseudo=pseudo;
+		
+		 //--------on envoi la nouvel tab de client ‡ tous les clients connectÈs------------- 
+		client.send(JSON.stringify({
+		"timestamp": (new Date()).toLocaleString(),
+		"clients": allClients,
+		"tab_client": tab_client
+		}));
+		client.broadcast.send(JSON.stringify({
+		"timestamp": (new Date()).toLocaleString(),
+		"clients": allClients,
+		"tab_client": tab_client,
+		"connexion":pseudo
+		}));
+		 
+    });
 
-  //timer d'intervalle
-  var my_timer;
+	
+	//-----------reception d'un message pour change de slide-----------------
+	client.on('message', function (data)
+	{
+		var obj_client = JSON.parse(data);
+		client.broadcast.send(JSON.stringify({
+      
+			le_next: obj_client.suivant,
+			le_prev: obj_client.precedant,
+			le_first: obj_client.premier,
+			le_last: obj_client.dernier,
+			le_msg: obj_client.message,
+			le_pseudo: obj_client.pseudo,
+			url: obj_client.url
+		}));
+    
+	});
+	
+	//---------RÈception de l'id de l'ÈlËlement cliquÈ et revnoi l'id ‡ tout les clients ------
+	client.on('envoiRefObjetHtml', function (idtempo) {
 
-  //instanciation du client
-  var my_client = {
-    "id": clientId,
-    "obj": client
-  };
-
-  tab_client.push(my_client.id);
-  //console.log(tab_client);
-  clientId += 1;
-  allClients += 1;
-
-  // my_client.obj.broadcast.send(JSON.stringify(
-  // {
-    // "clients": allClients
-  // }));
-
-  //envoi rÈgulier d'un timerstamp et du nombre de clients connectÈs
-  my_timer = setInterval(function () {
-  my_client.obj.send(JSON.stringify({
-  "timestamp": (new Date()).getTime(),
-  "clients": allClients,
-  "num_client": my_client.id,
-  "tab_client": tab_client
-  }));
-  }, 3000);
-/////////////////////////////////////////////////////////////
-  //reception d'un message
-  client.on('message', function (data)
-  {
-    var obj_client = JSON.parse(data);
-    my_client.obj.broadcast.send(JSON.stringify(
-    {
-      //message: "poke send by client "+my_client.id,
-      le_next: obj_client.suivant,
-      le_prev: obj_client.precedant,
-      le_first: obj_client.premier,
-      le_last: obj_client.dernier,
-      url: obj_client.url
-    }));
-    //console.log(data);
-  });
-////////////////////////////////////////////////////////////
-client.on('envoiRefObjetHtml', function (idtempo) {
-	console.log("Click reçu");
 		client.broadcast.emit('recupObjetHtml', idtempo);
+
+    });
+	
+	//-------------Traitement video------------------------------------
+	client.on('envoiControlVideo', function (video) {
+		
+		var obj_video = JSON.parse(video);
+		client.broadcast.emit('emettreControlVideo', JSON.stringify({
+      
+			pause: obj_video.pause,
+			play: obj_video.play,
+			toPlay: obj_video.toPlay
+		}));
 
     });
 
 
-/////////////////////////////////////////////////////////////
-  client.on('disconnect', function ()
-  {
-    //tab_client.splice(tab_client.indexOf(my_client.id),1);
-    //console.log(tab_client);
-    //clearTimeout(my_timer);
-	tab_client.shift();
-    allClients -= 1;
-    my_client.obj.broadcast.send(JSON.stringify(
-    {
-      "clients": allClients,
-	  "tab_client": tab_client
-    }));
-    //console.log('disconnect'+my_client.id);
-  });
+	//------lors de la dÈconnexion d'un client 
+	client.on('disconnect', function ()
+	{
+	
+		console.log('disconnect '+TempoPseudo);
+	
+		tab_client.splice(tab_client.indexOf(TempoPseudo),1) // on retire de la table le speudo du client qui c'est dÈconnectÈ
+	
+		allClients -= 1;
+		client.broadcast.send(JSON.stringify( //on renvoi la nouvel table de client ‡ tout les clients
+		{
+		  "clients": allClients,
+		  "tab_client": tab_client,
+		  "deconnexion": TempoPseudo
+		}));
+		
+	});
 });
