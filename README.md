@@ -16,8 +16,8 @@ Pour la suite du projet DLL, nous comptons ajouter plusieurs fonctionnalités à
     - Correction sur la diffusion des animations itératives ;
     - Initialisation du slide de l'utilisateur avec celui du master lors de sa connexion.
     
-Merci de prendre en compte le fait que l'on a perdu pas mal de temps du fait de l'abandon de l'autre projet
-pour la version 0.1 du projet DLL :
+Merci de prendre en compte le fait que l'on a perdu du temps, du fait de l'abandon de l'autre projet
+pour la version 1.0 du projet DLL :
 
     Voice Memos -> https://github.com/aurelien/Voice-Memos-OWA
 
