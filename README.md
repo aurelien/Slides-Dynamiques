@@ -41,6 +41,7 @@ VERSION 3.0
 ===========
 
 Ajout des fonctionalités suivantes :
+
     - Ajout d'une liste de nom des utilisateurs connectés retractable sous le nombre d'utilisateurs connectés
     - Amélioration du channel retractable fonctionnant sous tout environnment (Linux, Windows, etc.)
     - Intégration video synchronisée fonctionnel avec un bouton play/pause et d'un controleur de video qui apparait
