@@ -33,9 +33,6 @@ Ajout des fonctionalités suivantes :
     - Débogage du nombre d'utilisateurs connectés ;
     - Ajout d'un channel rétractable à gauche du slide ;
     - Début intégration vidéo (en cours de dév)
-    
-NB : Le tchat n'est pas encore synchronisé avec les postes esclaves.
-
 
 VERSION 3.0
 ===========
