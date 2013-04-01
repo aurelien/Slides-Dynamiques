@@ -39,10 +39,12 @@ VERSION 3.0
 
 Ajout des fonctionalités suivantes :
 
-    - Ajout d'une liste de nom des utilisateurs connectés retractable sous le nombre d'utilisateurs connectés
+    - Ajout liste utilisateurs connectés qui s'affiche au passage de la souris sur le nombre d'utilisateurs connectés
     - Amélioration du channel retractable fonctionnant sous tout environnment (Linux, Windows, etc.)
-    - Intégration video synchronisée fonctionnel avec un bouton play/pause et d'un controleur de video qui apparaissent
-    lorsque la video est affichée dans la slide.
+    - Notification lors d'un nouveau message lorsque le Channel est fermé.
+    - Intégration video synchronisée. Fonctionne avec les contrôles par défaut ou avec avec le nouveau contrôleur video situé au haut du menu qui apparaissent lorsque la video est détecté dans le Slide. Synchronisation video à la seconde près entre le Master et les utilisateurs.
+    - Compatible avec la nouvelle version de express 3 
+    - optimisation de la gestion des utilisateurs (plus aucune socket n'est envoyé inutilement)
 
 HOW TO
 -----------------------------
