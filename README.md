@@ -25,7 +25,7 @@ Ceci est dû au fait que l'enregistrement de l'audio avec mediaStreamRecorder n'
 sous Firefox pour l'instant.
 
 VERSION 2.0
-===========
+---------------------------
 
 Ajout des fonctionalités suivantes :
 
@@ -35,7 +35,7 @@ Ajout des fonctionalités suivantes :
     - Début intégration vidéo (en cours de dév)
 
 VERSION 3.0
-===========
+----------------------------
 
 Ajout des fonctionalités suivantes :
 
@@ -45,8 +45,8 @@ Ajout des fonctionalités suivantes :
     lorsque la video est affichée dans la slide.
 
 HOW TO
-======
+-----------------------------
 
 Pour faire fonctionner le Projet Slides-Dynamiques :
 
-    - Voir le wiki.
+    - Voir le `Wiki <https://github.com/aurelien/Slides-Dynamiques/wiki>`_ .
