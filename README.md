@@ -35,14 +35,20 @@ Ajout des fonctionalités suivantes :
     - Début intégration vidéo (en cours de dév)
     
 NB : Le tchat n'est pas encore synchronisé avec les postes esclaves.
-  
-======  
+
+
+VERSION 3.0
+===========
+
+Ajout des fonctionalités suivantes :
+    - Ajout d'une liste de nom des utilisateurs connectés retractable sous le nombre d'utilisateurs connectés
+    - Amélioration du channel retractable fonctionnant sous tout environnment (Linux, Windows, etc.)
+    - Intégration video synchronisée fonctionnel avec un bouton play/pause et d'un controleur de video qui apparait
+    lorsque la video est affichée dans la slide.
+
 HOW TO
 ======
 
 Pour faire fonctionner le Projet Slides-Dynamiques :
 
-    - Cloner le dépot (git clone)
-    - Lancer le serveur node à l'aide de l'invite de commande (cmd.exe), aller la racine du projet et taper la commande "node server.js"
-    - Lancer le navigateur Firefox, et taper "localhost:8333" dans la barre de recherche pour lancer le slide. Ré-ouvrir un autre onglet avec toujours "localhost:8333" pour testé la synchronisation des slides, animations,...
-    - Se connecter avec le pseudo "master" pour que les boutons du haut soient fonctionnels et puissent permettre la synchronisation des slides.
+    - Voir le wiki.
