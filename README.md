@@ -49,6 +49,4 @@ HOW TO
 
 Pour faire fonctionner le Projet Slides-Dynamiques :
 
-    - Voir le `Wiki <http://docutils.sourceforge.net/docs/user/rst/quickref.html>`_ 
-    
-    ```Wiki <https://github.com/aurelien/Slides-Dynamiques/wiki>`_`` 
+    - Voir le Wiki. 
