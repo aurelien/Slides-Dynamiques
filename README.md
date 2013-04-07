@@ -45,6 +45,7 @@ Ajout des fonctionalités suivantes :
     - Intégration video synchronisée. Fonctionne avec les contrôles par défaut ou avec le nouveau contrôleur video situé en haut du menu qui apparait lorsque la video est détectée dans le slide. Synchronisation video à la seconde près entre le poste maître et les postes esclaves.
     - Compatible avec la nouvelle version de Express 3 
     - Optimisation de la gestion des utilisateurs (plus aucune socket n'est envoyée inutilement)
+    - Lorsqu'un nouvel utilisateur se connecte, le slide se positionne à la slide courante du poste maître
 
 HOW TO
 -----------------------------
