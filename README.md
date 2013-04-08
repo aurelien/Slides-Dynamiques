@@ -52,9 +52,9 @@ VERSION 4.0
 
 Ajout des fonctionalités suivantes :
 
-    - Synchronisation des slides des postes esclave avec les slides du master
+    - Synchronisation des slides des postes esclaves avec les slides du master
     - Amélioration de la gestion de l’animateur/master (système de jeton)
-    - Nouvelle fonctionnalité : interface permettant de charger une présentation autre que celle par défaut et de la diffuser sur les postes esclave.
+    - Nouvelle fonctionnalité : interface permettant de charger une présentation autre que celle par défaut et de la diffusée sur les postes esclaves.
     - Correction du bug sur la fermeture du contrôleur vidéo.
     
 
