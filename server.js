@@ -5,6 +5,10 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var socket = io.listen(server);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 
  //-----changement du serveur et définition du dossier statics à inclure dans le serveur
 app.configure(function(){
@@ -13,17 +17,24 @@ app.configure(function(){
 app.get('/', function(req, res, next){
   res.render('./public/index.html');
 });
+<<<<<<< HEAD
 server.listen(8333); // Définition du port d'écoute
+=======
+server.listen(8333);
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
  
  
 //----------Attribut-------------
 var my_timer;
 var allClients = 0;
 var tab_client = new Array();
+<<<<<<< HEAD
 var slide_currently;
 var TempoPPT;
 var master=false;
 
+=======
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 
 //---------on définie le fichier client-----
 app.get('/', function (req, res)
@@ -37,6 +48,7 @@ socket.on('connection', function (client)
 {
 	allClients ++;
 	var TempoPseudo;
+<<<<<<< HEAD
 	var TempoMaster;
 	
 	//--------Après avoir saisie son speudo on ouvre la session-------------
@@ -75,11 +87,33 @@ socket.on('connection', function (client)
 		"clients": allClients,
 		"tab_client": tab_client,
 		"pseudo":TempoPseudo
+=======
+	
+	//--------Après avoir saisie son speudo on ouvre la session-------------
+	client.on('ouvertureSession', function (pseudo) {
+	
+		console.log("Ouverture Session");
+		tab_client.push(pseudo);
+		TempoPseudo=pseudo;
+		
+		 //--------on envoi la nouvel tab de client à tous les clients connectés------------- 
+		client.send(JSON.stringify({
+		"timestamp": (new Date()).toLocaleString(),
+		"clients": allClients,
+		"tab_client": tab_client
+		}));
+		client.broadcast.send(JSON.stringify({
+		"timestamp": (new Date()).toLocaleString(),
+		"clients": allClients,
+		"tab_client": tab_client,
+		"connexion":pseudo
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 		}));
 		 
     });
 
 	
+<<<<<<< HEAD
 	//-----------reception d'un message pour la gestion des slide et l'envoi au poste esclave-----------------
 	client.on('message', function (data)
 	{
@@ -87,46 +121,75 @@ socket.on('connection', function (client)
 		
 		slide_currently=obj_client.slide;
 		
+=======
+	//-----------reception d'un message pour change de slide-----------------
+	client.on('message', function (data)
+	{
+		var obj_client = JSON.parse(data);
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 		client.broadcast.send(JSON.stringify({
       
 			le_next: obj_client.suivant,
 			le_prev: obj_client.precedant,
 			le_first: obj_client.premier,
 			le_last: obj_client.dernier,
+<<<<<<< HEAD
 			le_msg: obj_client.message, //channel de discution
 			le_pseudo: obj_client.pseudo, //speudo
 			le_slide: obj_client.slide,   // id du SLide
+=======
+			le_msg: obj_client.message,
+			le_pseudo: obj_client.pseudo,
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 			url: obj_client.url
 		}));
     
 	});
 	
+<<<<<<< HEAD
 	//---------Réception de l'id de l'élément cliqué et on envoi l'id à tous les clients ------
+=======
+	//---------Réception de l'id de l'élèlement cliqué et revnoi l'id à tout les clients ------
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	client.on('envoiRefObjetHtml', function (idtempo) {
 
 		client.broadcast.emit('recupObjetHtml', idtempo);
 
     });
 	
+<<<<<<< HEAD
 	//-------------Réception d'un traitement video et l'envoi à tout les clients --------------
+=======
+	//-------------Traitement video------------------------------------
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	client.on('envoiControlVideo', function (video) {
 		
 		var obj_video = JSON.parse(video);
 		client.broadcast.emit('emettreControlVideo', JSON.stringify({
       
 			pause: obj_video.pause,
+<<<<<<< HEAD
 			play: obj_video.play, 
 			toPlay: obj_video.toPlay //jouer la video sur position de lecture saisie
+=======
+			play: obj_video.play,
+			toPlay: obj_video.toPlay
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 		}));
 
     });
 
 
+<<<<<<< HEAD
 	//------lors de la déconnexion d'un client ------------------------
+=======
+	//------lors de la déconnexion d'un client 
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	client.on('disconnect', function ()
 	{
 	
 		console.log('disconnect '+TempoPseudo);
+<<<<<<< HEAD
 		
 		if(TempoPseudo)
 		{
@@ -136,6 +199,13 @@ socket.on('connection', function (client)
 		}
 		allClients -= 1;
 		client.broadcast.send(JSON.stringify( //on renvoi la nouvelle table de client à tous les clients
+=======
+	
+		tab_client.splice(tab_client.indexOf(TempoPseudo),1) // on retire de la table le speudo du client qui c'est déconnecté
+	
+		allClients -= 1;
+		client.broadcast.send(JSON.stringify( //on renvoi la nouvel table de client à tout les clients
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 		{
 		  "clients": allClients,
 		  "tab_client": tab_client,

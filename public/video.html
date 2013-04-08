@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  
+  <head>
+    <title>Demo</title>
+	
+    <link href="css/smoothness/jquery-ui-1.10.2.custom.css" rel="stylesheet">
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.2.custom.js"></script>
+	
+	
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+	
+	var myVideo;
+		
+      $(document).ready(function ()
+      {
+	  
+	  
+	   
+	 
+
+	  
+
+	  	$("#lectureVideo").click(function(){
+		
+			
+			if (myVideo.paused) 
+				myVideo.play(); 
+			else if (myVideo.played)
+				myVideo.pause(); 
+	
+			//myVideo.currentTime=120
+			//alert (myVideo.currentTime);
+			//myVideo.width=560;
+	  
+		}) ;
+	  
+	    setTimeout(initVideo, 1000);
+	  
+	  });
+	  
+
+
+		
+		function initVideo() { 
+		
+		
+		
+
+			myVideo=$($('#notre_frame').contents()).find("video")[0];
+			$("#lectureVideo").button({ text: true, icons: {primary: "ui-icon-play"} });
+			
+			$(myVideo).bind('timeupdate',function(){
+			
+				TimeNow=myVideo.currentTime;
+				
+				$("#lectureVideo").button( "option", "label", TimeNow.toFixed(1));
+				
+				$('#barre').slider('value', TimeNow);
+
+			
+			 });
+			 
+			 
+			 $(myVideo).bind("pause", function () {
+			 
+			     $("#lectureVideo").button({ text: true, icons: {primary: "ui-icon-play"} });
+			
+			
+			});
+
+			$(myVideo).bind("playing", function () {
+				$("#lectureVideo").button({ text: true, icons: {primary: "ui-icon-pause"} });
+				
+			});
+			
+			
+			
+			
+			var video_duration = myVideo.duration
+						
+				$('#barre').slider({
+					value: 0,
+					step: 0.1,
+					orientation: "horizontal",
+					range: "min",
+					max: video_duration,
+					animate: true,					
+					slide: function(){							
+						
+					},
+					stop:function(e,ui){
+								//alert("coucou");			
+					//	$(myVideo).attr("currentTime",ui.value);
+						myVideo.currentTime=ui.value;
+					}
+				});	
+				
+				
+				
+				
+				$(myVideo).bind("seeked", function () {
+				
+				
+				// alert("COUOCOU");
+				});
+	
+		}
+
+	  
+
+
+	  
+
+	  
+	  
+    </script>
+  </head>
+  
+  <body topmargin="0" leftmargin="0" style="width:100%;">
+
+
+    <style>
+      #liste_player {
+        margin :0px;
+        padding:0px;
+        list-style-type:none;
+        position:absolute;
+        top:8px;
+      }
+      #liste_player li {
+        float:left;
+        margin-left:12px;
+        cursor:pointer;
+      }
+    </style>
+
+    <div style="width:100%;height:33px;repeat:x;background-image:url('images/titre2.png')">
+      <div style="position:absolute;top:0px;left:0px;">
+        <img src="images/titre1.png" />
+      </div>
+      <div style="position:relative;width:105px;margin:auto;padding-top:6px;">
+        <img src="images/fond-player.png" />
+        <ul id="liste_player">
+          <li>
+            <img id="first1" src="images/first.png" />
+          </li>
+          <li>
+            <img id="prev1" src="images/prev.png" />
+          </li>
+          <li>
+            <img id="next1" src="images/next.png" />
+          </li>
+          <li>
+            <img id="last1" src="images/last.png" />
+          </li>
+        </ul>
+      </div>
+      <div style="position:absolute;top:0px;right:0px;">
+        <span style="position:absolute;top:6px;left:19px;color:#787777;font-size:19px;"
+        id="clients"></span>
+        <img src="images/titre3.png" />
+      </div>
+    </div>
+    <div id="menu-deroule" style="height:115px;display:none;">
+      <div style="margin-left:12px; margin-top:14px;">
+        <img src="images/url-presentation.png" />
+        <br>
+        <input type="text" value="" id="input_url" style="width:500px;height:22px;">
+        <img id="btn_ok" style="margin-top:4px;margin-left:2px;" src="images/btn-ok.png"
+        />
+      </div>
+    </div>
+    <div style="position:relative;width:100%;">
+      <div style="z-index:9;position:absolute;top:0px;left:0px;width:100%;height:3px;repeat:x;background-image:url('images/degrade-inf.png')"></div>
+      <div style="width:100%;position:absolute;margin:auto;cursor:pointer;z-index:10;">
+        <center>
+          <img id="open" statut="off" src="images/open.png"
+          />
+        </center>
+      </div>
+    </div>
+
+    <IFRAME id="notre_frame"  src="ppt/CoursWebVTT2012/video.html"
+        width=100% height=100% ></IFRAME> 
+
+
+<div id="exemple">coucou</div><br>
+<div id="timestamp"></div>
+
+<button id="lectureVideo">play</button>
+<div style="width:300px; " id="barre"></div>
+  </body>
+
+</html>

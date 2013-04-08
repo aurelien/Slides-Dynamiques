@@ -143,7 +143,11 @@ border-radius:30px
 
 
 #cadre-video{
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	position:fixed;
 	
 	overflow:hidden;
@@ -154,7 +158,10 @@ border-radius:30px
 	border:5px solid #999;
 	
 	padding:10px;
+<<<<<<< HEAD
 	padding-bottom:5px;
+=======
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	padding-top:10px;
 	left: 50%;
 	margin-left: -190px;
@@ -170,6 +177,7 @@ border-radius:30px
 float:left;
 
 }
+<<<<<<< HEAD
 #cadre-video-droit {
 	
 	margin-top: 10px;
@@ -216,4 +224,10 @@ background: url('../images/loading.gif') center no-repeat;
 	font-size:12px;
 	box-shadow: 1px 1px 4px black;
 	
+=======
+#cadre-video div{
+	margin-top:13px;
+
+float:right;
+>>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 }

@@ -16,8 +16,8 @@ Pour la suite du projet DLL, nous comptons ajouter plusieurs fonctionnalités à
     - Correction sur la diffusion des animations itératives ;
     - Initialisation du slide de l'utilisateur avec celui du master lors de sa connexion.
     
-Merci de prendre en compte le fait que l'on a perdu pas mal de temps du fait de l'abandon de l'autre projet
-pour la version 0.1 du projet DLL :
+Merci de prendre en compte le fait que l'on a perdu du temps, du fait de l'abandon de l'autre projet
+pour la version 1.0 du projet DLL :
 
     Voice Memos -> https://github.com/aurelien/Voice-Memos-OWA
 
@@ -25,7 +25,7 @@ Ceci est dû au fait que l'enregistrement de l'audio avec mediaStreamRecorder n'
 sous Firefox pour l'instant.
 
 VERSION 2.0
-===========
+---------------------------
 
 Ajout des fonctionalités suivantes :
 
@@ -33,16 +33,23 @@ Ajout des fonctionalités suivantes :
     - Débogage du nombre d'utilisateurs connectés ;
     - Ajout d'un channel rétractable à gauche du slide ;
     - Début intégration vidéo (en cours de dév)
-    
-NB : Le tchat n'est pas encore synchronisé avec les postes esclaves.
-  
-======  
+
+VERSION 3.0
+----------------------------
+
+Ajout des fonctionalités suivantes :
+
+    - Ajout d'une liste des utilisateurs connectés qui s'affiche au passage de la souris sur le nombre d'utilisateurs connectés
+    - Amélioration du channel retractable fonctionnant sous tout environnment (Linux, Windows, etc.)
+    - Notification d'un nouveau message lorsque le Channel est fermé.
+    - Intégration video synchronisée. Fonctionne avec les contrôles par défaut ou avec le nouveau contrôleur video situé en haut du menu qui apparait lorsque la video est détectée dans le slide. Synchronisation video à la seconde près entre le poste maître et les postes esclaves.
+    - Compatible avec la nouvelle version de Express 3 
+    - Optimisation de la gestion des utilisateurs (plus aucune socket n'est envoyée inutilement)
+    - Lorsqu'un nouvel utilisateur se connecte, le slide se positionne à la slide courante du poste maître
+
 HOW TO
-======
+-----------------------------
 
 Pour faire fonctionner le Projet Slides-Dynamiques :
 
-    - Cloner le dépot (git clone)
-    - Lancer le serveur node à l'aide de l'invite de commande (cmd.exe), aller la racine du projet et taper la commande "node server.js"
-    - Lancer le navigateur Firefox, et taper "localhost:8333" dans la barre de recherche pour lancer le slide. Ré-ouvrir un autre onglet avec toujours "localhost:8333" pour testé la synchronisation des slides, animations,...
-    - Se connecter avec le pseudo "master" pour que les boutons du haut soient fonctionnels et puissent permettre la synchronisation des slides.
+    - Voir le Wiki. 
