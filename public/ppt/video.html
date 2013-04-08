@@ -1,0 +1,570 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Essai de vidéos</title>
+<style type="text/css">
+
+/* Page */
+
+	
+
+body { background: #FFFFFF } 
+h1 { text-align: center; font-size: 150%; font-family: sans-serif; color: #963232 }
+h2 { text-align: center; font-size: 110%; font-weight: bold; font-family: sans-serif; color: #963232 }
+h3 { font-size: 100%; font-weight: bold; font-family: serif; margin-bottom: 0.5em }
+h5 { text-align: center; font-size: 90%; font-weight: bold; font-family: serif; margin-bottom: 0.5em; color: #963232 }
+h6 { text-align: center; font-size: 70%; font-weight: bold; font-family: serif; margin-bottom: 0.5em; color: #963232 }
+.auteur { text-align: center }
+.date { text-align: left }
+.sommaire { page-break-after: always; background: #F5F5FF; margin: 0.5em; padding: 0.5em; border: gray outset }
+.cover { page-break-after: always; background: #F5F5FF; margin: 0.5em; padding: 0.5em; border: gray outset }
+.section { page-break-after: always; background: #FFFFEB; margin: 2em 0.5em; padding: 0.5em; border: gray outset }
+
+
+
+
+	
+		
+		
+			.slide { page-break-after: always; background: #FFFFEB; margin: 2em 0.5em; padding: 0.5em; border: gray outset }
+		
+	
+		
+	
+/* Fin page */
+
+/* Page de titre */
+
+.pagetitre {
+
+	
+	
+	
+color:  ;
+ 
+}
+
+
+/* Fin Page de titre */
+
+
+/* Environnements d'image et de video */
+
+	
+
+.titreimage { text-align: center; font-weight: bold; background-color: #E0E0FF ;  ; color: black}
+.envimage { text-align: center; border: gray outset; padding: 0; margin: 1em; background: #EBFFEB }
+.legende { font-family: sans-serif; margin-top: 1em ; color: black}
+
+
+/* Fin environnements */
+
+	
+
+pre.code_xml { color: #963232 } ;
+pre { background: #EBFFEB; padding-left: 2em; padding-bottom: 0.5em }
+tt { color: #963232 ; font-family:  sans-serif}
+li { margin-bottom: 0.5em; }
+dt { font-weight: bold; }
+dd { margin-bottom: 0.5em; }
+.elsommaire { font-size: 110%; color: #963232 ; text-decoration: none; font-weight: bold }
+.elsommaire:hover { font-size: 110%; color: #663399; text-decoration: none; font-weight: bold }
+.elsommaire2 { font-size: 110%; color: #963232 ; text-decoration: none}
+.elsommaire2:hover { font-size: 110%; color: #663399; text-decoration: none }
+
+
+/* Tableaux */
+
+table#table_titre {
+height: 80%;
+margin-top: 10 %;
+margin-bottom: 10 %;
+width: 80%;
+margin-left: 10%;
+margin-right: 10%;
+}
+
+/* Entetes */
+
+	
+
+th {
+background: #FFF0E0 ;
+color: black ;
+
+}
+
+/* Corps des tableaux */
+
+	
+	
+.tableau1 {
+background: #FFFAE0 ;
+color: black ;
+ 
+}
+.tableau2 {
+background: #FFFAE0 ;
+color: black ;
+ 
+}
+
+td.tiers { width: 33% }
+td.vingt { width: 20% }
+table.bas { position: absolute; bottom: 2% ; left:0 }
+
+/* Fin tableaux */
+
+	
+
+.commentaire {
+margin: 1em;
+color: #196419 ;
+}
+
+
+.equation { vertical-align : middle }
+
+
+	
+	
+	
+	ul { margin-top: 0.5em }
+	p { text-indent: 1em; text-align: justify; margin-top: 0.5em }
+	.spanli { }
+	
+	p#navigation_par {text-indent: 1em; text-align: justify; margin-top: 0.5em ; background : none }
+	p#text_size_par {text-indent: 1em; text-align: justify; margin-top: 0.5em ; background : none }
+	
+	
+	
+	
+	tt.slidenumber { color : #963232 }
+	
+	
+	
+		
+		
+		
+
+
+/* Titres */
+
+td.soixante { width: 60% ; background :  }
+
+.slide_title  , .titrepartie , .titresommaire {
+
+	
+
+
+color : #963232 ;
+
+
+}
+
+/* Fin Titres */
+
+
+
+
+
+
+
+#slideshow div.slide {
+  position: absolute;
+  left: 10%;
+  top: 3%;
+  width:80%;
+  height:80%;  
+}
+#slideshow div.print {
+  position: relative !important;
+}
+
+#slideshow div.image {
+align:center;
+}
+
+#slideshow div.moitie {
+  float:left;
+  width:50%;
+}
+
+#slideshow div.tiers {
+  float:left;
+  width:33%;
+}
+#slideshow div.quart {
+  float:left;
+  width:25%;
+}
+
+
+
+#navigation_par.print {
+  display: none;
+  opacity: 0;
+}
+
+#text_size_par.print {
+  display: none;
+  opacity: 0;
+}
+
+/* navigation menu */
+#slideshow .menu {
+  position: absolute;
+  /*bottom: 0;*/
+  /*right: 2em;*/
+  /*font-size: 0.75em;*/
+  bottom: 0%;
+  right: 9%;
+	margin: 0;
+  border-radius         : 0px;
+  -o-border-radius      : 0px;
+  -moz-border-radius    : 0px;
+  -webkit-border-radius : 0px;
+  box-shadow         : none;
+  -o-box-shadow      : none;
+  -moz-box-shadow    : none;
+  -webkit-box-shadow : none;
+  z-index: 2;
+}
+/* no transition for the menu! */
+#slideshow .menu {
+  opacity: 1 ;
+  visibility: visible ;
+}
+#slideshow .menu button {
+  opacity: 1;
+  transition         : none;
+  -o-transition      : none;
+  -moz-transition    : none;
+  -webkit-transition : none;
+}
+#slideshow .menu button[smil=idle] {
+  opacity: 0.5;
+  transform         : none;
+  -o-transform      : none;
+  -moz-transform    : none;
+  -webkit-transform : none;
+}
+
+
+/* text sizing menu */
+#slideshow .menuts {
+  position: absolute;
+  /*bottom: 0;*/
+  /*right: 2em;*/
+  /*font-size: 0.75em;*/
+  bottom: 0%;
+  left: 9%;
+	margin: 0;
+  border-radius         : 0px;
+  -o-border-radius      : 0px;
+  -moz-border-radius    : 0px;
+  -webkit-border-radius : 0px;
+  box-shadow         : none;
+  -o-box-shadow      : none;
+  -moz-box-shadow    : none;
+  -webkit-box-shadow : none;
+  z-index: 2;
+}
+/* no transition for the menu! */
+#slideshow .menuts {
+  opacity: 1 ;
+  visibility: visible ;
+}
+#slideshow .menuts button {
+  opacity: 1;
+  transition         : none;
+  -o-transition      : none;
+  -moz-transition    : none;
+  -webkit-transition : none;
+}
+#slideshow .menuts button[smil=idle] {
+  opacity: 0.5;
+  transform         : none;
+  -o-transform      : none;
+  -moz-transform    : none;
+  -webkit-transform : none;
+}
+
+/* Code en colonnes */
+
+div.code_cols {
+
+   column-gap: 1em;
+   -o-column-gap: 1em;
+   -moz-column-gap: 1em;
+   -webkit-column-gap: 1em;
+   column-rule:1px solid;
+   -o-column-rule:1px solid;
+   -moz-column-rule:1px solid;
+   -webkit-column-rule:1px solid;
+   color: #963232;
+   white-space:pre-wrap ;
+   word-wrap:break-word;
+}
+
+#slideshow div[smil="active"] {
+
+   display: block;
+}
+
+/*  Tous les slides et les boutons sont caches par defaut
+    pour verifier la presence du repertoire de configuration qui contient
+    le fichier CSS qui va les rendre visibles
+    
+    Un slide d'erreur est affiche */
+    
+#slideshow {
+
+	display: none;
+	
+}
+
+p.menu {
+
+	display: none;
+
+}
+
+p.menuts {
+
+	display: none;
+
+}
+
+div#erreur {
+
+	display: block;
+	
+	position: absolute;
+	left: 10%;
+	top: 3%;
+	width:80%;
+	height:80%;
+	background: #FFFFEB;
+	margin: 2em 0.5em;
+	padding: 0.5em;
+	border: gray outset
+}
+
+    </style>
+<meta charset="UTF-8"/>
+<link href="config_EAST/EAST_transitions.css" type="text/css" rel="stylesheet"> </link>
+<link href="config_EAST/EAST.css" type="text/css" rel="stylesheet"> </link>
+<link href="config_EAST/EAST_config.css" type="text/css" rel="stylesheet"> </link>
+<link href="config_EAST/EAST.smil" type="application/smil+xml" rel="timesheet"> </link> <!--[if lt IE 9]> 
+<script src="config_EAST/sizzle.js" type="text/javascript"/>
+<script src="config_EAST/html5.js" type="text/javascript"/>
+<script src="config_EAST/mediaelement.js" type="text/javascript"/> <![endif]--> 
+<script src="config_EAST/EAST.js" type="text/javascript"> </script>
+<script src="config_EAST/timesheets.js" type="text/javascript"> </script>
+<script src="config_EAST/timesheets-navigation.js" type="text/javascript"> </script>
+</head>
+<body style="font-size: 100%" class="burst">
+<div id="slideshow">
+<div id="cover" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left"/>
+<td/>
+<td class="vingt logodroit" align="right">
+<tt/>
+</td>
+</tr>
+</table>
+<table id="table_titre">
+<tbody>
+<tr>
+<td>
+<h1 class="pagetitre">Essai de vidéos</h1>
+</td>
+</tr>
+<tr>
+<td>
+<h2 class="pagetitre"/>
+</td>
+</tr>
+<tr>
+<td>
+<h5 class="pagetitre"/>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td>
+<h6 class="pagetitre">
+<tt/>
+</h6>
+</td>
+</tr>
+</tfoot>
+</table>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche"/>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber"/>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit"/>
+</td>
+</tr>
+</table>
+</div>
+<div id="sommaire" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt" align="left"/>
+<td class="soixante" align="center">
+<h1 class="titresommaire"> Plan </h1>
+</td>
+<td class="vingt" align="right">
+<tt/>
+</td>
+</tr>
+</table>
+<ul class="accordion">
+<li id="111" class="elsommaire">
+<span>Vidéos<ul id="liste_sections">
+<li class="elsommaire2">
+<span>
+<a class="linkitem" href="#slide1">Liste incluant une vidéo</a>
+</span>
+</li>
+</ul>
+</span>
+</li>
+</ul>
+</div>
+<div id="partie1" class="slide">
+<table height="60%" width="100%">
+<tbody>
+<tr>
+<td>
+<h1 class="titrepartie">Vidéos</h1>
+</td>
+</tr>
+</tbody>
+</table>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche"/>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber"/>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit"/>
+</td>
+</tr>
+</table>
+</div>
+<div id="slide1" class="slide">
+<table width="100%">
+<tr>
+<td class="vingt logogauche" align="left"/>
+<td class="soixante" align="center">
+<h2 class="slide_title">Liste incluant une vidéo</h2>
+</td>
+<td class="vingt logodroit" align="right"/>
+</tr>
+</table>
+<ul class="incremental">
+<li class="li_class" id="l1110">
+<span class="spanli" id="s1110">Premier item de liste</span>
+</li>
+<script type="text/javascript">
+						
+						
+							var lil1110 = document.getElementById("l1110");
+							var spans1110 = document.getElementById("s1110");
+						
+							lil1110.style.color = "black";
+							spans1110.style.color = "black";
+						
+						
+						</script>
+<li class="li_class" id="l1111">
+<span class="spanli" id="s1111">
+<video poster="config_EAST/videos.png" preload="auto" height="50%" width="50%" src="Matin.webm">x</video>
+</span>
+</li>
+<script type="text/javascript">
+						
+						
+							var lil1111 = document.getElementById("l1111");
+							var spans1111 = document.getElementById("s1111");
+						
+							lil1111.style.color = "black";
+							spans1111.style.color = "black";
+						
+						
+						</script>
+<li class="li_class" id="l1112">
+<span class="spanli" id="s1112">Troisième item de liste</span>
+</li>
+<script type="text/javascript">
+						
+						
+							var lil1112 = document.getElementById("l1112");
+							var spans1112 = document.getElementById("s1112");
+						
+							lil1112.style.color = "black";
+							spans1112.style.color = "black";
+						
+						
+						</script>
+<li class="signeplus">
+<img src="config_EAST/signe_plus.png"/>
+</li>
+</ul>
+<table width="100%" class="bas">
+<tr>
+<td class="tiers" align="left">
+<tt class="piedgauche"/>
+</td>
+<td class="tiers" align="center">
+<tt class="slidenumber">1/1</tt>
+</td>
+<td class="tiers" align="right">
+<tt class="pieddroit"/>
+</td>
+</tr>
+</table>
+</div>
+<p class="menu" id="navigation_par">
+<button title="first slide" id="first">  &lt;&lt; begin   </button>
+<button title="previous slide" id="prev"> &lt; prev </button>
+<button title="next slide" id="next">     next &gt; </button>
+<button title="last slide" id="last">         end &gt;&gt;  </button>
+<button onclick="location.href='#sommaire'" title="Plan" id="plan"> Plan </button>
+<button onclick="make_print();" title="Print" id="print"> Print </button>
+</p>
+<p class="menuts" id="text_size_par">
+<button onclick="increase_body_size();" title="A++" id="A++">  A++ </button>
+<button onclick="decrease_body_size();" title="A--" id="A--">  A-- </button>
+</p>
+</div>
+<div id="erreur">
+<h1> Problème </h1>
+<ul>
+<h3> Francais </h3>
+<li> La configuration de EAST n'a pas été trouvée et cela empêche le fonctionnement normal de EAST. </li>
+<li> Pour corriger ce probleme, placez le répertoire <em> config_EAST </em>  à côté de votre fichier HTML dans le même répertoire et rechargez votre fichier HTML</li>
+</ul>
+<ul>
+<h3> English </h3>
+<li> EAST configuration has not been found and EAST cannot work normally. </li>
+<li> To fix this problem, just put the directory <em> config_EAST </em>  beside your HTML file in the same directory and reload your HTML file</li>
+</ul>
+</div>
+</body>
+</html>

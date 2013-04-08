@@ -1,408 +1,377 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+  
   <head>
-		<meta charset='utf-8'>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Slides-Dynamiques</title>
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
-		<script type="text/javascript">
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>Web Teach</title>
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.2.custom.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+	
+	<!------Module complémentaire pour le traitement de la vidéo et du channel de discutions------->
+	<script type="text/javascript" src="js/pannel.js"></script>
+	<script type="text/javascript" src="js/video.js"></script>
+	
+	<!-- On relie la feuille de style -->
+	<link rel='stylesheet' href="css/style.css" type='text/css' media='screen' /></script>
+	<link href="css/smoothness/jquery-ui-1.10.2.custom.css" rel="stylesheet">
+    <script type="text/javascript">
+	
+	<!-----variable global---------->
+		var mon_identifiant = "";
+		var socket;
+		var master = false;
+		var slideControlContainer;
+		var TempoMaster;
+		
       $(document).ready(function ()
       {
 
-        var mon_identifiant = "";
-        var master = false;
+        socket = io.connect(); //Connection socket
+		
 
-        var height_content = $("#content").height();
-        $("#overlay").css(
-        {
-          "position": "absolute",
-          "top": "0",
-          "left": "0px",
-          "display": "block"
-        });
-        var positionLeft = $(document).scrollLeft() + (($(window).width() * 50) / 100) - ((50 * parseInt($('#div_connection').width())) / 100);
-        $('#div_connection').css(
-        {
-          "left": positionLeft + 'px'
-        });
-
-        $("#div_connection").show();
-
-        $("#connection").click(function ()
-        {
-          var height_content = $("#content").height();
-          $("#overlay").css(
-          {
-            "position": "absolute",
-            "top": "0",
-            "left": "0px",
-            "display": "block"
-          });
-          var positionLeft = $(document).scrollLeft() + (($(window).width() * 50) / 100) - ((50 * parseInt($('#div_connection').width())) / 100);
-          $('#div_connection').css(
-          {
-            "left": positionLeft + 'px'
-          });
-
-          $("#div_connection").show();
-
-        });
-/////////////////////////////////////////////////////////////////////
-        //connection avec un compte client/master (temporaire, non secure, utilisation du websocket pour requetter le serveur ?)
+        <!------se lance après l'authentification, et permet de s'enregistrer auprès du serveur afin d'avertir un nouvelle utilisateur  --------------------->
         $("#identification").click(function ()
         {
+			if($("#identifiant").val()!="")
+			{
+				$('#identification').unbind('click');
+				$(".img-loading").css( "visibility", "visible");
+				mon_identifiant = $("#identifiant").val();
+				
+				if($("#master").is(':checked')==true)
+					TempoMaster = true;
+				
+				
+				if(TempoMaster==true && $("#hiddenfile").val()!="")  // On vérifie s'il y a un demande d'animateur 
+					var Newppt=$("#hiddenfile").val();
 
-          $("#div_connection").hide();
-          $("#overlay").hide();
-
-          mon_identifiant = $("#identifiant").val();
-
-          if (mon_identifiant == "master")
-          {
-            master = true;
-          }
-          $("#bonjour").html("Bonjour");
-          $("#connection").html(mon_identifiant);
-
+				socket.emit('ouvertureSession', JSON.stringify(   
+				  {
+					identifant: mon_identifiant,
+					ppt: Newppt,
+					master: TempoMaster
+				  }));
+			  
+				$("#menu-pseudo").html("Bonjour "+mon_identifiant);
+			  	
+			}
+			
         });
-////////////////////////////////////////////////////////////////////////////
-        //Au click sur la croix dans la div de l'overlay
-        $('#fermeture_overlay1').click(function ()
+		
+		<!------------------ On Vérifie si on charge bien un une présentation html----->
+		$("#img-select").click(function ()
         {
-          $("#div_connection").hide();
-          $("#overlay").hide();
-        });
+			$("#hiddenfile").click();
+			
+			$("#hiddenfile").change(function(){
+			
+				if($("#hiddenfile").val().split('.').reverse()[0]=="html")
+					$("#selected-Slide").val($("#hiddenfile").val());
+			});
+		
+		});
+		
 
-        var socket = io.connect();
+
+		<!------------------ Réception des messages du serveur et traitement des messages en fonction des données reçues----->  	
         socket.on('message', function (data)
         {
-          //var obj = jQuery.JSON.parse(data);
-var obj = jQuery.parseJSON(data);
-          if (obj.le_next)
-          {
-            $('#pos_y').text(obj.le_next);
-            $($('#notre_frame').contents()).find("#next").click();
-          }
-          else if (obj.le_prev)
-          {
-            $('#pos_x').text(obj.le_prev);
-            $($('#notre_frame').contents()).find("#prev").click();
-          }
-          else if (obj.le_first)
-          {
-            $('#pos_x').text(obj.le_prev);
-            $($('#notre_frame').contents()).find("#first").click();
-          }
-          else if (obj.le_last)
-          {
-            $('#pos_x').text(obj.le_prev);
-            $($('#notre_frame').contents()).find("#last").click();
-          }
-          else if (obj.url)
-          {
-            $('#notre_frame').attr("src", obj.url);
-          }
-          else
-          {
-            $('#num_client').text(obj.num_client);
-            var ma_liste = "";
-            for (var i = 0; i < obj.tab_client.length; i++) {
-                ma_liste = ma_liste + obj.tab_client[i] + " - ";
-            }
-            $('#exemple').text(ma_liste);
-            $('#timestamp').text(obj.timestamp);
-            $('#clients').text(obj.clients);
-          }
+          
+			var obj = jQuery.parseJSON(data);
+			if (obj.le_next){ // chargement du slide Suivant
+			
+				slideControlContainer.selectIndex(obj.le_slide);
+			}
+			else if (obj.le_prev){ // chargement du slide Précédant
+			
+				slideControlContainer.selectIndex(obj.le_slide);
+			}
+			else if (obj.le_first){ // chargement du premier slide 
+			
+				$($('#notre_frame').contents()).find("#first").click();
+			}
+			else if (obj.le_last){
+			
+				$($('#notre_frame').contents()).find("#last").click();
+			}
+			else if (obj.url){ // chargement du dernier slide
+			
+				$('#notre_frame').attr("src", obj.url);
+			}
+			else if (obj.le_msg){ // réception et traitement des messages de discussion
+		  
+				$("#message ul").append("<li>("+obj.le_pseudo+"): "+obj.le_msg+"</li>");
+				$("#message").scrollTop(100000) ;
+				
+				//--------------- Notification du pannel (rouge clignotant)-------
+				if($("#cadre-menu").css("margin-Left")=="0px")
+				{
+					if($('#bouton-menu').html())
+						var nbNewMessage=parseInt($('#bouton-menu b').html())+1;
+					else
+						var nbNewMessage=1;
+					$('#bouton-menu').html("(<b>"+nbNewMessage+"</b>)");
+				}
+		  	  
+			}
+			else{
+           
+				var ma_liste = "";
+				for (var i = 0; i < obj.tab_client.length; i++) {
+					ma_liste += "<li>"+ obj.tab_client[i] +"</li>";
+				}
+				
+				$('#cadre-user ul').html(ma_liste); // actualisation de la liste des pseudos
+				$('#clients').text(obj.clients); // Affichage nombre de client connecté
+				
+
+				if (obj.connexion)
+				{
+					$("#message ul").append("<li><font color='green'>("+obj.connexion+") s'est connect&#233;</font> </li>");
+					
+					var timeLoad=200;
+					if(obj.ppt) // Change la présentation sur les postes esclave
+					{
+						$("#notre_frame").attr("src","ppt/"+obj.ppt);
+						timeLoad=3000;
+					}
+					
+					
+					setTimeout(function (){
+					
+						initVideo(); //charge les controles pour la gestion de la video
+						chargementSlide(); 
+						
+						if(obj.le_slide)
+							slideControlContainer.selectIndex(obj.le_slide); // Lors de la connection on charge le slide en cours
+							
+						$("#div_connection").hide();
+						$("#overlay").hide();
+					},timeLoad);
+					
+				}
+				if(obj.master) // on lui donne les droits de master
+					master=true;
+					
+				if (obj.pseudo)
+					$("#message ul").append("<li><font color='green'>("+obj.pseudo+") s'est connect&#233;</font> </li>");	
+					
+				if (obj.deconnexion) 
+					$("#message ul").append("<li><font color='red'>("+obj.deconnexion+") s'est d&#233connect&#233;</font> </li>");
+			}
         });
         
-///////////////////////////////////////////////////////////
-       
-		$('#notre_frame').load(function(){
-			$($(this).contents()).find(".slide").click(function(e){
-			e.stopPropagation();
-
-			if (master==true)
-			{	
-			idtempo = this.id;
-			socket.emit('envoiRefObjetHtml', idtempo);
+      $("#cadre-video").hide();
+      
+			
+	<!------------------ Les esclaves reçois l'id du slide ou de l'élément cliqué du poste master et on simule le click----->    
+		socket.on('recupObjetHtml', function (idtempo) {
+		
+			if(idtempo)
+			{
+				$($('#notre_frame').contents()).find("#"+idtempo).click();
 			}
+		 
 		});
-
-		$($(this).contents()).find("li").not("[class='highlight']").click(function(e){
-			e.stopPropagation();
-
-			if (master==true)
-			{	
-			idtempo = this.id;
-			socket.emit('envoiRefObjetHtml', idtempo);
-			}
-		});
-	});
-        
-    socket.on('recupObjetHtml', function (idtempo) {
-
-/*
-$($('#notre_frame').contents()).find("#"+idtempo).attr("class","active");
-$($('#notre_frame').contents()).find("#"+idtempo).attr("smil","active");
-
-*/
-
-	if(idtempo)
-	{
-	$($('#notre_frame').contents()).find("#"+idtempo).click();
-	}
-
-
-//var ifram = document.getElementById("notre_frame");
-//var doc = ifram.contentDocument || ifram.contentWindow.document; // standard
-//doc.getElementById(doc.location.hash.slice(1)).click();
-
-
-//document.getElementById(window.location.hash.slice(1)).click();
-//$($('#notre_frame').contents()).find("#"+window.location.hash.slice(1)).click();
-
-
-  });
         
         
         
-///////////////////////////////////////////////////////////////
+		<!------------------Permet de récupérer les événements de la gestion des slides et de les envoyer au poste esclave------------->
 
         $("#next1").click(function ()
         {
 			if (master==true)
-			{            
-				$($('#notre_frame').contents()).find("#next").click(); 
-				socket.send(JSON.stringify(
-			  {
-				suivant: "next"
-			  }));
-			}  
+			{
+  
+				$($('#notre_frame').contents()).find("#next").click();
+				  socket.send(JSON.stringify(
+				  {
+					suivant: "next",
+					slide: slideControlContainer.currentIndex //on envoi l'ID du slide
+				  }));
+			}        
         });
 
         $("#prev1").click(function ()
-        {  
+        {
 			if (master==true)
 			{
-				$($('#notre_frame').contents()).find("#prev").click();       
+			
+				$($('#notre_frame').contents()).find("#prev").click();	
 				socket.send(JSON.stringify(
-			{
-				precedant: "prev"
-			 }));
-			}
+				{
+					precedant: "prev",
+					slide: slideControlContainer.currentIndex //on envoi l'ID du slide
+				}));
+			 }
         });
+
         $("#first1").click(function ()
         {
 			if (master==true)
 			{
+			
 				$($('#notre_frame').contents()).find("#first").click();
 				socket.send(JSON.stringify(
-			{
-				premier: "first"
-             }));
+				{
+					premier: "first"
+				}));
 			}
         });
+
         $("#last1").click(function ()
         {
+		
 			if (master==true)
 			{
-			  $($('#notre_frame').contents()).find("#last").click();
-			  socket.send(JSON.stringify(
-            {
-				dernier: "last"
-			 }));
-			}
-        });
-        $('#btn_ok').click(function ()
-        {
-          $('#notre_frame').attr('src', $('#input_url').val());
-          netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-          var url = $('#input_url').val();
-          socket.send(JSON.stringify(
-          {
-            url: url
-          }));
-        });
-		
-// Integration d'un channel		
-		
-		$('#btn_send').click(function ()
-		{
-			var ContenuChannel = $('#channel').html();
-			var texte = document.getElementById("input_text").value;
-		
-			if (identifiant != "")
-			{
-				$('#channel').html(''+ContenuChannel+'<br><font size="-1"><font color=black>&lt' +identifiant+ '&gt ' +texte+ '<br></font></font>');
-				$("#channel").scrollTop(30000000000);
-			}
-			else
-			{
-				$('#channel').html(''+ContenuChannel+'<br><font size="-1"><font color=black>&ltAnonymous&gt ' +texte+ '<br></font></font>');
-				$("#channel").scrollTop(30000000000);
-			}
-		});
-        $("#open").click(function ()
-        {
-			if ($("#open").attr("statut") == 'off')
-			{
-				$('#menu-deroule').show(1000);
-				$("#open").attr('src', 'images/close.png');
-				$("#open").attr('statut', 'on');
-            }
-			else
-			{
-				$('#menu-deroule').hide(1000);
-				$("#open").attr('src', 'images/open.png');
-				$("#open").attr('statut', 'off');
-			}
-        });
-		$("#open_channel").click(function ()
-        {
-			if ($("#open_channel").attr("statut") == 'off')
-			{
-				$('#menu-deroule2').show(1100);
-				$("#open_channel").attr('src', 'images/close2.png');
-				$("#open_channel").attr('statut', 'on');	
-				$("#toto").animate({left:"148"},1065);			  
-			}
-			else
-			{
-				$('#menu-deroule2').hide(1000);
-				$("#open_channel").attr('src', 'images/open2.png');
-				$("#open_channel").attr('statut', 'off');
-				$("#toto").animate({left:"8"},1000);
+				  $($('#notre_frame').contents()).find("#last").click();
+				  socket.send(JSON.stringify(
+				  {
+					dernier: "last"
+				  }));
+		  
 			}
         });
 
-	
-	$("#identification").click(function ()
-	{	
-		identifiant = document.getElementById("identifiant").value;
+     });
+	  
+		<!------------------Permet de charger les slides et de créer des évènements sur la présentation------------->
+		function chargementSlide(){
 		
-			if (identifiant != "")
-			{
-				$("#channel").html('<font color=green><I>&lt' +identifiant+ '&gt vient de se connecter !</I><br></font>');
-			}
-			else 
-			{
-				$("#channel").html('<font color=green><I>&ltAnonymous&gt vient de se connecter !</I><br></font>');
-			}	
-	});
-	$("#fermeture_overlay1").click(function ()
-	{	
-		identifiant = document.getElementById("identifiant").value;
-		$("#channel").html('<font color=green><I>&ltAnonymous&gt vient de se connecter !</I><br></font>');
-	});
-});
-/////////////////////////////////////// traitement video////////////////////////
+				
+				var containers=$($('#notre_frame').contents())[0].getTimeContainersByTagName("*");
+				slideControlContainer =  containers[containers.length-1];
+		
+				<!------------------Permet de récupérer l'action fait sur le master et de le simuler sur les postes client connectés------------->
+				$($('#notre_frame').contents()).find(".slide").click(function(e){
+			
+					e.stopPropagation();		
+					 if (master==true)
+					{	
+						idtempo = this.id;
+						socket.emit('envoiRefObjetHtml', idtempo);  
+					}
+				}); 
 
-	function playPause()
-	{
-		//On rÃ©cupere l'element video;
-		var myVideo=$($('#notre_frame').contents()).find("video")[0];
+			
+				$($('#notre_frame').contents()).find("li").not("[class='highlight']").click(function(e){
+					
+					if($(this).parent().attr("class")!="incremental")
+					{
+						e.stopPropagation();	
+						 if (master==true)
+						{		
+							idtempo = this.id;
+							socket.emit('envoiRefObjetHtml', idtempo);  
+						}
+					}
+				
+				}); 
+			
+			
+		}; 
+	  
 
-			if (myVideo.paused)
-				myVideo.play();
-			else if (myVideo.played)
-				myVideo.pause();
-				//myVideo.width=560;
-	}
-		</script>
+	<!------------------Permet de ne pas autocratiser les caractères spéciaux pour le pseudo------------------->
+	function special_caract(evt) {
+		var keyCode = evt.which ? evt.which : evt.keyCode;
+		if (keyCode==9) return true;
+		var interdit = 'ààâäãçéèêëìîïòôöõµùûüñ &\?!:\.;,\t#~"^¨@%\$£?²¤§%\*()[]{}-_=+<>|\\/`\'';
+		if (interdit.indexOf(String.fromCharCode(keyCode)) >= 0) 
+		return false;
+		
+	}	
+	  
+	  
+    </script>
   </head>
-  
-  <body topmargin="0" leftmargin="0" style="width:100%;">
-    <div id="overlay" style="background:black; opacity:0.7; width:100%; height:115%; display:block; z-index:1"></div>
-		<div id="div_connection" style="z-index:2; display:none; position:absolute; top:250px; background:white; padding:15px; font-family:arial; font-size:12px;box-shadow: 1px 1px 4px black;">
-			<img src="images/fermer.png" style="float:right; cursor:pointer;" id="fermeture_overlay1"/>
-			<a><strong>Bienvenue sur WebTeach !</strong></a><br/><br/>
-			<a>Veuillez entrer votre identifiant :</a><br/><br />
-			<INPUT type=text name="identifiant" id="identifiant">
-			<INPUT type="submit" style="background:url(images/btn-connect.png) no-repeat; width:118px; height:22px" value="" id="identification">
-		</div>
+	<!------------------Page de connection ----------------------------------------->  
+	<body topmargin="0" leftmargin="0" style="width:100%;">
+    <div id="overlay" style="background:black; opacity:0.7; width:100%; height:115%; display:block; z-index:1">
+	</div>
+	<div id="div_connection" >
+		<a><strong>Bienvenue sur WebTeach !</strong></a><div class="img-loading"/></div><br/><br/>
+		<a>Veuillez entrer votre identifiant :</a><br/><br/>
+		<INPUT type="text" maxlength="12" name="identifiant" id="identifiant" title="13 caracteres max" onKeypress="return special_caract(event);" />
+		<div class="img-connect" id="identification"></div><br>
+		Annimateur :<input type="checkbox" id="master" ><br><br>
+			<a>Choisir une pr&#233;sentation (option) :</a><br/><br/>
+			<input type="file" id="hiddenfile" style="display:none"  accept='text/html' />
+			<input type="text" id="selected-Slide" readonly="readonly"/>
+			<div class="img-select" id="img-select" /></div>
+	</div>
+	<!------------------Fin de la connection -----------------------------------------> 
 
-		<style>
-		  #liste_player {
-			margin :0px;
-			padding:0px;
-			list-style-type:none;
-			position:absolute;
-			top:8px;
-		  }
-		  #liste_player li {
-			float:left;
-			margin-left:12px;
-			cursor:pointer;
-		  }
-		</style>
+	<!------------------Menu de changement de Slide ----------------------------------------->
+    <div style="position:fixed; width:100%;height:33px;repeat:x;background-image:url('images/titre2.png')">
+		  <div style="position:absolute;top:0px;left:0px;">
+			<img src="images/titre1.png" />
+		  </div>
+		  <div style="position:relative;width:105px;margin:auto;padding-top:6px;">
+			<img src="images/fond-player.png" />
+			<ul id="liste_player">
+			  <li>
+				<img id="first1" src="images/first.png" />
+			  </li>
+			  <li>
+				<img id="prev1" src="images/prev.png" />
+			  </li>
+			  <li>
+				<img id="next1" src="images/next.png" />
+			  </li>
+			  <li>
+				<img id="last1" src="images/last.png" />
+			  </li>
+			</ul>
+		  </div>
+		  <div id="menu-pseudo" style="position:absolute;top:6px;right:20%;font:10x Arial;color:#555;">
+			
+		  </div>
+		  <div id="boutton-user" style="position:absolute;top:0px;right:0px;">
+			<span style="position:absolute;top:6px;left:19px;color:#787777;font-size:19px;"
+			id="clients"></span>
+			<img src="images/titre3.png" />
+		  </div>	  
+    </div>
+	<div style="z-index:9;position:fixed;top:33px;left:0px;width:100%;height:3px;repeat:x;background-image:url('images/degrade-inf.png')"></div>
+	<!------------------Fin Menu de changement de Slide -------------------------------------->
+	
 
-		<div style="width:100%;height:33px;repeat:x;background-image:url('images/titre2.png')">
-			<div style="position:absolute;top:0px;left:0px;margin-left:30px;">
-				<img src="images/titre1.png" />
+	<!--------- fenetre des utilisateurs connectés -------------------------------------------->
+	<div id="cadre-user">
+			<ul></ul>
+	</div>
+	
+	<!--------- Debut du Pannel de discussion ----------------------------------------------->
+	<div id="cadre-menu">
+		<div id="bordure-menu">
+			<div id="message">
+				<ul></ul>
 			</div>
-			<div style="position:relative;width:105px;margin:auto;padding-top:6px;">
-				<img src="images/fond-player.png" />
-				<ul id="liste_player">
-					<li>
-						<img id="first1" src="images/first.png" />
-					</li>
-					<li>
-						<img id="prev1" src="images/prev.png" />
-					</li>
-					<li>
-						<img id="next1" src="images/next.png" />
-					</li>
-					<li>
-						<img id="last1" src="images/last.png" />
-					</li>
-				</ul>
-		    </div>
-			<div style="position:absolute;top:0px;right:0px;">
-				<span style="position:absolute;top:6px;left:19px;color:#787777;font-size:19px;" id ="clients"></span>
-				<img src="images/titre3.png" />
-			</div>
+			
+			<input id="input_text" type="text" value="Tapez votre message!" onclick="this.value='';"  />
+			<div id="img-send"></div>
 		</div>
-		<div id="menu-deroule" style="height:100px;display:none;">
-			<div style="margin-left:150px; margin-top:14px;">
-				<img src="images/url-presentation.png" />
-				<br>
-				<input type="text" value="" id="input_url" style="width:500px;height:22px;">
-				<img id="btn_ok" style="margin-top:20px;margin-left:2px;" src="images/btn-ok.png"/>
-			</div>
-		</div>
-		<div style="position:relative;width:100%;">
-			<div style="z-index:9;position:absolute;top:0px;left:0px;width:100%;height:3px;repeat:x;background-image:url('images/degrade-inf.png')"></div>
-			<div style="width:100%;position:absolute;margin:auto;cursor:pointer;z-index:10;">
-				<center>
-					<img id="open" statut="off" src="images/open.png"/>
-				</center>
-			</div>
-		</div>
+		<div id="bouton-menu"></div>
+	</div>
+	<!------- Fin du Pannel ------------------------------------------------------------------>
+	
 
-		<table width=100% height=100%  border="0" cellspacing="0" cellpadding="0"> 
-			<tr>
-				<td>	
-					<div id="menu-deroule2" style="width:39px;display:none;">
-						<div style="left:6px; top:54px; position:absolute; z-index:3000; height : 90%">  
-							<div id="channel" style="border: 1px solid #000; padding:4px; resize: none; height:89%; width:120px; overflow: auto; white-space : pre-line;">
-							</div> 
-							<br>
-							<input type="text" value="Tapez votre message!" id="input_text" style="font-style:italic;font-size:12;width:130px;height:22px;" onclick="this.value='';"/>
-							 <br>
-							 <img id="btn_send" src="images/btn-send.png" style="width:130px;height:22px;">
-						</div>
-					</div>
-						<div id="toto" style="position:absolute;margin-left:auto;top:320px; left:8px;cursor:pointer;z-index:20;">
-							<img id="open_channel" statut="off" src="images/open2.png"/>
-						</div>
-				</td>
-				<td>
-					<IFRAME id="notre_frame"  src="ppt/CoursWebVTT2012/webvtt.html" width=99,99% height=100% style="overflow-x: hidden; margin-left : 8px"></IFRAME> 
-				</td>
-			</tr>
-		</table>
-		<button onclick="playPause()">Play/Pause</button>
+	<IFRAME id="notre_frame"  src="ppt/video.html"  ></IFRAME> 
+
+
+
+	<!--------- Debut Control Video ---------------------------------------------------------->
+	<div id="cadre-video">
+		<button id="lectureVideo">play</button>
+		
+		<div id="cadre-video-droit">
+			<div style="width:250px; " id="barre"></div>
+			<img src="images/fermer.png" style="cursor:pointer; float:right; padding-top:2px;" id="fermeture_controle_video" />
+		</div>
+	</div>
+	<!--------- Fin Control Video ------------------------------------------------------------->
   </body>
+
 </html>
