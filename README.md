@@ -46,10 +46,27 @@ Ajout des fonctionalités suivantes :
     - Compatible avec la nouvelle version de Express 3 
     - Optimisation de la gestion des utilisateurs (plus aucune socket n'est envoyée inutilement)
     - Lorsqu'un nouvel utilisateur se connecte, le slide se positionne à la slide courante du poste maître
+    
+VERSION 4.0
+----------------------------  
+
+Ajout des fonctionalités suivantes :
+    - Synchronisation des slides des postes esclave avec les slides du master
+    - Amélioration de la gestion de l’animateur/master (système de jeton)
+    - Nouvelle fonctionnalité : interface permettant de charger une présentation autre que celle par défaut et de la diffuser sur les postes esclave.
+    - Correction du bug sur la fermeture du contrôleur vidéo.
+    
 
 HOW TO
 -----------------------------
 
 Pour faire fonctionner le Projet Slides-Dynamiques :
 
-    - Voir le Wiki. 
+    https://github.com/aurelien/Slides-Dynamiques/wiki
+
+ESSENTIAL FILES
+-----------------------------
+    - server.js  // Gestion serveur
+    - public/index.html  // Gestion client (slide, annimation, utilisateur)
+    - public/js/video.js // Gestion vidéo
+    - public/js/pannel.js // gestion channel de discussion
