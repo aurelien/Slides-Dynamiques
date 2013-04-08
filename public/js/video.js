@@ -2,7 +2,6 @@
 	
 	var myVideo;
 		
-<<<<<<< HEAD
 
 	 
 		
@@ -15,36 +14,11 @@
 		$($('#notre_frame').contents()).find("video").hover(function () {
 			
 				
-=======
-    $(document).ready(function (){
-	  
-	$("#cadre-video").hide();
-	
-
-
-	  
-	setTimeout(initVideo, 2000);
-	  
-	});
-	  
-
-
-		
-	function initVideo() { 
-		
-
-		myVideo=$($('#notre_frame').contents()).find("video")[0];
-		
-		
-		$($('#notre_frame').contents()).find("video").hover(function () {
-				 
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 			$("#cadre-video").show(300);
 				
 				
 		});
 		
-<<<<<<< HEAD
 		$('#fermeture_controle_video').click(function ()
         {
 			$("#cadre-video").hide(200);
@@ -52,20 +26,13 @@
         });
 
 		
-=======
-		//$($('#notre_frame').contents()).find("video").parent().append("<button onClik='$(\"#cadre-video\").show(300);'>Control</button>" );
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 		
 		if(myVideo)
 		{
 		
 			$("#lectureVideo").button({ text: true, icons: {primary: "ui-icon-play"} });
-<<<<<<< HEAD
 			
 			//---------- capture le temp de la video et on l'affiche  -------		
-=======
-				
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 			$(myVideo).bind('timeupdate',function(){
 				
 				TimeNow=myVideo.currentTime;
@@ -77,11 +44,7 @@
 				
 			});
 				 
-<<<<<<< HEAD
 			//---------- Lors que l'on détecte l'événement pause on l'envoi au poste esclave -------	 
-=======
-				 
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 			$(myVideo).bind("pause", function () {
 				 
 				$("#lectureVideo").button({ text: true, icons: {primary: "ui-icon-play"} });
@@ -96,11 +59,7 @@
 				}
 				
 			});
-<<<<<<< HEAD
 			//---------- Lors que l'on détecte l'événement lecture on l'envoi au poste esclave -------
-=======
-
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 			$(myVideo).bind("playing", function () {
 			
 					
@@ -117,11 +76,7 @@
 				
 			});
 				
-<<<<<<< HEAD
 			//-------------Définition du slider pour la video ------------				
-=======
-							
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 			var video_duration = myVideo.duration;
 							
 			$('#barre').slider({
@@ -140,34 +95,17 @@
 				}
 			});	
 			
-<<<<<<< HEAD
 			//-------------Boutton de lecture video------------
 			$("#lectureVideo").click(function(){
 						
-=======
-			$("#lectureVideo").click(function(){
-			
-				
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 				if (myVideo.paused) 
 					myVideo.play(); 
 				else if (myVideo.played)
 					myVideo.pause(); 
-<<<<<<< HEAD
 		  
 			}) ;
 								
 			//--------------- Lors du changement de la position de la video on l'envoi la nouvelle position aux postes esclave -----------		
-=======
-		
-				//myVideo.currentTime=120
-				//alert (myVideo.currentTime);
-				//myVideo.width=560;
-		  
-			}) ;
-								
-					
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 			$(myVideo).bind("seeked", function () {
 			
 			
@@ -188,11 +126,7 @@
 		}
 		
 		
-<<<<<<< HEAD
 		//--------------- Lors la réception du contrôle envoyé video par le serveur on l'exécute-----------
-=======
-		
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 		socket.on('emettreControlVideo', function (video) {
 		var obj_video = jQuery.parseJSON(video);
 			if(obj_video.play)
@@ -207,10 +141,6 @@
 	 
 		});
 	
-<<<<<<< HEAD
 	};
-=======
-	}
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 
 	  

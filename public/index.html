@@ -7,11 +7,8 @@
 	<script src="js/jquery-1.9.1.js"></script>
 	<script src="js/jquery-ui-1.10.2.custom.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-<<<<<<< HEAD
 	
 	<!------Module complémentaire pour le traitement de la vidéo et du channel de discutions------->
-=======
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	<script type="text/javascript" src="js/pannel.js"></script>
 	<script type="text/javascript" src="js/video.js"></script>
 	
@@ -19,7 +16,6 @@
 	<link rel='stylesheet' href="css/style.css" type='text/css' media='screen' /></script>
 	<link href="css/smoothness/jquery-ui-1.10.2.custom.css" rel="stylesheet">
     <script type="text/javascript">
-<<<<<<< HEAD
 	
 	<!-----variable global---------->
 		var mon_identifiant = "";
@@ -27,50 +23,12 @@
 		var master = false;
 		var slideControlContainer;
 		var TempoMaster;
-=======
-		var mon_identifiant = "";
-		var socket;
-		var master = false;
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 		
       $(document).ready(function ()
       {
 
-<<<<<<< HEAD
         socket = io.connect(); //Connection socket
 		
-=======
-        socket = io.connect();
-       
-
-        var height_content = $("#content").height();
- 
-        var positionLeft = $(document).scrollLeft() + (($(window).width() * 50) / 100) - ((50 * parseInt($('#div_connection').width())) / 100);
-        $('#div_connection').css(
-        {
-          "left": positionLeft + 'px'
-        });
-
-        $("#div_connection").show();
-
-        $("#connection").click(function ()
-        {
-          var height_content = $("#content").height();
-          $("#overlay").css(
-          {
-            "position": "absolute",
-            "top": "0",
-            "left": "0px",
-            "display": "block"
-          });
-          var positionLeft = $(document).scrollLeft() + (($(window).width() * 50) / 100) - ((50 * parseInt($('#div_connection').width())) / 100);
-          $('#div_connection').css(
-          {
-            "left": positionLeft + 'px'
-          });
-
-          $("#div_connection").show();
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 
         <!------se lance après l'authentification, et permet de s'enregistrer auprès du serveur afin d'avertir un nouvelle utilisateur  --------------------->
         $("#identification").click(function ()
@@ -88,7 +46,6 @@
 				if(TempoMaster==true && $("#hiddenfile").val()!="")  // On vérifie s'il y a un demande d'animateur 
 					var Newppt=$("#hiddenfile").val();
 
-<<<<<<< HEAD
 				socket.emit('ouvertureSession', JSON.stringify(   
 				  {
 					identifant: mon_identifiant,
@@ -104,25 +61,6 @@
 		
 		<!------------------ On Vérifie si on charge bien un une présentation html----->
 		$("#img-select").click(function ()
-=======
-          $("#div_connection").hide();
-          $("#overlay").hide();
-
-          mon_identifiant = $("#identifiant").val();
-
-          if (mon_identifiant == "master")
-          {
-            master = true;
-          }
-          socket.emit('ouvertureSession', mon_identifiant); 
-          $("#menu-pseudo").html("Bonjour "+mon_identifiant);
-		  $("#message ul").append("<li><font color='green'>("+mon_identifiant+") c'est connect&#233;</font> </li>");
-
-        });
-		////////////////////////////////////////////////////////////////////////////
-        //Au click sur la croix dans la div de l'overlay
-        $('#fermeture_overlay1').click(function ()
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
         {
 			$("#hiddenfile").click();
 			
@@ -136,16 +74,11 @@
 		
 
 
-<<<<<<< HEAD
 		<!------------------ Réception des messages du serveur et traitement des messages en fonction des données reçues----->  	
-=======
-        
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
         socket.on('message', function (data)
         {
           
 			var obj = jQuery.parseJSON(data);
-<<<<<<< HEAD
 			if (obj.le_next){ // chargement du slide Suivant
 			
 				slideControlContainer.selectIndex(obj.le_slide);
@@ -156,26 +89,10 @@
 			}
 			else if (obj.le_first){ // chargement du premier slide 
 			
-=======
-			if (obj.le_next){
-			
-				$('#pos_y').text(obj.le_next);
-				$($('#notre_frame').contents()).find("#next").click();
-			}
-			else if (obj.le_prev){
-			
-				$('#pos_x').text(obj.le_prev);
-				$($('#notre_frame').contents()).find("#prev").click();
-			}
-			else if (obj.le_first){
-			
-				$('#pos_x').text(obj.le_prev);
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 				$($('#notre_frame').contents()).find("#first").click();
 			}
 			else if (obj.le_last){
 			
-<<<<<<< HEAD
 				$($('#notre_frame').contents()).find("#last").click();
 			}
 			else if (obj.url){ // chargement du dernier slide
@@ -187,19 +104,6 @@
 				$("#message ul").append("<li>("+obj.le_pseudo+"): "+obj.le_msg+"</li>");
 				$("#message").scrollTop(100000) ;
 				
-=======
-				$('#pos_x').text(obj.le_prev);
-				$($('#notre_frame').contents()).find("#last").click();
-			}
-			else if (obj.url){
-			
-				$('#notre_frame').attr("src", obj.url);
-			}
-			else if (obj.le_msg){
-		  
-				$("#message ul").append("<li>("+obj.le_pseudo+"): "+obj.le_msg+"</li>");
-				$("#message").scrollTop(100000) ;
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 				//--------------- Notification du pannel (rouge clignotant)-------
 				if($("#cadre-menu").css("margin-Left")=="0px")
 				{
@@ -213,7 +117,6 @@
 			}
 			else{
            
-<<<<<<< HEAD
 				var ma_liste = "";
 				for (var i = 0; i < obj.tab_client.length; i++) {
 					ma_liste += "<li>"+ obj.tab_client[i] +"</li>";
@@ -275,76 +178,6 @@
         
         
 		<!------------------Permet de récupérer les événements de la gestion des slides et de les envoyer au poste esclave------------->
-=======
-            var ma_liste = "";
-            for (var i = 0; i < obj.tab_client.length; i++) {
-                ma_liste += "<li>"+ obj.tab_client[i] +"</li>";
-            }
-			
-            $('#cadre-user ul').html(ma_liste); // actualisation de la liste des pseudos
-            $('#timestamp').text(obj.timestamp); 
-            $('#clients').text(obj.clients); // Affichage nombre de client connecté
-			
-			
-			if (obj.connexion)
-				$("#message ul").append("<li><font color='green'>("+obj.connexion+") c'est connect&#233;</font> </li>");
-			if (obj.deconnexion)
-				$("#message ul").append("<li><font color='red'>("+obj.deconnexion+") c'est d&#233connect&#233;</font> </li>");
-          }
-        });
-        
-///////////////////////////////////////////////////////////        
-       
-		$('#notre_frame').load(function(){
-		
-			$($(this).contents()).find(".slide").click(function(e){
-					//$(this).html("coucou");
-					e.stopPropagation();
-					
-				 if (master==true)
-				{	
-			
-					idtempo = this.id;
-					socket.emit('envoiRefObjetHtml', idtempo);  
-				}
-				
-			}); 
-		
-			
-			$($(this).contents()).find("li").not("[class='highlight']").click(function(e){
-					
-				if($(this).parent().attr("class")!="incremental")
-				{
-				
-					e.stopPropagation();
-					
-					 if (master==true)
-					{	
-						
-						idtempo = this.id;
-						socket.emit('envoiRefObjetHtml', idtempo);  
-					}
-				}
-				
-				
-			}); 
-				
-		});  
-			
-	///////////////////// Simule un click sur les SLides clients en fonction de l'Id de L'élément///////////      
-    socket.on('recupObjetHtml', function (idtempo) {
-	
-		if(idtempo)
-		{
-			$($('#notre_frame').contents()).find("#"+idtempo).click();
-		}
-	 
-	});
-        
-        
-        
-		///////////////////////////////////////////////////////////////
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 
         $("#next1").click(function ()
         {
@@ -354,12 +187,8 @@
 				$($('#notre_frame').contents()).find("#next").click();
 				  socket.send(JSON.stringify(
 				  {
-<<<<<<< HEAD
 					suivant: "next",
 					slide: slideControlContainer.currentIndex //on envoi l'ID du slide
-=======
-					suivant: "next"
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 				  }));
 			}        
         });
@@ -372,12 +201,8 @@
 				$($('#notre_frame').contents()).find("#prev").click();	
 				socket.send(JSON.stringify(
 				{
-<<<<<<< HEAD
 					precedant: "prev",
 					slide: slideControlContainer.currentIndex //on envoi l'ID du slide
-=======
-					precedant: "prev"
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 				}));
 			 }
         });
@@ -407,7 +232,6 @@
 				  }));
 		  
 			}
-<<<<<<< HEAD
         });
 
      });
@@ -457,53 +281,11 @@
 		if (interdit.indexOf(String.fromCharCode(keyCode)) >= 0) 
 		return false;
 		
-=======
-        });
-        $('#btn_ok').click(function ()
-        {
-			  $('#notre_frame').attr('src', $('#input_url').val());
-			  netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-			  var url = $('#input_url').val();
-			  socket.send(JSON.stringify(
-			  {
-				url: url
-			  }));
-        });
-        $("#open").click(function ()
-        {
-			  if ($("#open").attr("statut") == 'off')
-			  {
-				$('#menu-deroule').show();
-				$("#open").attr('src', 'images/close.png');
-				$("#open").attr('statut', 'on');
-
-			  }
-			  else
-			  {
-				$('#menu-deroule').hide();
-				$("#open").attr('src', 'images/open.png');
-				$("#open").attr('statut', 'off');
-			  }
-        });
-
-      });
-	  
-
-	
-	function special_caract(evt) {
-		var keyCode = evt.which ? evt.which : evt.keyCode;
-		if (keyCode==9) return true;
-		var interdit = 'ààâäãçéèêëìîïòôöõµùûüñ &\?!:\.;,\t#~"^¨@%\$£?²¤§%\*()[]{}-_=+<>|\\/`\'';
-		if (interdit.indexOf(String.fromCharCode(keyCode)) >= 0) 
-		return false;
-		
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	}	
 	  
 	  
     </script>
   </head>
-<<<<<<< HEAD
 	<!------------------Page de connection ----------------------------------------->  
 	<body topmargin="0" leftmargin="0" style="width:100%;">
     <div id="overlay" style="background:black; opacity:0.7; width:100%; height:115%; display:block; z-index:1">
@@ -557,86 +339,11 @@
 	
 
 	<!--------- fenetre des utilisateurs connectés -------------------------------------------->
-=======
-  
-  <body topmargin="0" leftmargin="0" style="width:100%;">
-    <div id="overlay" style="background:black; opacity:0.7; width:100%;
-    height:115%; display:block; z-index:1"></div>
-<div id="div_connection" style="z-index:2; display:none; position:absolute; top:250px; background:white; padding:15px; font-family:arial; font-size:12px;box-shadow: 1px 1px 4px black;">
-<img src="images/fermer.png" style="float:right; cursor:pointer;" id="fermeture_overlay1"/>
-<a><strong>Bienvenue sur WebTeach !</strong></a><br/><br/>
-<a>Veuillez entrer votre identifiant :</a><br/><br />
-<INPUT type="text" maxlength="12" name="identifiant" id="identifiant" title="13 caracteres max" onKeypress="return special_caract(event);" >
-<INPUT type="submit" value="Se connecter" id="identification">
-</div>
-
-
-	<!------------------Menu de changement de Slide ----------------------------------------->
-    <div style="position:fixed; width:100%;height:33px;repeat:x;background-image:url('images/titre2.png')">
-		  <div style="position:absolute;top:0px;left:0px;">
-			<img src="images/titre1.png" />
-		  </div>
-		  <div style="position:relative;width:105px;margin:auto;padding-top:6px;">
-			<img src="images/fond-player.png" />
-			<ul id="liste_player">
-			  <li>
-				<img id="first1" src="images/first.png" />
-			  </li>
-			  <li>
-				<img id="prev1" src="images/prev.png" />
-			  </li>
-			  <li>
-				<img id="next1" src="images/next.png" />
-			  </li>
-			  <li>
-				<img id="last1" src="images/last.png" />
-			  </li>
-			</ul>
-		  </div>
-		  <div id="menu-pseudo" style="position:absolute;top:6px;right:20%;font:10x Arial;color:#555;">
-			
-		  </div>
-		  <div id="boutton-user" style="position:absolute;top:0px;right:0px;">
-			<span style="position:absolute;top:6px;left:19px;color:#787777;font-size:19px;"
-			id="clients"></span>
-			<img src="images/titre3.png" />
-		  </div>
-		  
-    </div>
-	
-	<div style="z-index:9;position:fixed;top:33px;left:0px;width:100%;height:3px;repeat:x;background-image:url('images/degrade-inf.png')"></div>
-	<!--
-    <div id="menu-deroule" style="height:115px;display:none;">
-		  <div style="margin-left:12px; margin-top:14px;">
-			<img src="images/url-presentation.png" />
-			<br>
-			<input type="text" value="" id="input_url" style="width:500px;height:22px;">
-			<img id="btn_ok" style="margin-top:4px;margin-left:2px;" src="images/btn-ok.png"
-			/>
-		  </div>
-    </div>
-    <div style="position:relative;width:100%;">
-		  <div style="width:100%;position:absolute;margin:auto;cursor:pointer;z-index:10;">
-			<center>
-			  <img id="open" statut="off" src="images/open.png"
-			  />
-			</center>
-		  </div>
-    </div>
-	-->
-	<!--------- Fin Menu de changement de Slide -------------------------->
-
-	<!---------- fenetre des utilisateur connecté ------------------------->
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	<div id="cadre-user">
 			<ul></ul>
 	</div>
 	
-<<<<<<< HEAD
 	<!--------- Debut du Pannel de discussion ----------------------------------------------->
-=======
-	<!-- Debut du Pannel de discussion /  ------------------------>
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
 	<div id="cadre-menu">
 		<div id="bordure-menu">
 			<div id="message">
@@ -648,7 +355,6 @@
 		</div>
 		<div id="bouton-menu"></div>
 	</div>
-<<<<<<< HEAD
 	<!------- Fin du Pannel ------------------------------------------------------------------>
 	
 
@@ -666,22 +372,6 @@
 		</div>
 	</div>
 	<!--------- Fin Control Video ------------------------------------------------------------->
-=======
-	<!-- Fin du Pannel -->
-
-	<IFRAME id="notre_frame"  src="ppt/CoursWebVTT2012/video.html"  ></IFRAME> 
-
-
-
-<div id="timestamp"></div>
-<br>
-<div id="cadre-video">
-	<button id="lectureVideo">play</button>
-	<div style="width:250px; " id="barre"></div>
-	
-</div>
-
->>>>>>> 43e04aba692606827ead3b5753c8b90d7867df88
   </body>
 
 </html>
