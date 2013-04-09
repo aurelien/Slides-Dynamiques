@@ -131,7 +131,7 @@
 					$("#message ul").append("<li><font color='green'>("+obj.connexion+") s'est connect&#233;</font> </li>");
 					
 					var timeLoad=200;
-					if(obj.ppt) // Change la pr�sentation sur les postes esclave
+					if(obj.ppt) // Change la presentation sur les postes esclave
 					{
 						$("#notre_frame").attr("src","ppt/"+obj.ppt);
 						timeLoad=3000;
@@ -243,7 +243,7 @@
 				var containers=$($('#notre_frame').contents())[0].getTimeContainersByTagName("*");
 				slideControlContainer =  containers[containers.length-1];
 		
-				<!------------------Permet de r�cup�rer l'action fait sur le master et de le simuler sur les postes client connect�s------------->
+				//------------------Permet de r�cup�rer l'action fait sur le master et de le simuler sur les postes client connect�s------------->
 				$($('#notre_frame').contents()).find(".slide").click(function(e){
 			
 					e.stopPropagation();		
