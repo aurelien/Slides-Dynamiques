@@ -8,16 +8,16 @@
 	<script src="js/jquery-ui-1.10.2.custom.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 	
-	<!------Module complementaire pour le traitement de la video et du channel de discutions------->
+	<!------Module complémentaire pour le traitement de la vidéo et du channel de discutions------->
 	<script type="text/javascript" src="js/pannel.js"></script>
 	<script type="text/javascript" src="js/video.js"></script>
 	
-	<!-- On relie la feuille de style --->
+	<!-- On relie la feuille de style -->
 	<link rel='stylesheet' href="css/style.css" type='text/css' media='screen' /></script>
 	<link href="css/smoothness/jquery-ui-1.10.2.custom.css" rel="stylesheet">
     <script type="text/javascript">
 	
-	//-----variable global----------
+	<!-----variable global---------->
 		var mon_identifiant = "";
 		var socket;
 		var master = false;
@@ -30,7 +30,7 @@
         socket = io.connect(); //Connection socket
 		
 
-        //------se lance apres l'authentification, et permet de s'enregistrer aupres du serveur afin d'avertir un nouvelle utilisateur  --------------------->
+        <!------se lance après l'authentification, et permet de s'enregistrer auprès du serveur afin d'avertir un nouvelle utilisateur  --------------------->
         $("#identification").click(function ()
         {
 			if($("#identifiant").val()!="")
@@ -43,7 +43,7 @@
 					TempoMaster = true;
 				
 				
-				if(TempoMaster==true && $("#hiddenfile").val()!="")  // On vï¿½rifie s'il y a un demande d'animateur 
+				if(TempoMaster==true && $("#hiddenfile").val()!="")  // On vérifie s'il y a un demande d'animateur 
 					var Newppt=$("#hiddenfile").val();
 
 				socket.emit('ouvertureSession', JSON.stringify(   
@@ -59,7 +59,7 @@
 			
         });
 		
-		//------------------ On Verifie si on charge bien un une presentation html-----
+		<!------------------ On Vérifie si on charge bien un une présentation html----->
 		$("#img-select").click(function ()
         {
 			$("#hiddenfile").click();
@@ -74,7 +74,7 @@
 		
 
 
-		//------------------ Reception des messages du serveur et traitement des messages en fonction des donnï¿½es reï¿½ues----->  	
+		<!------------------ Réception des messages du serveur et traitement des messages en fonction des données reçues----->  	
         socket.on('message', function (data)
         {
           
@@ -83,7 +83,7 @@
 			
 				slideControlContainer.selectIndex(obj.le_slide);
 			}
-			else if (obj.le_prev){ // chargement du slide Prï¿½cï¿½dant
+			else if (obj.le_prev){ // chargement du slide Précédant
 			
 				slideControlContainer.selectIndex(obj.le_slide);
 			}
@@ -99,7 +99,7 @@
 			
 				$('#notre_frame').attr("src", obj.url);
 			}
-			else if (obj.le_msg){ // rï¿½ception et traitement des messages de discussion
+			else if (obj.le_msg){ // réception et traitement des messages de discussion
 		  
 				$("#message ul").append("<li>("+obj.le_pseudo+"): "+obj.le_msg+"</li>");
 				$("#message").scrollTop(100000) ;
@@ -123,7 +123,7 @@
 				}
 				
 				$('#cadre-user ul').html(ma_liste); // actualisation de la liste des pseudos
-				$('#clients').text(obj.clients); // Affichage nombre de client connectï¿½
+				$('#clients').text(obj.clients); // Affichage nombre de client connecté
 				
 
 				if (obj.connexion)
@@ -131,7 +131,7 @@
 					$("#message ul").append("<li><font color='green'>("+obj.connexion+") s'est connect&#233;</font> </li>");
 					
 					var timeLoad=200;
-					if(obj.ppt) // Change la presentation sur les postes esclave
+					if(obj.ppt) // Change la présentation sur les postes esclave
 					{
 						$("#notre_frame").attr("src","ppt/"+obj.ppt);
 						timeLoad=3000;
@@ -165,7 +165,7 @@
       $("#cadre-video").hide();
       
 			
-	//------------------ Les esclaves reï¿½ois l'id du slide ou de l'ï¿½lï¿½ment cliquï¿½ du poste master et on simule le click----->    
+	<!------------------ Les esclaves reçois l'id du slide ou de l'élément cliqué du poste master et on simule le click----->    
 		socket.on('recupObjetHtml', function (idtempo) {
 		
 			if(idtempo)
@@ -177,7 +177,7 @@
         
         
         
-		//------------------Permet de rï¿½cupï¿½rer les ï¿½vï¿½nements de la gestion des slides et de les envoyer au poste esclave------------->
+		<!------------------Permet de récupérer les événements de la gestion des slides et de les envoyer au poste esclave------------->
 
         $("#next1").click(function ()
         {
@@ -236,14 +236,14 @@
 
      });
 	  
-		//------------------Permet de charger les slides et de crï¿½er des ï¿½vï¿½nements sur la prï¿½sentation------------->
+		<!------------------Permet de charger les slides et de créer des évènements sur la présentation------------->
 		function chargementSlide(){
 		
 				
 				var containers=$($('#notre_frame').contents())[0].getTimeContainersByTagName("*");
 				slideControlContainer =  containers[containers.length-1];
 		
-				//------------------Permet de rï¿½cupï¿½rer l'action fait sur le master et de le simuler sur les postes client connectï¿½s------------->
+				<!------------------Permet de récupérer l'action fait sur le master et de le simuler sur les postes client connectés------------->
 				$($('#notre_frame').contents()).find(".slide").click(function(e){
 			
 					e.stopPropagation();		
@@ -273,11 +273,11 @@
 		}; 
 	  
 
-	//------------------Permet de ne pas autocratiser les caractï¿½res spï¿½ciaux pour le pseudo------------------->
+	<!------------------Permet de ne pas autocratiser les caractères spéciaux pour le pseudo------------------->
 	function special_caract(evt) {
 		var keyCode = evt.which ? evt.which : evt.keyCode;
 		if (keyCode==9) return true;
-		var interdit = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ &\?!:\.;,\t#~"^ï¿½@%\$ï¿½?ï¿½ï¿½ï¿½%\*()[]{}-_=+<>|\\/`\'';
+		var interdit = 'ààâäãçéèêëìîïòôöõµùûüñ &\?!:\.;,\t#~"^¨@%\$£?²¤§%\*()[]{}-_=+<>|\\/`\'';
 		if (interdit.indexOf(String.fromCharCode(keyCode)) >= 0) 
 		return false;
 		
@@ -338,7 +338,7 @@
 	<!------------------Fin Menu de changement de Slide -------------------------------------->
 	
 
-	<!--------- fenetre des utilisateurs connectï¿½s -------------------------------------------->
+	<!--------- fenetre des utilisateurs connectés -------------------------------------------->
 	<div id="cadre-user">
 			<ul></ul>
 	</div>
